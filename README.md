@@ -1,7 +1,7 @@
 # bancho.js
 
-[![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)
-
+[![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)  
+[![pipeline status](https://git.cartooncraft.fr/ThePooN/bancho.js/badges/master/pipeline.svg)](https://git.cartooncraft.fr/ThePooN/bancho.js/commits/master)
 
 # Introduction
 
