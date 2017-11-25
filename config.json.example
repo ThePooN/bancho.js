@@ -1,0 +1,6 @@
+{
+	"irc_host": "irc.ppy.sh",
+	"irc_port": 6667,
+	"irc_user": "",
+	"irc_pass": ""
+}
