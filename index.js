@@ -231,7 +231,7 @@ exports.Client = function(irc_host, irc_port, irc_username, irc_password) {
 				if(err)
 					return reject();
 				resolve();
-			}
+			};
 		});
 	};
 };

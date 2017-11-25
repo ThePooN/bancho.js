@@ -1,0 +1,14 @@
+image: node:latest
+
+stages:
+    - test
+
+cache:
+  paths:
+  - node_modules/
+
+eslint:
+    stage: test
+    script:
+        - npm install eslint
+        - ./node_modules/.bin/eslint .
