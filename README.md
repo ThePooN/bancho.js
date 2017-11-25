@@ -1,5 +1,8 @@
 # bancho.js
 
+[![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)
+
+
 # Introduction
 
 bancho.js is designed to be the best library when it comes to interacting with bancho in real-time. It connects over its IRC interface and enables you to do anything you can do over IRC - and much more to come!
