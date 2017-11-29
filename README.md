@@ -9,7 +9,7 @@ bancho.js is designed to be the best library when it comes to interacting with b
 
 It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg).
 
-Its development is only at the early stages at the moment - it doesn't do more than a standard IRC library would. However, feel free to have a look at the milestones and issues to get an idea of what's coming!
+Its development is only at the early stages at the moment - it doesn't do more than a standard IRC library would. However, feel free to have a look at the [issues](https://git.cartooncraft.fr/ThePooN/bancho.js/issues) to get an idea of what's coming!
 
 ## License
 
