@@ -36,7 +36,7 @@ class ChannelMessageTest extends Test {
 			setTimeout(() => {
 				if(!returned)
 					reject(new Error("Didn't receive message after timeout!"));
-			}, 10000);
+			}, 20000);
 		});
 	}
 }

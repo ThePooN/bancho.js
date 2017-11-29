@@ -20,7 +20,7 @@ class PrivateMessageTest extends Test {
 			setTimeout(() => {
 				if(!returned)
 					reject(new Error("Didn't receive message after timeout!"));
-			}, 5000);
+			}, 10000);
 		});
 	}
 }

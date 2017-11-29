@@ -16,6 +16,7 @@ eslint:
 irc:
     stage: test
     script:
+        - npm config set script-shell "/bin/bash"
         - npm i
         - node ./ci/add-config.js
         - npm run test

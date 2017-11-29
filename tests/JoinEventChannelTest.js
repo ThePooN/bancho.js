@@ -27,7 +27,7 @@ class JoinEventChannelTest extends Test {
 			setTimeout(() => {
 				if(!returned)
 					reject(new Error("Didn't join after timeout!"));
-			}, 5000);
+			}, 10000);
 		});
 	}
 }
