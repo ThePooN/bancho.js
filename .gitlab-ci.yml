@@ -12,3 +12,10 @@ eslint:
     script:
         - npm install eslint
         - ./node_modules/.bin/eslint .
+
+irc:
+    stage: test
+        script:
+            - npm i
+            - node ./ci/add-config.js
+            - npm run test
