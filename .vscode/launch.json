@@ -1,11 +1,14 @@
 {
-		"version": "0.2.0",
-		"configurations": [
-			{
-				"type": "node",
-				"request": "launch",
-				"name": "Launch Tests",
-				"program": "${workspaceRoot}/run-tests.js"
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Launch Tests",
+			"program": "${workspaceRoot}/run-tests.js",
+			"env": {
+				"DEBUG": "*"
 			}
-		]
-	}
+		}
+	]
+}

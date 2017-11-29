@@ -11,7 +11,7 @@ class JoinEventChannelTest extends Test {
 			const channel = "#french";
 			let returned = false;
 			this.client.on("JOIN", (obj) => {
-				if(obj.username == this.config["irc_user"] && obj.channel == channel) {
+				if(obj.username == this.client.username && obj.channel == channel) {
 					returned = true;
 					this.client.leaveChannel(channel);
 					resolve();

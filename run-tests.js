@@ -4,7 +4,7 @@ const Banchojs = require("./");
 const config = module.exports.config = require("./config.json");
 
 log.info("Connecting to Bancho...");
-const client = module.exports.client = new Banchojs.Client(config["irc_host"], config["irc_port"], config["irc_user"], config["irc_pass"]);
+const client = module.exports.client = new Banchojs.Client(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"]);
 const connectStartTime = Date.now();
 client.connect().then(async () => {
 	log.info("Connected to Bancho in "+(Date.now()-connectStartTime)+"ms!");
