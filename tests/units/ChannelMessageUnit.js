@@ -1,9 +1,10 @@
-const Test = require("../Test.js").Test;
+const TestUnit = require("../TestUnit").TestUnit;
+const TestGoals = require("../TestGoals");
 
-class ChannelMessageTest extends Test {
+class ChannelMessageUnit extends TestUnit {
 	constructor() {
 		super();
-		this.name = "ChannelMessageTest";
+		this.name = "ChannelMessageUnit";
 	}
 
 	run() {
@@ -26,6 +27,7 @@ class ChannelMessageTest extends Test {
 			this.client.on("CM", (msg) => {
 				if(msg.user == "BanchoBot" && msg.message == "Changed beatmap to https://osu.ppy.sh/b/75 Kenji Ninuma - DISCO PRINCE" && msg.channel == channel) {
 					returned = true;
+					this.fulFillGoal(TestGoals.ChannelMessage);
 					resolve();
 					this.client.sendMessage(channel, "!mp close");
 				}
@@ -41,4 +43,4 @@ class ChannelMessageTest extends Test {
 	}
 }
 
-module.exports = new ChannelMessageTest();
+module.exports = new ChannelMessageUnit();

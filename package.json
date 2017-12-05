@@ -4,7 +4,7 @@
   "description": "Interface with Bancho over IRC, made easy and reliable",
   "main": "index.js",
   "scripts": {
-    "test": "time DEBUG='*' node run-tests.js"
+    "test": "time DEBUG='*' node tests/run.js"
   },
   "repository": {
     "type": "git",

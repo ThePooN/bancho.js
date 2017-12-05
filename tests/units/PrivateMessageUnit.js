@@ -1,6 +1,7 @@
-const Test = require("../Test.js").Test;
+const TestUnit = require("../TestUnit").TestUnit;
+const TestGoals = require("../TestGoals");
 
-class PrivateMessageTest extends Test {
+class PrivateMessageUnit extends TestUnit {
 	constructor() {
 		super();
 		this.name = "PrivateMessageTest";
@@ -12,6 +13,7 @@ class PrivateMessageTest extends Test {
 			let returned = false;
 			this.client.on("PM", (msg) => {
 				if(msg.user == this.config["irc_user"] && msg.message == message) {
+					this.fulFillGoal(TestGoals.PrivateMessage);
 					returned = true;
 					resolve();
 				}
@@ -25,4 +27,4 @@ class PrivateMessageTest extends Test {
 	}
 }
 
-module.exports = new PrivateMessageTest();
+module.exports = new PrivateMessageUnit();

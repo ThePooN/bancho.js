@@ -1,6 +1,7 @@
-const Test = require("../Test.js").Test;
+const TestUnit = require("../TestUnit").TestUnit;
+const TestGoals = require("../TestGoals");
 
-class JoinPromiseChannelTest extends Test {
+class JoinPromiseChannelUnit extends TestUnit {
 	constructor() {
 		super();
 		this.name = "JoinPromiseChannelTest";
@@ -11,9 +12,12 @@ class JoinPromiseChannelTest extends Test {
 			const channel = "#french";
 			let returned = false;
 			this.client.joinChannel(channel).then(() => {
-				returned = true;
-				this.client.leaveChannel(channel);
-				resolve();
+				this.fulFillGoal(TestGoals.JoinPromise);
+				this.client.leaveChannel(channel).then(() => {
+					this.fulFillGoal(TestGoals.PartPromise);
+					returned = true;
+					resolve();
+				});
 			}, (err) => {
 				returned = true;
 				reject(err);
@@ -26,4 +30,4 @@ class JoinPromiseChannelTest extends Test {
 	}
 }
 
-module.exports = new JoinPromiseChannelTest();
+module.exports = new JoinPromiseChannelUnit();
