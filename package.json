@@ -4,7 +4,9 @@
   "description": "Interface with Bancho over IRC, made easy and reliable",
   "main": "index.js",
   "scripts": {
-    "test": "time DEBUG='*' node tests/run.js"
+    "test": "time DEBUG='*' node tests/run.js",
+    "doc": "node ./node_modules/.bin/jsdoc -R README.md -r index.js lib/",
+    "doc:dev": "node ./node_modules/.bin/jsdoc -R README.md -r -p index.js lib/"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "eslint": "^4.12.1",
+    "jsdoc": "^3.5.5",
     "log-fancy": "^1.3.0"
   }
 }
