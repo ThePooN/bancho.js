@@ -1,5 +1,14 @@
 # Pre-release
 
+## Version 0.3
+
+- Documentation
+- Changelog
+- Contribution guide
+- Test goals are now independent from test units
+- Added leaving channels test goals
+- Rename Client to BanchoClient
+
 ## Version 0.2
 
 - Rewrote the original Bancho.js library in classes and split across multiple files

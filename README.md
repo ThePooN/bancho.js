@@ -3,6 +3,8 @@
 [![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)  
 [![pipeline status](https://git.cartooncraft.fr/ThePooN/bancho.js/badges/master/pipeline.svg)](https://git.cartooncraft.fr/ThePooN/bancho.js/commits/master)
 
+## Current release: v0.3.0
+
 # Introduction
 
 bancho.js is designed to be the best library when it comes to interacting with bancho in real-time. It connects over its IRC interface and enables you to do anything you can do over IRC - and much more to come!
