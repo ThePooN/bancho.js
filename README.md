@@ -17,9 +17,8 @@ It is licensed as GPL 3.0. The entire license text is available in the [LICENSE]
 
 # Documentation
 
-soon™  
-Nah seriously this is just an initial push with the library in a single file at the moment, with just a few added test units. Don't count on a documentation for now, that'll come with the split in multiple files and classes.  
-Definitely expect a very rich documentation though.
+End-user documentation is now hosted on https://bancho.js.org!  
+Developers documentation can be generated using `npm run doc:dev`. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
 
 # Support The Development
 
