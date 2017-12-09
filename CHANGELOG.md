@@ -1,5 +1,9 @@
 # Pre-release
 
+## Version 0.4
+
+- Added type definitions (thanks @ekgame!)
+
 ## Version 0.3
 
 - Documentation
