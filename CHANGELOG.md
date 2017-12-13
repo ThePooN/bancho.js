@@ -3,6 +3,8 @@
 ## Version 0.4
 
 - Added type definitions (thanks @ekgame!)
+- Add config file and CI variables in contributing guide
+- Add connect.js and ping.js examples
 
 ## Version 0.3
 
