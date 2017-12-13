@@ -13,6 +13,10 @@ It is designed to be reliable and easy to use. It has already been successfully 
 
 Its development is only at the early stages at the moment - it doesn't do more than a standard IRC library would. However, feel free to have a look at the [issues](https://git.cartooncraft.fr/ThePooN/bancho.js/issues) to get an idea of what's coming!
 
+# Examples
+
+To get an idea on how easy it is - check the examples in the [examples](examples/) folder!
+
 # License
 
 It is licensed as GPL 3.0. The entire license text is available in the [LICENSE](/LICENSE) file, however I recommend you to take a look at this [short summary](https://choosealicense.com/licenses/gpl-3.0/) to get a better idea!
