@@ -1,6 +1,6 @@
 declare module "bancho.js" {
 	import { EventEmitter } from "events";
-	import { Client, User, UserEvent } from "nodesu";
+	import * as nodesu from "nodesu";
 
 	export class BanchoClient extends EventEmitter {
 		
@@ -21,9 +21,8 @@ declare module "bancho.js" {
 		 * Get a BanchoUser instance for the specified user
 		 * 
 		 * @param username 
-		 * @returns {BanchoUser}
 		 */
-		getUser(username: string)
+		getUser(username: string): BanchoUser
 	
 		/**
 		 * Sends a message to an user or a channel over IRC
@@ -157,16 +156,13 @@ declare module "bancho.js" {
 		 * Fetch the user from the osu! API if possible. Populates all the "optional" properties of BanchoUser.
 		 * 
 		 * @throws {Error} osu! API/no API key error
-		 * @returns Promise<nodesu.User>
 		 */
 		fetchFromAPI(): Promise<nodesu.User>
 		
 		/**
 		 * Returns true if the user is the client
-		 * 
-		 * @returns {boolean}
 		 */
-		isClient()
+		isClient(): boolean
 	
 		/**
 		 * Sends a PM to this user.
