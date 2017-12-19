@@ -11,7 +11,7 @@ class UserAPIFetchUnit extends TestUnit {
 	run() {
 		return new Promise((resolve, reject) => {
 			let returned = false;
-			const user = this.client.getUser(config.username);
+			const user = this.client.getUser(this.client.username);
 			user.fetchFromAPI().then((apiUser) => {
 				const props = ["id", "username", "count300", "count100", "count50",
 					"playcount", "rankedScore", "totalScore", "ppRank", "accuracy",
@@ -31,7 +31,7 @@ class UserAPIFetchUnit extends TestUnit {
 					reject(new Error("User id doesn't match!"));
 					return;
 				}
-				if(user.username != config.username) {
+				if(user.username != this.client.username) {
 					returned = true;
 					reject(new Error("Username doesn't match!"));
 					return;

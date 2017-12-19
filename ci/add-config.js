@@ -5,8 +5,7 @@ const config = {
 	"irc_user": process.env["IRC_USER"],
 	"irc_pass": process.env["IRC_PASS"],
 	"api_key": process.env["API_KEY"],
-	"user_id": Number(process.env["USER_ID"]),
-	"username": Number(process.env["USERNAME"]),
+	"user_id": Number(process.env["USER_ID"])
 };
 if(process.env["IRC_HOST"])
 	config["irc_host"] = process.env["IRC_HOST"];
