@@ -47,6 +47,7 @@ client.connect().then(async () => {
 	log.error("Error while connecting to Bancho!");
 	log.error(err);
 	log.error("Now aborting");
+	process.exit(1);
 });
 
 module.exports.fulFillGoal = function(goal) {
