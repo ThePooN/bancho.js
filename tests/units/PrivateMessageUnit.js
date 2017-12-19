@@ -4,15 +4,15 @@ const TestGoals = require("../TestGoals");
 class PrivateMessageUnit extends TestUnit {
 	constructor() {
 		super();
-		this.name = "PrivateMessageTest";
+		this.name = "PrivateMessageUnit";
 	}
 
 	run() {
 		return new Promise((resolve, reject) => {
 			const message = Math.random().toString(36).substring(8);
 			let returned = false;
-			this.client.on("PM", (msg) => {
-				if(msg.user == this.config["irc_user"] && msg.message == message) {
+			this.client.on("PM", async (msg) => {
+				if(msg.user.isClient() && msg.message == message) {
 					this.fulFillGoal(TestGoals.PrivateMessage);
 					returned = true;
 					resolve();

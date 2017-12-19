@@ -1,4 +1,5 @@
 import { EventEmitter } from "events";
+import { Client, User, UserEvent } from "nodesu";
 
 declare class BanchoClient extends EventEmitter {
 	
@@ -9,6 +10,19 @@ declare class BanchoClient extends EventEmitter {
 	 * @param port Custom IRC port
 	 */
 	constructor(username: string, password: string, host?: string, port?: number)
+
+	/**
+	 * Populated with a Nodesu client, if api key is passed to the constructor
+	 */
+	[osuApi]: Client
+
+	/**
+	 * Get a BanchoUser instance for the specified user
+	 * 
+	 * @param username 
+	 * @returns {BanchoUser}
+	 */
+	getUser(username: string)
 
 	/**
 	 * Sends a message to an user or a channel over IRC
@@ -141,7 +155,7 @@ export const ConnectStates: ConnectStateTypes
  * The base type for messages.
  */
 declare interface Message {
-	user: string,
+	user: BanchoUser,
 	message: string
 }
 
@@ -162,6 +176,56 @@ declare interface PrivateMessage extends Message {
  * The type for a user-channel pair.
  */
 declare interface ChannelUser {
-	username: string,
+	user: BanchoUser,
 	channel: string
+}
+
+declare class BanchoUser {
+	/**
+	 * Creates an instance of BanchoUser.
+	 * @param banchojs Bancho.js client this user was instancied by
+	 * @param ircUsername 
+	 */
+	constructor(banchojs: BanchoClient, ircUsername: string)
+
+	banchojs: BanchoClient
+	ircUsername: string
+
+	[id]: number
+	[username]: string
+	[count300]: number
+	[count100]: number
+	[count50]: number
+	[playcount]: number
+	[rankedScore]: number
+	[totalScore]: number
+	[ppRank]: number
+	[accuracy]: number
+	[countRankSS]: number
+	[countRankS]: number
+	[countRankA]: number
+	[country]: number
+	[ppCountryRank]: number
+	[events]: Array.UserEvent
+
+	/**
+	 * Fetch the user from the osu! API if possible. Populates all the "optional" properties of BanchoUser.
+	 * 
+	 * @throws {Error} osu! API/no API key error
+	 * @returns Promise<nodesu.User>
+	 */
+	fetchFromAPI(): Promise<User>
+	
+	/**
+	 * Returns true if the user is the client
+	 * 
+	 * @returns {boolean}
+	 */
+	isClient()
+
+	/**
+	 * Sends a PM to this user.
+	 * @param message
+	 */
+	sendMessage(message: string)
 }

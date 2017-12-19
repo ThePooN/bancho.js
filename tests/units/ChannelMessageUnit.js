@@ -15,7 +15,7 @@ class ChannelMessageUnit extends TestUnit {
 			let matchCreatedRegex = /Created the tournament match https:\/\/osu\.ppy\.sh\/mp\/(\d+) (.+)/;
 			
 			this.client.on("PM", (msg) => {
-				if(msg.user == "BanchoBot") {
+				if(msg.user.ircUsername == "BanchoBot") {
 					const match = matchCreatedRegex.exec(msg.message);
 					if(!match || match[2] != roomName)
 						return;
@@ -25,7 +25,7 @@ class ChannelMessageUnit extends TestUnit {
 			});
 
 			this.client.on("CM", (msg) => {
-				if(msg.user == "BanchoBot" && msg.message == "Changed beatmap to https://osu.ppy.sh/b/75 Kenji Ninuma - DISCO PRINCE" && msg.channel == channel) {
+				if(msg.user.ircUsername == "BanchoBot" && msg.message == "Changed beatmap to https://osu.ppy.sh/b/75 Kenji Ninuma - DISCO PRINCE" && msg.channel == channel) {
 					returned = true;
 					this.fulFillGoal(TestGoals.ChannelMessage);
 					resolve();

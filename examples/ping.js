@@ -6,6 +6,6 @@ client.connect().then(() => {
 	console.log("We're online! Now listening for incoming messages.");
 	client.on("PM", (message) => {
 		if(message.message.indexOf("!ping") == 0)
-			client.sendMessage(message.user, "Pong!");
+			message.user.sendMessage("Pong!");
 	});
 }).catch(console.error);

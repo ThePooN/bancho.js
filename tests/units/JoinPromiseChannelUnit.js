@@ -4,7 +4,7 @@ const TestGoals = require("../TestGoals");
 class JoinPromiseChannelUnit extends TestUnit {
 	constructor() {
 		super();
-		this.name = "JoinPromiseChannelTest";
+		this.name = "JoinPromiseChannelUnit";
 	}
 
 	run() {

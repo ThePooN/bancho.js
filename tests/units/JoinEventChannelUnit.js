@@ -4,7 +4,7 @@ const TestGoals = require("../TestGoals");
 class JoinEventChannelUnit extends TestUnit {
 	constructor() {
 		super();
-		this.name = "JoinEventChannelTest";
+		this.name = "JoinEventChannelUnit";
 	}
 
 	run() {
@@ -12,12 +12,12 @@ class JoinEventChannelUnit extends TestUnit {
 			const channel = "#french";
 			let returned = false;
 			this.client.on("JOIN", (obj) => {
-				if(obj.username == this.client.username && obj.channel == channel) {
+				if(obj.user.isClient() && obj.channel == channel) {
 					this.fulFillGoal(TestGoals.JoinEvent);
 					this.client.leaveChannel(channel);
 
 					this.client.on("PART", (obj) => {
-						if(obj.username == this.client.username && obj.channel == channel) {
+						if(obj.user.isClient() && obj.channel == channel) {
 							this.fulFillGoal(TestGoals.PartEvent);
 							returned = true;
 							resolve();

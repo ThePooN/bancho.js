@@ -5,7 +5,7 @@ const TestGoals = require("./TestGoals");
 const config = module.exports.config = require("../config.json");
 
 log.info("Connecting to Bancho...");
-const client = module.exports.client = new Banchojs.Client(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"]);
+const client = module.exports.client = new Banchojs.Client(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"], config["api_key"]);
 const fulFilledGoals = [];
 
 const connectStartTime = Date.now();

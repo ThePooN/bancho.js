@@ -1,3 +1,10 @@
+/**
+ * A test unit
+ * 
+ * @private
+ * @property {string} name
+ * @property {BanchoClient} client
+ */
 class TestUnit {
 	constructor() {
 		this.name = "Rename Me!";
@@ -5,7 +12,6 @@ class TestUnit {
 		this.config = require("./run.js").config;
 		this.log = require("./run.js").log;
 		this.fulFillGoal = require("./run.js").fulFillGoal;
-		this.goals = [];
 	}
 	run() {
 		throw new Error("Unimplemented unit!");

@@ -5,6 +5,8 @@
 - Added type definitions (thanks @ekgame!)
 - Add config file and CI variables in contributing guide
 - Add connect.js and ping.js examples
+- Add BanchoUser class
+- Add nodesu as a dependency for osu! API requests
 
 ## Version 0.3
 
