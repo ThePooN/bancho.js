@@ -1,5 +1,4 @@
 import { EventEmitter } from "events";
-import { Client, User, UserEvent } from "nodesu";
 
 declare class BanchoClient extends EventEmitter {
 	
@@ -14,7 +13,7 @@ declare class BanchoClient extends EventEmitter {
 	/**
 	 * Populated with a Nodesu client, if api key is passed to the constructor
 	 */
-	[osuApi]: Client
+	osuApi: Nodesu.Client
 
 	/**
 	 * Get a BanchoUser instance for the specified user
@@ -206,7 +205,7 @@ declare class BanchoUser {
 	[countRankA]: number
 	[country]: number
 	[ppCountryRank]: number
-	[events]: Array.UserEvent
+	[events]: Array.Nodesu.UserEvent
 
 	/**
 	 * Fetch the user from the osu! API if possible. Populates all the "optional" properties of BanchoUser.
@@ -214,7 +213,7 @@ declare class BanchoUser {
 	 * @throws {Error} osu! API/no API key error
 	 * @returns Promise<nodesu.User>
 	 */
-	fetchFromAPI(): Promise<User>
+	fetchFromAPI(): Promise<Nodesu.User>
 	
 	/**
 	 * Returns true if the user is the client

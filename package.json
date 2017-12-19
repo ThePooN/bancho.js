@@ -3,6 +3,7 @@
   "version": "0.3.0",
   "description": "Interface with Bancho over IRC, made easy and reliable",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "time DEBUG='*' node tests/run.js",
     "doc": "node ./node_modules/.bin/jsdoc -R README.md -r index.js lib/",
