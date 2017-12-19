@@ -37,7 +37,7 @@ class UserAPIFetchUnit extends TestUnit {
 					return;
 				}
 
-				this.fulFillGoal(TestGoals.UserAPIFetch)
+				this.fulFillGoal(TestGoals.UserAPIFetch);
 				resolve();
 			});
 			setTimeout(() => {
