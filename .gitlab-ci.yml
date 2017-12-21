@@ -20,7 +20,8 @@ mirror:
         - git clone --mirror git@git.cartooncraft.fr:ThePooN/bancho.js.git git/
         - cd git
         - git push --mirror git@github.com:ThePooN/bancho.js.git
-# dont forget only main repo btw LOL XD
+    only:
+        - branches@ThePooN/bancho.js
 
 eslint:
     stage: test
