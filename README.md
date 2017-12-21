@@ -9,22 +9,33 @@
 
 bancho.js is designed to be the best library when it comes to interacting with bancho in real-time. It connects over its IRC interface and enables you to do anything you can do over IRC - and much more to come!
 
-It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg).
+It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg), followed by osu! French Championship and osu!SQL in the near future, and maybe your own project!
 
-Its development is only at the early stages at the moment - it doesn't do more than a standard IRC library would. However, feel free to have a look at the [issues](https://git.cartooncraft.fr/ThePooN/bancho.js/issues) to get an idea of what's coming!
-
-# Examples
-
-To get an idea on how easy it is - check the examples in the [examples](examples/) folder!
-
-# License
-
-It is licensed as GPL 3.0. The entire license text is available in the [LICENSE](/LICENSE) file, however I recommend you to take a look at this [short summary](https://choosealicense.com/licenses/gpl-3.0/) to get a better idea!
+# Getting Started
+This will print all your incoming PMs to the console:
+```javascript
+const client = new Banchojs.BanchoClient(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"]);
+client.connect().then(() => {
+	console.log("We're online! Now listening for incoming messages.");
+	client.on("PM", (message) => {
+		console.log(message.user.ircUsername+": "+message.message);
+	});
+}).catch(console.error);
+```
+Output:
+```
+Ghouru: notice me senpai
+```
+There are much more possibilities, including firing API requests from any `BanchoUser` object. Learn more about all the features in the Documentation!
 
 # Documentation
 
 End-user documentation is now hosted on https://bancho.js.org!  
 Developers documentation can be generated using `npm run doc:dev`. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+
+# License
+
+It is licensed as GPL 3.0. The entire license text is available in the [LICENSE](/LICENSE) file, however I recommend you to take a look at this [short summary](https://choosealicense.com/licenses/gpl-3.0/) to get a better idea!
 
 # Support The Development
 

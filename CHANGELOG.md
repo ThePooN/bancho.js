@@ -12,6 +12,7 @@
 - New class: BanchoChannel
 - BanchoClient.join/leaveChannel functions have been moved to BanchoChannel
 - Fancier test logs
+- Enhance README with a Getting Started section
 
 ## Version 0.3
 
