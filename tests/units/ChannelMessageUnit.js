@@ -19,8 +19,8 @@ class ChannelMessageUnit extends TestUnit {
 					const match = matchCreatedRegex.exec(msg.message);
 					if(!match || match[2] != roomName)
 						return;
-					channel = "#mp_"+match[1];
-					this.client.sendMessage(channel, "!mp map 75");
+					channel = this.client.getChannel("#mp_"+match[1]);
+					channel.sendMessage("!mp map 75");
 				}
 			});
 
@@ -29,11 +29,11 @@ class ChannelMessageUnit extends TestUnit {
 					returned = true;
 					this.fulFillGoal(TestGoals.ChannelMessage);
 					resolve();
-					this.client.sendMessage(channel, "!mp close");
+					channel.sendMessage("!mp close");
 				}
 			});
 			
-			this.client.sendMessage("BanchoBot", "!mp make "+roomName);
+			this.client.getUser("BanchoBot").sendMessage("!mp make "+roomName);
 			
 			setTimeout(() => {
 				if(!returned)

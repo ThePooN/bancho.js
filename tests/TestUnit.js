@@ -2,8 +2,8 @@
  * A test unit
  * 
  * @private
- * @property {string} name
- * @property {BanchoClient} client
+ * @prop {string} name
+ * @prop {BanchoClient} client
  */
 class TestUnit {
 	constructor() {

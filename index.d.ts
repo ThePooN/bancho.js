@@ -19,18 +19,14 @@ declare module "bancho.js" {
 	
 		/**
 		 * Get a BanchoUser instance for the specified user
-		 * 
-		 * @param username 
 		 */
 		getUser(username: string): BanchoUser
 	
 		/**
-		 * Sends a message to an user or a channel over IRC
-		 * @param recipient Recipient of the message (either a channel or an username)
-		 * @param message Message
+		 * Get a BanchoChannel instance for the specified name
 		 */
-		sendMessage(recipient: string, message: string): void
-		
+		getChannel(channelName: string): BanchoChannel
+	
 		/**
 		 * Connects to Bancho, rejects an Error if connection fails
 		 */
@@ -40,18 +36,6 @@ declare module "bancho.js" {
 		 * Disconnects from Bancho
 		 */
 		disconnect(): void
-		
-		/**
-		 * Join a channel, rejects an Error if joining fails or we're disconnected
-		 * @param channelName Channel we want to join
-		 */
-		joinChannel(channelName: string): Promise<null>
-	
-		/**
-		 * Leave a channel, rejects an Error if leaving fails or we're disconnected
-		 * @param channelName Channel we want to leave
-		 */
-		leaveChannel(channelName: string): Promise<null>
 		
 		/**
 		 * Returns the current connection state.
@@ -128,7 +112,6 @@ declare module "bancho.js" {
 		/**
 		 * Creates an instance of BanchoUser.
 		 * @param banchojs Bancho.js client this user was instancied by
-		 * @param ircUsername 
 		 */
 		constructor(banchojs: BanchoClient, ircUsername: string)
 	
@@ -166,15 +149,45 @@ declare module "bancho.js" {
 	
 		/**
 		 * Sends a PM to this user.
-		 * @param message
 		 */
 		sendMessage(message: string)
 	}
 
 	/**
-	 * The base type for messages.
+	 * Message to be sent later to a BanchoChannel or BanchoUser
 	 */
-	class Message {
+	export class OutgoingBanchoMessage {
+		constructor(banchojs: BanchoClient, recipient: BanchoUser|BanchoChannel, message: string)
+		/**
+		 * Sends the prepared message to the recipient
+		 * 
+		 * @throws {Error} If recipient isn't a valid type
+		 */
+		send()
+		recipient: BanchoUser|BanchoChannel
+		message: string
+	}
+
+	/**
+	 * Represents a discussion channel (not including PMs)
+	 */
+	class BanchoChannel {
+		/**
+		 * @param name Channel name as it is referred to on IRC (including #)
+		 */
+		constructor(banchojs: BanchoClient, name: string)
+		/**
+		 * Sends a message to this channel
+		 */
+		sendMessage(message: string)
+		join(): Promise<null>
+		leave(): Promise<null>
+	}
+
+	/**
+	 * Bancho incoming message
+	 */
+	class BanchoMessage {
 		user: BanchoUser
 		message: string
 	}
@@ -182,14 +195,14 @@ declare module "bancho.js" {
 	/**
 	 * The type for channel messages.
 	 */
-	class ChannelMessage extends Message {
+	class ChannelMessage extends BanchoMessage {
 		channel: string
 	}
 
 	/**
 	 * The type for private messages.
 	 */
-	class PrivateMessage extends Message {
+	class PrivateMessage extends BanchoMessage {
 
 	}
 

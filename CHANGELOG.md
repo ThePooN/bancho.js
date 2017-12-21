@@ -7,6 +7,10 @@
 - Add connect.js and ping.js examples
 - Add BanchoUser class
 - Add nodesu as a dependency for osu! API requests
+- Rename Message to BanchoMessage
+- New class: OutgoingBanchoMessage
+- New class: BanchoChannel
+- BanchoClient.join/leaveChannel functions have been moved to BanchoChannel
 
 ## Version 0.3
 

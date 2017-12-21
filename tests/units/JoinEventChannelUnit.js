@@ -9,12 +9,12 @@ class JoinEventChannelUnit extends TestUnit {
 
 	run() {
 		return new Promise((resolve, reject) => {
-			const channel = "#french";
+			const channel = this.client.getChannel("#french");
 			let returned = false;
 			this.client.on("JOIN", (obj) => {
 				if(obj.user.isClient() && obj.channel == channel) {
 					this.fulFillGoal(TestGoals.JoinEvent);
-					this.client.leaveChannel(channel);
+					channel.leave(channel);
 
 					this.client.on("PART", (obj) => {
 						if(obj.user.isClient() && obj.channel == channel) {
@@ -28,10 +28,10 @@ class JoinEventChannelUnit extends TestUnit {
 			this.client.on("nochannel", (errorChannel) => {
 				if(errorChannel == channel) {
 					returned = true;
-					reject(new Error("No such channel: "+errorChannel));
+					reject(new Error("No such channel: "+errorChannel.name));
 				}
 			});
-			this.client.joinChannel(channel);
+			channel.join();
 			setTimeout(() => {
 				if(!returned)
 					reject(new Error("Didn't join after timeout!"));

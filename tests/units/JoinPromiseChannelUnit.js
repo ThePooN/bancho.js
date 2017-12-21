@@ -9,11 +9,11 @@ class JoinPromiseChannelUnit extends TestUnit {
 
 	run() {
 		return new Promise((resolve, reject) => {
-			const channel = "#french";
+			const channel = this.client.getChannel("#french");
 			let returned = false;
-			this.client.joinChannel(channel).then(() => {
+			channel.join().then(() => {
 				this.fulFillGoal(TestGoals.JoinPromise);
-				this.client.leaveChannel(channel).then(() => {
+				channel.leave().then(() => {
 					this.fulFillGoal(TestGoals.PartPromise);
 					returned = true;
 					resolve();
