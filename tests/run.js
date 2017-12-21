@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
+
 const fs = require("fs");
-const log = module.exports.log = require("log-fancy")("tests");
+const log = module.exports.log = require("./log");
 const Banchojs = require("../");
 const TestGoals = require("./TestGoals");
 const config = module.exports.config = require("../config.json");
@@ -12,6 +14,7 @@ const connectStartTime = Date.now();
 
 client.connect().then(async () => {
 	log.info("Connected to Bancho in "+(Date.now()-connectStartTime)+"ms!");
+	console.log();
 	log.info("Listing units...");
 	const files = fs.readdirSync("./tests/units");
 	const units = [];
@@ -20,6 +23,7 @@ client.connect().then(async () => {
 			units.push(require("./units/"+fileName));
 	}
 	log.info("About to execute "+units.length+" units...");
+	console.log();
 
 	for(const unit of units) {
 		log.info("Starting unit "+unit.name);
@@ -27,6 +31,7 @@ client.connect().then(async () => {
 			const startTime = Date.now();
 			await unit.run();
 			log.info("Successfully ran unit "+unit.name+" in "+(Date.now()-startTime)+"ms");
+			console.log();
 		}
 		catch(err) {
 			log.fatal("An error was encountered when running unit "+unit.name+"!", err);

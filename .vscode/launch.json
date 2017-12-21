@@ -5,10 +5,7 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch Tests",
-			"program": "${workspaceRoot}/tests/run.js",
-			"env": {
-				"DEBUG": "*"
-			}
+			"program": "${workspaceRoot}/tests/run.js"
 		}
 	]
 }

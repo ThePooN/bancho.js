@@ -11,6 +11,7 @@
 - New class: OutgoingBanchoMessage
 - New class: BanchoChannel
 - BanchoClient.join/leaveChannel functions have been moved to BanchoChannel
+- Fancier test logs
 
 ## Version 0.3
 
