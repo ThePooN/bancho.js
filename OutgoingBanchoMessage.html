@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ChannelMessage</title>
+    <title>JSDoc: Class: OutgoingBanchoMessage</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ChannelMessage</h1>
+    <h1 class="page-title">Class: OutgoingBanchoMessage</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ChannelMessage<span class="signature">(user, message, channel)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>OutgoingBanchoMessage<span class="signature">(banchojs, recipient, message)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Message received from a Channel</div>
+            <div class="class-description">Message to be sent later to a BanchoChannel or BanchoUser</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="ChannelMessage"><span class="type-signature"></span>new ChannelMessage<span class="signature">(user, message, channel)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="OutgoingBanchoMessage"><span class="type-signature"></span>new OutgoingBanchoMessage<span class="signature">(banchojs, recipient, message)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Creates an instance of ChannelMessage.
+    Creates an instance of OutgoingBanchoMessage.
 </div>
 
 
@@ -89,13 +89,13 @@
 
         <tr>
             
-                <td class="name"><code>user</code></td>
+                <td class="name"><code>banchojs</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
+<span class="param-type"><a href="BanchoClient.html">BanchoClient</a></span>
 
 
             
@@ -105,7 +105,33 @@
 
             
 
-            <td class="description last">User the message was sent by</td>
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
+|
+
+<span class="param-type"><a href="BanchoChannel.html">BanchoChannel</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
         </tr>
 
     
@@ -128,30 +154,7 @@
 
             
 
-            <td class="description last">Message body</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>channel</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Channel the message was received from</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -189,7 +192,33 @@
 
         <tr>
             
-                <td class="name"><code>channel</code></td>
+                <td class="name"><code>recipient</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
+|
+
+<span class="param-type"><a href="BanchoChannel.html">BanchoChannel</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
             
 
             <td class="type">
@@ -205,7 +234,7 @@
 
             
 
-            <td class="description last">Channel the message was received from</td>
+            <td class="description last"></td>
         </tr>
 
     
@@ -244,7 +273,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_ChannelMessage.js.html">lib/ChannelMessage.js</a>, <a href="lib_ChannelMessage.js.html#line9">line 9</a>
+        <a href="lib_OutgoingBanchoMessage.js.html">lib/OutgoingBanchoMessage.js</a>, <a href="lib_OutgoingBanchoMessage.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -276,30 +305,138 @@
     </div>
 
     
-        <h3 class="subsection-title">Extends</h3>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="send"><span class="type-signature"></span>send<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Sends the prepared message to the recipient
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="lib_OutgoingBanchoMessage.js.html">lib/OutgoingBanchoMessage.js</a>, <a href="lib_OutgoingBanchoMessage.js.html#line25">line 25</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
 
         
 
+<dl>
+    <dt>
+        <div class="param-desc">
+        If recipient isn't a valid type
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
 
-    <ul>
-        <li><a href="BanchoMessage.html">BanchoMessage</a></li>
-    </ul>
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
 
 
     
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
+        
     
 
     

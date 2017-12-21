@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: lib/IrcCommand.js</title>
+    <title>JSDoc: Source: lib/OutgoingBanchoMessage.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: lib/IrcCommand.js</h1>
+    <h1 class="page-title">Source: lib/OutgoingBanchoMessage.js</h1>
 
     
 
@@ -27,31 +27,45 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Incoming IRC Command
+ * Message to be sent later to a BanchoChannel or BanchoUser
  * 
- * @abstract
- * @private
+ * @prop {BanchoUser|BanchoChannel} recipient
+ * @prop {string} message
  */
-class IrcCommand {
-	constructor() {
-		if(new.target === IrcCommand)
-			throw new Error("Don't instanciate an abstract class you dumbass");
+class OutgoingBanchoMessage {
+	/**
+	 * Creates an instance of OutgoingBanchoMessage.
+	 * @param {BanchoClient} banchojs 
+	 * @param {BanchoUser|BanchoChannel} recipient 
+	 * @param {string} message 
+	 */
+	constructor(banchojs, recipient, message) {
+		this.banchojs = banchojs;
+		this.recipient = recipient;
+		this.message = message;
 	}
 
 	/**
-	 * Handles the IRC command
+	 * Sends the prepared message to the recipient
 	 * 
-	 * @param {BanchoClient} client 
-	 * @param {string} command 
-	 * @param {array.&lt;string>} splits 
+	 * @throws {Error} If recipient isn't a valid type
 	 */
-	// eslint-disable-next-line no-unused-vars
-	handleCommand(client, command, splits) {
-		throw new Error("Unimplemented command!");
+	send() {
+		let name = null;
+		// Requiring BanchoUser/BanchoClass here to avoid "circular dependencies"
+		if(this.recipient instanceof require("./BanchoUser"))
+			name = this.recipient.ircUsername;
+		else if(this.recipient instanceof require("./BanchoChannel"))
+			name = this.recipient.name;
+		else
+			throw new Error("Recipient isn't a BanchoUser or BanchoChannel!");
+		name = name.replace(/ /g, "_").split("\n")[0].substring(0, 28);
+		this.message.split("\n")[0];
+		this.banchojs.send("PRIVMSG "+name+" :"+this.message, true);
 	}
 }
 
-module.exports = IrcCommand;</code></pre>
+module.exports = OutgoingBanchoMessage;</code></pre>
         </article>
     </section>
 

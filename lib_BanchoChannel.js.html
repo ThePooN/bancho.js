@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: lib/IrcCommand.js</title>
+    <title>JSDoc: Source: lib/BanchoChannel.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: lib/IrcCommand.js</h1>
+    <h1 class="page-title">Source: lib/BanchoChannel.js</h1>
 
     
 
@@ -26,32 +26,77 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Incoming IRC Command
+            <pre class="prettyprint source linenums"><code>const OutgoingBanchoMessage = require("./OutgoingBanchoMessage.js");
+
+/**
+ * Represents a discussion channel (not including PMs)
  * 
- * @abstract
- * @private
+ * @prop {string} name Channel name as it is referred to on IRC (including #)
  */
-class IrcCommand {
-	constructor() {
-		if(new.target === IrcCommand)
-			throw new Error("Don't instanciate an abstract class you dumbass");
+class BanchoChannel {
+	/**
+	 * Creates an instance of BanchoChannel.
+	 * @param {BanchoClient} banchojs bancho.js client
+	 * @param {string} name Channel name as it is referred to on IRC (including #)
+	 */
+	constructor(banchojs, name) {
+		this.banchojs = banchojs;
+		this.name = name;
+		this.joinCallback = null;
+		this.partCallback = null;
 	}
 
 	/**
-	 * Handles the IRC command
+	 * Sends a message to this channel
 	 * 
-	 * @param {BanchoClient} client 
-	 * @param {string} command 
-	 * @param {array.&lt;string>} splits 
+	 * @param {string} message 
 	 */
-	// eslint-disable-next-line no-unused-vars
-	handleCommand(client, command, splits) {
-		throw new Error("Unimplemented command!");
+	sendMessage(message) {
+		(new OutgoingBanchoMessage(this.banchojs, this, message)).send();
+	}
+
+	/**
+	 * Join the channel
+	 * 
+	 * @returns {Promise&lt;null>}
+	 */
+	join() {
+		return this._joinOrPart("JOIN", "joinCallback");
+	}
+
+	/**
+	 * Leave the channel
+	 * 
+	 * @returns {Promise&lt;null>}
+	 */
+	leave() {
+		return this._joinOrPart("PART", "partCallback");
+	}
+
+	/**
+	 * Sub-function for join/leave calls
+	 * 
+	 * @private
+	 * @param {string} action 
+	 * @param {*} callbackProp 
+	 */
+	_joinOrPart(action, callbackProp) {
+		if(action != "JOIN" &amp;&amp; action != "PART")
+			throw new Error("wrong action dumbass");
+		return new Promise((resolve, reject) => {
+			this.banchojs.send(action+" "+this.name);
+			this[callbackProp] = (err) => {
+				if(!err)
+					resolve();
+				else
+					reject(err);
+				this[callbackProp] = null;
+			};
+		});
 	}
 }
 
-module.exports = IrcCommand;</code></pre>
+module.exports = BanchoChannel;</code></pre>
         </article>
     </section>
 

@@ -29,8 +29,11 @@
             <pre class="prettyprint source linenums"><code>const net = require("net");
 const EventEmitter = require("events").EventEmitter;
 
+const BanchoUser = require("./BanchoUser");
+const BanchoChannel = require("./BanchoChannel");
 const ConnectStates = require("./ConnectStates");
 const IrcCommands = require("./IrcCommands");
+const Nodesu = require("nodesu");
 
 const ignoredSplits = [
 	"375",  // MOTD Begin
@@ -47,6 +50,7 @@ const ignoredSplits = [
 
 /**
  * Client to connect to Bancho over its IRC gateway
+ * @property {nodesu.Client} osuApi Populated with a Nodesu client, if api key is passed to the constructor
  * @extends {EventEmitter}
  */
 class BanchoClient extends EventEmitter {
@@ -56,8 +60,9 @@ class BanchoClient extends EventEmitter {
 	 * @param {string} password IRC Password of the user to connect to Bancho (see https://osu.ppy.sh/p/irc)
 	 * @param {string} [host="irc.ppy.sh"] Custom IRC host (for proxy-ing from a firewall for example)
 	 * @param {number} [port=6667] Custom IRC port
+	 * @param {string} [apiKey] osu! API key for API requests (see https://osu.ppy.sh/p/api)
 	 */
-	constructor(username, password, host = "irc.ppy.sh", port = 6667) {
+	constructor(username, password, host = "irc.ppy.sh", port = 6667, apiKey) {
 		super();
 		if(!username || !password)
 			throw new Error("You gotta gimme an username and a password to connect to Bancho dumbass");
@@ -73,6 +78,12 @@ class BanchoClient extends EventEmitter {
 		this.connectCallback = null;
 		this.joinCallbacks = [];
 		this.partCallbacks = [];
+		if(apiKey)
+			this.osuApi = new Nodesu.Client(apiKey, {
+				parseData: true
+			});
+		this.users = {};
+		this.channels = {};
 
 		this.ignoreClose = false; // TODO: find something better than this solution. it works and is 100% reliable though! also eventually try with process.nextTick instead of setTimeout()
 	}
@@ -214,20 +225,32 @@ class BanchoClient extends EventEmitter {
 	}
 
 	/**
-	 * Sends a message to an user or a channel over IRC
+	 * Get a BanchoUser instance for the specified user
 	 * 
-	 * @method
-	 * @param {string} recipient Recipient of the message (either a channel or an username)
-	 * @param {string} message Message
-	 * @throws {Error} If we're disconnected or the user was not found (TODO: not implemented yet)
+	 * @param {string} username 
+	 * @returns {BanchoUser}
 	 */
-	sendMessage(recipient, message) {
-		recipient = recipient.replace(/ /g, "_").split("\n")[0].substring(0, 28);
-		message.split("\n")[0];
-		if(!this.isConnected()) {
-			return;
-		}
-		this.send("PRIVMSG "+recipient+" :"+message, true);
+	getUser(username) {
+		username = username.replace(/ /g, "_").split("\n")[0].substring(0, 28);
+		if(this.users[username])
+			return this.users[username];
+		else
+			return (this.users[username] = new BanchoUser(this, username));
+	}
+
+	/**
+	 * Get a BanchoChannel instance for the specified name
+	 * 
+	 * @param {string} channelName 
+	 * @returns {BanchoChannel}
+	 */
+	getChannel(channelName) {
+		if(channelName.indexOf("#") != 0 || channelName.indexOf(",") != -1 || channelName.indexOf("") != -1)
+			throw new Error("Invalid channel name!");
+		if(this.channels[channelName])
+			return this.channels[channelName];
+		else
+			return (this.channels[channelName] = new BanchoChannel(this, channelName));
 	}
 
 	/**
@@ -283,48 +306,6 @@ class BanchoClient extends EventEmitter {
 	}
 
 	/**
-	 * Join a channel, rejects an Error if joining fails or we're disconnected
-	 * 
-	 * @param {string} channelName Channel we want to join
-	 * @returns {Promise&lt;null, Error>}
-	 */
-	joinChannel(channelName) {
-		return this._joinOrPartChannel("JOIN", channelName, this.joinCallbacks);
-	}
-
-	/**
-	 * Leave a channel, rejects an Error if leaving fails or we're disconnected
-	 * 
-	 * @param {string} channelName Channel we want to leave
-	 * @returns {Promise.&lt;null, Error>}
-	 */
-	leaveChannel(channelName) {
-		return this._joinOrPartChannel("PART", channelName, this.partCallbacks);
-	}
-
-	/**
-	 * Sub-function used by {@link BanchoClient#joinChannel} and {@link BanchoClient#leaveChannel}
-	 * 
-	 * @param {string} action 
-	 * @param {string} channelName 
-	 * @param {Array.&lt;function>} callbacks
-	 * @private 
-	 */
-	_joinOrPartChannel(action, channelName, callbacks) {
-		if(action != "JOIN" &amp;&amp; action != "PART")
-			throw new Error("learn to code dumbass.");
-		
-		return new Promise((resolve, reject) => {
-			this.send(action+" "+channelName, true);
-			callbacks[channelName] = (err) => {
-				if(err)
-					return reject(err);
-				resolve();
-			};
-		});
-	}
-
-	/**
 	 * When we've just connected, execute the connect callback
 	 * 
 	 * @param {any} arg Arg to pass to the callback
@@ -337,53 +318,6 @@ class BanchoClient extends EventEmitter {
 			this.connectCallback(arg);
 			if(erase)
 				this.connectCallback = null;
-		}
-		else if(throwIfNonexistant)
-			throw new Error("Inexistant connect callback!");
-	}
-
-	/**
-	 * Call a channel's callback after joining
-	 * 
-	 * @param {any} arg Arg to pass to the callback
-	 * @param {any} channelName Channel we've joined
-	 * @param {boolean} [erase=true] Erase the callback after execution?
-	 * @param {boolean} [throwIfNonexistant=false] Throw if callback doesn't exist?
-	 * @private
-	 */
-	callJoinCallback(arg, channelName, erase = true, throwIfNonexistant = false) {
-		this._callChannelCallback(arg, this.joinCallbacks, channelName, erase, throwIfNonexistant);
-	}
-
-	/**
-	 * Call a channel's callback after leaving
-	 * 
-	 * @param {any} arg Arg to pass to the callback
-	 * @param {any} channelName Channel we've left
-	 * @param {boolean} [erase=true] Erase the callback after execution?
-	 * @param {boolean} [throwIfNonexistant=false] Throw if callback doesn't exist?
-	 * @private
-	 */
-	callPartCallback(arg, channelName, erase = true, throwIfNonexistant = false) {
-		this._callChannelCallback(arg, this.partCallbacks, channelName, erase, throwIfNonexistant);
-	}
-
-	/**
-	 * When we've joined or left a channel, call its callback. Subfunction used by {@link BanchoClient#callJoinCallback} and {@link BanchoClient#callPartCallback}
-	 * 
-	 * @param {any} arg Arg to pass to the callback
-	 * @param {any} callbacks Callbacks array
-	 * @param {any} channelName Channel we've joined or left
-	 * @param {boolean} [erase=true] Erase the callback after execution?
-	 * @param {boolean} [throwIfNonexistant=false] Throw if callback doesn't exist?
-	 * @private
-	 */
-	_callChannelCallback(arg, callbacks, channelName, erase = true, throwIfNonexistant = false) {
-		const callback = callbacks[channelName];
-		if(callback != null) {
-			callback(arg);
-			if(erase)
-				callbacks[channelName] = null;
 		}
 		else if(throwIfNonexistant)
 			throw new Error("Inexistant connect callback!");
@@ -427,13 +361,13 @@ module.exports = BanchoClient;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="Message.html">Message</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li></ul><h3>Events</h3><ul><li><a href="BanchoClient.html#event:CM">CM</a></li><li><a href="BanchoClient.html#event:connected">connected</a></li><li><a href="BanchoClient.html#event:disconnected">disconnected</a></li><li><a href="BanchoClient.html#event:error">error</a></li><li><a href="BanchoClient.html#event:JOIN">JOIN</a></li><li><a href="BanchoClient.html#event:nochannel">nochannel</a></li><li><a href="BanchoClient.html#event:PART">PART</a></li><li><a href="BanchoClient.html#event:PM">PM</a></li><li><a href="BanchoClient.html#event:state">state</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConnectStates">ConnectStates</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li></ul><h3>Events</h3><ul><li><a href="BanchoClient.html#event:CM">CM</a></li><li><a href="BanchoClient.html#event:connected">connected</a></li><li><a href="BanchoClient.html#event:disconnected">disconnected</a></li><li><a href="BanchoClient.html#event:error">error</a></li><li><a href="BanchoClient.html#event:JOIN">JOIN</a></li><li><a href="BanchoClient.html#event:nochannel">nochannel</a></li><li><a href="BanchoClient.html#event:PART">PART</a></li><li><a href="BanchoClient.html#event:PM">PM</a></li><li><a href="BanchoClient.html#event:state">state</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConnectStates">ConnectStates</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Dec 08 2017 14:14:36 GMT+0100 (CET)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 21 2017 18:34:12 GMT+0100 (CET)
 </footer>
 
 <script> prettyPrint(); </script>

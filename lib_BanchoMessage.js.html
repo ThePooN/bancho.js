@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: lib/IrcCommand.js</title>
+    <title>JSDoc: Source: lib/BanchoMessage.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: lib/IrcCommand.js</h1>
+    <h1 class="page-title">Source: lib/BanchoMessage.js</h1>
 
     
 
@@ -27,31 +27,27 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Incoming IRC Command
- * 
- * @abstract
- * @private
+ * Bancho incoming message
+ * @abstract 
+ * @prop {BanchoUser} user User the message was sent by
+ * @prop {string} message Message body
  */
-class IrcCommand {
-	constructor() {
-		if(new.target === IrcCommand)
-			throw new Error("Don't instanciate an abstract class you dumbass");
-	}
-
+class BanchoMessage {
 	/**
-	 * Handles the IRC command
-	 * 
-	 * @param {BanchoClient} client 
-	 * @param {string} command 
-	 * @param {array.&lt;string>} splits 
+	 * Creates an instance of Message.
+	 * @param {BanchoUser} user User the message was sent by
+	 * @param {string} message Message body
 	 */
-	// eslint-disable-next-line no-unused-vars
-	handleCommand(client, command, splits) {
-		throw new Error("Unimplemented command!");
+	constructor(user, message) {
+		if(new.target === BanchoMessage)
+			throw new Error("Don't instanciate an abstract class you dumbass");
+		
+		this.user = user;
+		this.message = message;
 	}
 }
 
-module.exports = IrcCommand;</code></pre>
+module.exports = BanchoMessage;</code></pre>
         </article>
     </section>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Banchojs</title>
+    <title>JSDoc: Class: BanchoMessage</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Banchojs</h1>
+    <h1 class="page-title">Class: BanchoMessage</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Banchojs<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature">(abstract) </span></span>BanchoMessage<span class="signature">(user, message)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Main Banchojs class</div>
+            <div class="class-description">Bancho incoming message</div>
         
     
 </header>
@@ -45,19 +45,95 @@
     
 
     
-    <h4 class="name" id="Banchojs"><span class="type-signature"></span>new Banchojs<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="BanchoMessage"><span class="type-signature">(abstract) </span>new BanchoMessage<span class="signature">(user, message)</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
+<div class="description">
+    Creates an instance of Message.
+</div>
 
 
 
 
 
 
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">User the message was sent by</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Message body</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -90,13 +166,13 @@
 
         <tr>
             
-                <td class="name"><code>BanchoClient</code></td>
+                <td class="name"><code>user</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="BanchoClient.html">BanchoClient</a></span>
+<span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
 
 
             
@@ -106,20 +182,20 @@
 
             
 
-            <td class="description last">The BanchoClient class (Client alias is kept for history purposes)</td>
+            <td class="description last">User the message was sent by</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>OutgoingBanchoMessage</code></td>
+                <td class="name"><code>message</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></span>
+<span class="param-type">string</span>
 
 
             
@@ -129,30 +205,7 @@
 
             
 
-            <td class="description last">The OutgoingMessage class to produce messages</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ConnectStates</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="global.html#ConnectStates">ConnectStates</a></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">An enum containing all the possible ConnectStates of bancho.js</td>
+            <td class="description last">Message body</td>
         </tr>
 
     
@@ -191,7 +244,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line7">line 7</a>
+        <a href="lib_BanchoMessage.js.html">lib/BanchoMessage.js</a>, <a href="lib_BanchoMessage.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
