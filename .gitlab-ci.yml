@@ -22,6 +22,7 @@ mirror:
         - git push --mirror git@github.com:ThePooN/bancho.js.git
     only:
         - branches@ThePooN/bancho.js
+        - tags@ThePooN/bancho.js
 
 eslint:
     stage: test
