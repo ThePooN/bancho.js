@@ -3,7 +3,7 @@
 [![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)  
 [![pipeline status](https://git.cartooncraft.fr/ThePooN/bancho.js/badges/master/pipeline.svg)](https://git.cartooncraft.fr/ThePooN/bancho.js/commits/master)
 
-## Current release: v0.3.0
+## Current release: v0.4.0
 
 # Introduction
 
