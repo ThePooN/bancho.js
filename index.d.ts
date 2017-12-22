@@ -173,15 +173,44 @@ declare module "bancho.js" {
 	 */
 	class BanchoChannel {
 		/**
-		 * @param name Channel name as it is referred to on IRC (including #)
+		 * @param name Channel name as it is referred by on IRC (including #)
 		 */
 		constructor(banchojs: BanchoClient, name: string)
+		/** Channel name as it is referred to on IRC (including #) */
+		name: string
+		/** Members of the channel, referenced by their name */
+		channelMembers: BanchoChannelMember[]
 		/**
 		 * Sends a message to this channel
 		 */
 		sendMessage(message: string)
 		join(): Promise<null>
 		leave(): Promise<null>
+	}
+
+	/**
+	 * A Bancho channel user mode, or "IRC modes".
+	 * Used by Bancho to mark someone in a channel as an IRC user or a moderator.
+	 */
+	class BanchoChannelMemberMode {
+		/**
+		 * @param {string} ircLetter Letter used in the MODE command to represent this mode
+		 * @param name Name to describe the mode
+		 */
+		constructor(ircLetter, name)
+	}
+
+	/** A Bancho channel member */
+	class BanchoChannelMember {
+		/**
+		 * @param {BanchoClient} client 
+		 * @param {BanchoChannel} channel 
+		 * @param {string} userString Username with optional @ or + prefix (that will automatically determine the role)
+		 */
+		constructor(client, channel, userString)
+		channel: BanchoChannel
+		user: BanchoUser
+		mode: BanchoChannelMemberMode
 	}
 
 	/**
@@ -214,7 +243,9 @@ declare module "bancho.js" {
 		channel: string
 	}
 
-
+	/**
+	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.
+	 */
 	type ConnectStateTypes = {
 		/** 
 		 * When we're purposely disconnected from Bancho or after an auth fail 
