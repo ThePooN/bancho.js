@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: lib/IrcCommands/MessageCommand.js</title>
+    <title>JSDoc: Source: lib/BanchoChannelMemberMode.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: lib/IrcCommands/MessageCommand.js</h1>
+    <h1 class="page-title">Source: lib/BanchoChannelMemberMode.js</h1>
 
     
 
@@ -26,41 +26,21 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const IrcCommand = require("../IrcCommand");
-const PrivateMessage = require("../PrivateMessage");
-const ChannelMessage = require("../ChannelMessage");
-
-/**
- * Message IRC command
- * @description Received when a message is sent in either channels or PMs.
- * @fires BanchoClient#PM
- * @fires BanchoClient#CM
- * @extends {IrcCommand}
- * @private
+            <pre class="prettyprint source linenums"><code>/**
+ * A Bancho channel user mode, or "IRC modes".
+ * Used by Bancho to mark someone in a channel as an IRC user or a moderator.
+ * 
+ * @prop {string} ircLetter Letter used in the MODE command to represent this mode
+ * @prop {string} name Name to describe the mode
  */
-class MessageCommand extends IrcCommand {
-	handleCommand(client, command, splits) {
-		const user = client.getUser(splits[0].substr(1, splits[0].indexOf("!") - 1));
-		const message = splits.slice(3).join(" ").substr(1);
-
-		if(splits[2] == client.username)
-			/**
-			 * Fired when a PM reaches us.
-			 * @event BanchoClient#PM
-			 * @type {PrivateMessage}
-			 */
-			client.emit("PM", new PrivateMessage(user, message));
-		else
-			/**
-			 * Fired when a channel message reaches us.
-			 * @event BanchoClient#CM
-			 * @type {ChannelMessage}
-			 */
-			client.emit("CM", new ChannelMessage(user, message, client.getChannel(splits[2])));
+class BanchoChannelMemberMode {
+	constructor(ircLetter, name) {
+		this.ircLetter = ircLetter;
+		this.name = name;
 	}
 }
 
-module.exports = MessageCommand;</code></pre>
+module.exports = BanchoChannelMemberMode;</code></pre>
         </article>
     </section>
 

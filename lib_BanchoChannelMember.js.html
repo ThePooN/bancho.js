@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: lib/IrcCommands/MessageCommand.js</title>
+    <title>JSDoc: Source: lib/BanchoChannelMember.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: lib/IrcCommands/MessageCommand.js</h1>
+    <h1 class="page-title">Source: lib/BanchoChannelMember.js</h1>
 
     
 
@@ -26,41 +26,33 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>const IrcCommand = require("../IrcCommand");
-const PrivateMessage = require("../PrivateMessage");
-const ChannelMessage = require("../ChannelMessage");
+            <pre class="prettyprint source linenums"><code>const modes = require("./BanchoChannelMemberModes");
 
 /**
- * Message IRC command
- * @description Received when a message is sent in either channels or PMs.
- * @fires BanchoClient#PM
- * @fires BanchoClient#CM
- * @extends {IrcCommand}
- * @private
+ * A Bancho channel member
+ * @prop {BanchoChannel} channel
+ * @prop {BanchoUser} user
+ * @prop {BanchoChannelMemberMode} mode
  */
-class MessageCommand extends IrcCommand {
-	handleCommand(client, command, splits) {
-		const user = client.getUser(splits[0].substr(1, splits[0].indexOf("!") - 1));
-		const message = splits.slice(3).join(" ").substr(1);
-
-		if(splits[2] == client.username)
-			/**
-			 * Fired when a PM reaches us.
-			 * @event BanchoClient#PM
-			 * @type {PrivateMessage}
-			 */
-			client.emit("PM", new PrivateMessage(user, message));
+class BanchoChannelMember {
+	constructor(client, channel, userString) {
+		this.channel = channel;
+		let username = userString;
+		if(userString.indexOf("@") == 0) {
+			this.mode = modes.o;
+			username = username.substr(1, username.length - 1);
+		}
+		else if(userString.indexOf("+") == 0) {
+			this.mode = modes.v;
+			username = username.substr(1, username.length - 1);
+		}
 		else
-			/**
-			 * Fired when a channel message reaches us.
-			 * @event BanchoClient#CM
-			 * @type {ChannelMessage}
-			 */
-			client.emit("CM", new ChannelMessage(user, message, client.getChannel(splits[2])));
+			this.mode = null;
+		this.user = client.getUser(username);
 	}
 }
 
-module.exports = MessageCommand;</code></pre>
+module.exports = BanchoChannelMember;</code></pre>
         </article>
     </section>
 
