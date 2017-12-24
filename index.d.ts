@@ -184,6 +184,7 @@ declare module "bancho.js" {
 		constructor(banchojs: BanchoClient, name: string)
 		/** Channel name as it is referred to on IRC (including #) */
 		name: string
+		topic: string
 		/** Members of the channel, referenced by their name */
 		channelMembers: BanchoChannelMember[]
 		/**
