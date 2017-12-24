@@ -84,9 +84,15 @@ declare module "bancho.js" {
 		
 		/**
 		 * Registers a listener for when the client fails to enter a non-existant channel.
-		 * @param listener the callback with a String value of the channel.
+		 * @param listener the callback with the concerned BanchoChannel
 		 */
-		on(event: "nochannel", listener: (channel: String) => void): this
+		on(event: "nochannel", listener: (channel: BanchoChannel) => void): this
+		
+		/**
+		 * Registers a listener for when the client tries to execute something for an offline user.
+		 * @param listener the callback with the concerned BanchoUser
+		 */
+		on(event: "nouser", listener: (user: BanchoUser) => void): this
 		
 		/**
 		 * Registers a listener for when a user leaves a channel.
@@ -194,20 +200,20 @@ declare module "bancho.js" {
 	 */
 	class BanchoChannelMemberMode {
 		/**
-		 * @param {string} ircLetter Letter used in the MODE command to represent this mode
+		 * @param ircLetter Letter used in the MODE command to represent this mode
 		 * @param name Name to describe the mode
 		 */
-		constructor(ircLetter, name)
+		constructor(ircLetter: string, name: string)
 	}
 
 	/** A Bancho channel member */
 	class BanchoChannelMember {
 		/**
-		 * @param {BanchoClient} client 
-		 * @param {BanchoChannel} channel 
-		 * @param {string} userString Username with optional @ or + prefix (that will automatically determine the role)
+		 * @param client 
+		 * @param channel 
+		 * @param userString Username with optional @ or + prefix (that will automatically determine the role)
 		 */
-		constructor(client, channel, userString)
+		constructor(client: BanchoClient, channel: BanchoChannel, userString: string)
 		channel: BanchoChannel
 		user: BanchoUser
 		mode: BanchoChannelMemberMode
