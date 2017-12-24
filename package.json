@@ -23,7 +23,7 @@
   "devDependencies": {
     "@types/node": "^8.5.2",
     "chalk": "^2.3.0",
-    "eslint": "^4.13.1",
+    "eslint": "^4.14.0",
     "jsdoc": "^3.5.5",
     "log-symbols": "^2.1.0"
   },
