@@ -6,6 +6,7 @@
 - Answers to IRC PINGs (was getting disconnected after a few minutes of connection without)
 - WHOIS support on Bancho users
 - JOIN and PART events now fire with a BanchoChannelMember
+- Channels topics support
 
 ## Version 0.4
 
