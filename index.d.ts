@@ -80,7 +80,13 @@ declare module "bancho.js" {
 		 * Registers a listener for when a user joins a channel.
 		 * @param listener the callback
 		 */
-		on(event: "JOIN", listener: (data: ChannelUser) => void): this
+		on(event: "JOIN", listener: (member: BanchoChannelMember) => void): this
+		
+		/**
+		 * Registers a listener for when a user leaves a channel.
+		 * @param listener the callback
+		 */
+		on(event: "PART", listener: (member: BanchoChannelMember) => void): this
 		
 		/**
 		 * Registers a listener for when the client fails to enter a non-existant channel.
@@ -93,12 +99,6 @@ declare module "bancho.js" {
 		 * @param listener the callback with the concerned BanchoUser
 		 */
 		on(event: "nouser", listener: (user: BanchoUser) => void): this
-		
-		/**
-		 * Registers a listener for when a user leaves a channel.
-		 * @param listener the callback
-		 */
-		on(event: "PART", listener: (data: ChannelUser) => void): this
 		
 		/**
 		 * Registers a listener for private messages.
@@ -239,14 +239,6 @@ declare module "bancho.js" {
 	 */
 	class PrivateMessage extends BanchoMessage {
 
-	}
-
-	/**
-	 * The type for a user-channel pair.
-	 */
-	type ChannelUser = {
-		user: BanchoUser,
-		channel: string
 	}
 
 	/**
