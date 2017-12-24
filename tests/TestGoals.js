@@ -10,7 +10,8 @@ const TestGoals = {
 	JoinPromise: Symbol("JoinPromise"),
 	PartEvent: Symbol("PartEvent"),
 	PartPromise: Symbol("PartPromise"),
-	UserAPIFetch: Symbol("UserAPIFetch")
+	UserAPIFetch: Symbol("UserAPIFetch"),
+	Whois: Symbol("Whois")
 };
 
 module.exports = Object.freeze(TestGoals);

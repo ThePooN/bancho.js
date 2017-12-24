@@ -34,15 +34,19 @@ client.connect().then(async () => {
 			console.log();
 		}
 		catch(err) {
-			log.fatal("An error was encountered when running unit "+unit.name+"!", err);
+			log.fatal("An error was encountered when running unit "+unit.name+"!");
+			log.fatal(err);
 		}
 	}
 
-	log.info("All units have been ran successfully!");
+	log.info("All units have been ran!");
 
 	const missingGoals = getMissingGoals();
 	if(missingGoals.length > 0) {
-		log.error("Not all goals have been met! Missing goals:", missingGoals);
+		let msg = "Not all goals have been met! Missing goals: ";
+		for(const missingGoal of missingGoals)
+			msg += missingGoal.toString();
+		log.error(msg);
 		process.exit(1);
 	}
 
