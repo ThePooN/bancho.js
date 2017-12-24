@@ -1,5 +1,10 @@
 # Pre-release
 
+## Version 0.5
+
+- Channel members support
+- Answers to IRC PINGs (was getting disconnected after a few minutes of connection without)
+
 ## Version 0.4
 
 - Added type definitions (thanks @ekgame!)
