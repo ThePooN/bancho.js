@@ -2,6 +2,12 @@
 
 ## Version 0.5
 
+### Version 0.5.1
+
+- Fix mesage not considered a PM if case doesn't match
+
+### Version 0.5.0
+
 - Channel members support
 - Answers to IRC PINGs (was getting disconnected after a few minutes of connection without)
 - WHOIS support on Bancho users
