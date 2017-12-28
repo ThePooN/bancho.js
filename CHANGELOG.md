@@ -2,6 +2,11 @@
 
 ## Version 0.5
 
+### Version 0.5.2
+
+- Fix connect() callback not being called if initial connection fails but succeeds later
+- Fix uncaught exceptions errors if the end user doesn't listen for `errors`, making reconnection fails.
+
 ### Version 0.5.1
 
 - Fix mesage not considered a PM if case doesn't match
