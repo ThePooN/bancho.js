@@ -6,8 +6,8 @@
   "types": "index.d.ts",
   "scripts": {
     "test": "time node tests/run.js",
-    "doc": "node ./node_modules/.bin/jsdoc -R README.md -r index.js lib/",
-    "doc:dev": "node ./node_modules/.bin/jsdoc -R README.md -r -p index.js lib/"
+    "doc": "node ./node_modules/.bin/jsdoc -c ./jsdoc.conf.json -t ./node_modules/ink-docstrap/template -R README.md -r index.js lib/",
+    "doc:dev": "node ./node_modules/.bin/jsdoc -c ./jsdoc.conf.json -t ./node_modules/ink-docstrap/template -R README.md -r -p index.js lib/"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "chalk": "^2.3.0",
     "eslint": "^4.14.0",
     "jsdoc": "^3.5.5",
+    "ink-docstrap": "^1.3.2",
     "log-symbols": "^2.1.0"
   },
   "dependencies": {
