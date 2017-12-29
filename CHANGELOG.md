@@ -1,5 +1,10 @@
 # Pre-release
 
+## Version 0.6
+
+- Add rate limiter for officicially approved chat bots (part of the chat bots usergoup
+- sendMessage methods are now promises that will resolve whenever the message is sent, and will reject if we're disconnected
+
 ## Version 0.5
 
 ### Version 0.5.2

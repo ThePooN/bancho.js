@@ -157,7 +157,7 @@ declare module "bancho.js" {
 		/**
 		 * Sends a PM to this user.
 		 */
-		sendMessage(message: string)
+		sendMessage(message: string): Promise<null>
 	}
 
 	/**
@@ -170,7 +170,7 @@ declare module "bancho.js" {
 		 * 
 		 * @throws {Error} If recipient isn't a valid type
 		 */
-		send()
+		send(): Promise<null>
 		recipient: BanchoUser|BanchoChannel
 		message: string
 	}
@@ -191,7 +191,7 @@ declare module "bancho.js" {
 		/**
 		 * Sends a message to this channel
 		 */
-		sendMessage(message: string)
+		sendMessage(message: string): Promise<null>
 		join(): Promise<null>
 		leave(): Promise<null>
 	}
