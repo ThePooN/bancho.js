@@ -133,6 +133,7 @@ declare module "bancho.js" {
 		rankedScore: number
 		totalScore: number
 		ppRank: number
+		ppRaw: number
 		accuracy: number
 		countRankSS: number
 		countRankS: number

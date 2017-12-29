@@ -28,6 +28,6 @@
     "log-symbols": "^2.1.0"
   },
   "dependencies": {
-    "nodesu": "^0.6.2"
+    "nodesu": "^0.6.3"
   }
 }
