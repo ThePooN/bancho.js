@@ -35,7 +35,7 @@ client.connect().then(async () => {
 		}
 		catch(err) {
 			log.fatal("An error was encountered when running unit "+unit.name+"!");
-			log.fatal(err);
+			log.fatal(err.stack);
 		}
 	}
 
