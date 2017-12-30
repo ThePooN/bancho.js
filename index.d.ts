@@ -296,6 +296,11 @@ declare module "bancho.js" {
 		playing: boolean
 
 		/**
+		 * Fetch lobby from the osu! API.
+		 */
+		fetchFromAPI(): Promise<nodesu.Multi>
+
+		/**
 		 * Set a given map in the lobby
 		 * @param map Either a beatmap ID or a Beatmap object from nodesu
 		 * @param gamemode See nodesu.Mode
