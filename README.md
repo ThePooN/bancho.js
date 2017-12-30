@@ -3,13 +3,18 @@
 [![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)  
 [![pipeline status](https://git.cartooncraft.fr/ThePooN/bancho.js/badges/master/pipeline.svg)](https://git.cartooncraft.fr/ThePooN/bancho.js/commits/master)
 
-## Current release: v0.5.2
+## Current release: v0.6.0
 
 # Introduction
 
 bancho.js is designed to be the best library when it comes to interacting with bancho in real-time. It connects over its IRC interface and enables you to do anything you can do over IRC - and much more to come!
 
 It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg), followed by osu! French Championship and osu!SQL in the near future, and maybe your own project!
+
+# Disclaimer
+
+The osu! staff *tolerates* running bots on your own osu! account, however you aren't allowed to create a dedicated osu! account to your bot without acknowledging the staff. **Any attempt to do so will be considered multi-accounting, which is against the osu! Terms of Use.**  
+I highly recommended you to get in touch with peppy when hosting a public bot. If your bot is recognized by the staff, you'll get higher rate limits dedicated to chat bots, which are the rate limits this library uses.
 
 # Getting Started
 This will print all your incoming PMs to the console:

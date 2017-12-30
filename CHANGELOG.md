@@ -8,8 +8,9 @@
     - Slots
     - Settings
 - Add rate limiter for officicially approved chat bots (part of the chat bots usergoup
-- sendMessage methods are now promises that will resolve whenever the message is sent, and will reject if we're disconnected
+- sendMessage methods are now promises that will resolve whenever the message is sent (as they can be delayed because of the rate-limiter), and will reject if we're disconnected
 - New theme for the docs!
+- Can also now retrieve BanchoUser instances by user ids with `BanchoClient.getUserById(userid: number)`.
 
 ## Version 0.5
 
