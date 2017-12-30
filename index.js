@@ -9,6 +9,10 @@ class Banchojs {
 		this.Client = this.BanchoClient = require("./lib/BanchoClient");
 		this.OutgoingBanchoMessage = require("./lib/OutgoingBanchoMessage");
 		this.ConnectStates = require("./lib/ConnectStates");
+		this.BanchoLobbyPlayerStates = require("./lib/BanchoLobbyPlayerStates");
+		this.BanchoLobbyTeamModes = require("./lib/BanchoLobbyTeamModes");
+		this.BanchoLobbyTeams = require("./lib/BanchoLobbyTeams");
+		this.BanchoLobbyWinConditions = require("./lib/BanchoLobbyWinConditions");
 	}
 }
 

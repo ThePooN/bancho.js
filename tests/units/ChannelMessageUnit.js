@@ -19,6 +19,7 @@ class ChannelMessageUnit extends TestUnit {
 					const match = matchCreatedRegex.exec(msg.message);
 					if(!match || match[2] != roomName)
 						return;
+					this.client.removeAllListeners("PM");
 					channel = this.client.getChannel("#mp_"+match[1]);
 					channel.sendMessage("!mp map 75");
 				}
@@ -26,6 +27,7 @@ class ChannelMessageUnit extends TestUnit {
 
 			this.client.on("CM", (msg) => {
 				if(msg.user.ircUsername == "BanchoBot" && msg.message == "Changed beatmap to https://osu.ppy.sh/b/75 Kenji Ninuma - DISCO PRINCE" && msg.channel == channel) {
+					this.client.removeAllListeners("CM");
 					returned = true;
 					this.fulFillGoal(TestGoals.ChannelMessage);
 					resolve();

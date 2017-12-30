@@ -18,6 +18,8 @@ class JoinEventChannelUnit extends TestUnit {
 
 					this.client.on("PART", (obj) => {
 						if(obj.user.isClient() && obj.channel == channel) {
+							this.client.removeAllListeners("JOIN");
+							this.client.removeAllListeners("nochannel");
 							this.fulFillGoal(TestGoals.PartEvent);
 							returned = true;
 							resolve();
@@ -27,6 +29,8 @@ class JoinEventChannelUnit extends TestUnit {
 			});
 			this.client.on("nochannel", (errorChannel) => {
 				if(errorChannel == channel) {
+					this.client.removeAllListeners("JOIN");
+					this.client.removeAllListeners("nochannel");
 					returned = true;
 					reject(new Error("No such channel: "+errorChannel.name));
 				}

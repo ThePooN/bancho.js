@@ -11,7 +11,21 @@ const TestGoals = {
 	PartEvent: Symbol("PartEvent"),
 	PartPromise: Symbol("PartPromise"),
 	UserAPIFetch: Symbol("UserAPIFetch"),
-	Whois: Symbol("Whois")
+	Whois: Symbol("Whois"),
+
+	MultiplayerLobbyExists: Symbol("MultiplayerLobbyExists"),
+	MultiplayerLobbySetMap: Symbol("MultiplayerLobbySetMap"),
+	MultiplayerLobbySetModsDTFree: Symbol("MultiplayerLobbySetModsDTFree"),
+	MultiplayerLobbySetModsHDHR: Symbol("MultiplayerLobbySetModsHDHR"),
+	MultiplayerLobbySetPassword: Symbol("MultiplayerLobbySetPassword"),
+	MultiplayerLobbySetSize: Symbol("MultiplayerLobbySetSize"),
+	MultiplayerLobbySetSettings: Symbol("MultiplayerLobbySetSettings"),
+	MultiplayerLobbyLockSlots: Symbol("MultiplayerLobbyLockSlots"),
+	MultiplayerLobbyUnlockSlots: Symbol("MultiplayerLobbyUnlockSlots"),
+	MultiplayerLobbyClearHost: Symbol("MultiplayerLobbyClearHost"),
+	MultiplayerLobbyStartMatch: Symbol("MultiplayerLobbyStartMatch"),
+	MultiplayerLobbyAbortMatch: Symbol("MultiplayerLobbyAbortMatch"),
+	MultiplayerLobbyCloseLobby: Symbol("MultiplayerLobbyCloseLobby")	
 };
 
 module.exports = Object.freeze(TestGoals);

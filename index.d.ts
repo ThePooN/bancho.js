@@ -21,11 +21,16 @@ declare module "bancho.js" {
 		 * Get a BanchoUser instance for the specified user
 		 */
 		getUser(username: string): BanchoUser
+
+		/**
+		 * Get a BanchoUser instance for the specified user id
+		 */
+		getUserById(userid: number): Promise<BanchoUser>
 	
 		/**
 		 * Get a BanchoChannel instance for the specified name
 		 */
-		getChannel(channelName: string): BanchoChannel
+		getChannel(channelName: string): BanchoChannel|MultiplayerBanchoChannel
 	
 		/**
 		 * Connects to Bancho, rejects an Error if connection fails
@@ -158,6 +163,35 @@ declare module "bancho.js" {
 		 * Sends a PM to this user.
 		 */
 		sendMessage(message: string): Promise<null>
+
+		/**
+		 * Fires a WHOIS request to the server about this user.
+		 */
+		whois(): Promise<BanchoWhoisReturn>
+
+		/**
+		 * Registers a listener for messages from this user
+		 * @param listener the callback with the message
+		 */
+		on(event: "message", listener: (message: BanchoMessage) => void): this
+	}
+
+	/**
+	 * Class describing what is returned after a WHOIS query on an online user
+	 */
+	class BanchoWoisReturn {
+		/**
+		 * Username of the queried user
+		 */
+		name: string
+		/**
+		 * User id of the queried user
+		 */
+		userid: number
+		/**
+		 * Channels list the user is in
+		 */
+		channels: Array<BanchoChannel>
 	}
 
 	/**
@@ -173,6 +207,10 @@ declare module "bancho.js" {
 		send(): Promise<null>
 		recipient: BanchoUser|BanchoChannel
 		message: string
+		/**
+		 * If target is considered public by Bancho. true if recipient is a channel and not a multiplayer channel
+		 */
+		isPublic: boolean
 	}
 
 	/**
@@ -194,6 +232,277 @@ declare module "bancho.js" {
 		sendMessage(message: string): Promise<null>
 		join(): Promise<null>
 		leave(): Promise<null>
+
+		/**
+		 * Registers a listener for messages in this channel
+		 * @param listener the callback with the message
+		 */
+		on(event: "message", listener: (message: BanchoMessage) => void): this
+		
+		/**
+		 * Registers a listener for when a user joins this channel.
+		 * @param listener the callback
+		 */
+		on(event: "JOIN", listener: (member: BanchoChannelMember) => void): this
+		
+		/**
+		 * Registers a listener for when a user leaves this channel.
+		 * @param listener the callback
+		 */
+		on(event: "PART", listener: (member: BanchoChannelMember) => void): this
+	}
+
+	class BanchoMultiplayerChannel extends BanchoChannel {
+		/**
+		 * @param name Channel name as it is referred by on IRC (including #)
+		 */
+		constructor(banchojs: BanchoClient, name: string)
+		lobby: BanchoLobby
+	}
+
+	class BanchoLobby {
+		channel: BanchoMultiplayerChannel
+		/**
+		 * Multiplayer lobby ID (used in multiplayer history links)
+		 */
+		id: number
+		/**
+		 * Name of the lobby, as seein in-game
+		 */
+		name: string
+		/**
+		 * Array of BanchoLobbyPlayer determining each users' slot, from 0 to 15
+		 */
+		slots: Array<BanchoLobbyPlayer>
+		/**
+		 * Beatmap fetched from the API (late/not as reliable, use beatmapId when possible)
+		 * 
+		 */
+		beatmap: nodesu.Beatmap
+		beatmapId: number
+		/**
+		 * See BanchoLobbyWinConditions
+		 */
+		winCondition: number
+		/**
+		 * See BanchoLobbyTeamModes
+		 */
+		teamMode: number
+		mods: Array<BanchoMod>
+		freemod: boolean
+		/**
+		 * Whether we're currently playing or not
+		 */
+		playing: boolean
+
+		/**
+		 * Set a given map in the lobby
+		 * @param map Either a beatmap ID or a Beatmap object from nodesu
+		 * @param gamemode See nodesu.Mode
+		 */
+		setMap(map: number|nodesu.Beatmap, [gamemode=nodesu.Mode.osu]: number): Promise<null>
+
+		/**
+		 * Set given mods in the lobby
+		 * @param mods Either an array of BanchoMods or a mods string joined by spaces
+		 */
+		setMods(mods: Array<BanchoMod|String>, freemod: boolean): Promise<null>
+
+		/**
+		 * Sets the lobby's password
+		 */
+		setPassword(password: string): Promise<null>
+
+		/**
+		 * Adds referees to the lobby
+		 * @param ref A string or array of strings of referee(s) to add, referenced by their usernames or #<userid>
+		 */
+		addRef(ref: Array<string>|string): Promise<null>
+
+		/**
+		 * Removes referees from the lobby
+		 * @param ref A string or array of strings of referee(s) to remove, referenced by their usernames or #<userid>
+		 */
+		removeRef(ref: Array<string>|string): Promise<null>
+
+		/**
+		 * Locks the lobby's slots and teams
+		 */
+		lockSlots(): Promise<null>
+
+		/**
+		 * Unlocks the lobby's slots and teams
+		 */
+		unlockSlots(): Promise<null>
+
+		/**
+		 * Set the amount of open slots in the lobby
+		 */
+		setSize(size: number): Promise<null>
+
+		/**
+		 * Sets the settings of the lobby
+		 * @param teamMode See BanchoLobbyTeamModes
+		 * @param winCondition See BanchoLobbyWinConditions
+		 */
+		setSettings(teamMode: number, winCondition: number, [size]: number): Promise<null>
+		
+		/**
+		 * Moves a player from one slot to another
+		 * @param slot starting from 0
+		 */
+		movePlayer(player: BanchoLobbyPlayer, slot: number): Promise<null>
+
+		/**
+		 * Invites a player to the lobby
+		 * @param player Referenced by their username or #<userid>
+		 */
+		invitePlayer(player: string): Promise<null>
+
+		/**
+		 * Sets a player as the host of the lobby
+		 * @param player Referenced by their username or #<userid>
+		 */
+		setHost(player: string): Promise<null>
+
+		/**
+		 * Kicks a player from the lobby
+		 * @param player Referenced by their username or #<userid>
+		 */
+		kickPlayer(player: string): Promise<null>
+
+		/**
+		 * Get back the host from one's hand
+		 */
+		clearHost(): Promise<null>
+
+		/**
+		 * Close the lobby
+		 */
+		closeLobby(): Promise<null>
+
+		/**
+		 * Start the match
+		 */
+		startMatch(): Promise<null>
+
+		/**
+		 * Abort the match
+		 */
+		abortMatch(): Promise<null>
+
+		/**
+		 * Change one's team
+		 * @param team See BanchoLobbyTeams
+		 */
+		changeTeam(player: BanchoLobbyPlayer, team: string): Promise<null>
+
+		/**
+		 * Fires !mp settings, updates properties and player slots
+		 */
+		updateSettings(): Promise<null>
+
+		/**
+		 * Gets the player who is currently host
+		 */
+		getHost(): BanchoLobbyPlayer
+
+		/**
+		 * Gets the slot of a player
+		 */
+		getPlayerSlot(player: BanchoLobbyPlayer): number
+
+		/**
+		 * Gets or instanciate a player by its username
+		 */
+		getPlayerByName(name: string): Promise<BanchoLobbyPlayer>
+
+		/**
+		 * Gets or instanciate a player by its userid
+		 */
+		getPlayerById(id: number): Promise<BanchoLobbyPlayer>
+
+		/**
+		 * Gets the mp link or however you name it.
+		 */
+		getHistoryUrl(): string
+
+
+		on(event: "allPlayersReady", listener: () => void): this
+		/**
+		 * Fired when the beatmap property is updated from the API
+		 */
+		on(event: "beatmap", listener: (beatmap: nodesu.Beatmap) => void): this
+		/**
+		 * Fired when the beatmapId is updated
+		 */
+		on(event: "beatmapId", listener: (beatmapId: number) => void): this
+		/**
+		 * Fired when the lobby's freemod property is updated
+		 */
+		on(event: "freemod", listener: (freemod: boolean) => void): this
+		on(event: "host", listener: (player: BanchoLobbyPlayer) => void): this
+		on(event: "hostCleared", listener: () => void): this
+		on(event: "invalidBeatmapId", listener: () => void): this
+		on(event: "matchAborted", listener: () => void): this
+		on(event: "matchFinished", listener: () => void): this
+		on(event: "slotsLocked", listener: () => void): this
+		on(event: "slotsUnlocked", listener: () => void): this
+		on(event: "matchSettings", listener: (settings: {
+			size: number
+			teamMode: number
+			winCondition: number
+		}) => void): this
+		on(event: "matchSize", listener: (size: number) => void): this
+		on(event: "matchStarted", listener: () => void): this
+		on(event: "mods", listener: (mods: Array<BanchoMod>) => void): this
+		on(event: "name", listener: (name: string) => void): this
+		on(event: "passwordChanged", listener: () => void): this
+		on(event: "passwordRemoved", listener: () => void): this
+		on(event: "playerJoined", listener: (obj: {
+			player: BanchoLobbyPlayer
+			slot: number
+		}) => void): this
+		on(event: "playerMoved", listener: (obj: {
+			player; BanchoLobbyPlayer
+			slot: number
+		}) => void): this
+		on(event: "playerLeft", listener: (player: BanchoLobbyPlayer) => void): this
+		/**
+		 * Fired when the lobby starts or stop playing
+		 */
+		on(event: "playing", listener: (playing: boolean) => void): this
+		on(event: "refereeAdded", listener: (username: string) => void): this
+		on(event: "refereeRemoved", listener: (username: string) => void): this
+		/**
+		 * Fired when the slots of the lobby are updated
+		 */
+		on(event: "slots", listener: (player: BanchoLobbyPlayer) => void): this
+		on(event: "teamMode", listener: (teamMode: number) => void): this
+		on(event: "winCondition", listener: (winCondition: number) => void): this
+		on(event: "userNotFound", listener: () => void): this
+		on(event: "userNotFoundUsername", listener: (username: string) => void): this
+	}
+
+	class BanchoLobbyPlayer {
+		lobby: BanchoLobby
+		user: BanchoUser
+		/**
+		 * ready/not ready/no map, see BanchoLobbyPlayerState
+		 */
+		state: Symbol
+		isHost: boolean
+		/**
+		 * Blue or Red, see BanchoLobbyTeams
+		 */
+		team: string
+		mods: Array<BanchoMod>
+		score: BanchoLobbyPlayerScore
+	}
+
+	class BanchoLobbyPlayerScore {
+		score: number
+		pass: boolean
 	}
 
 	/**
@@ -243,6 +552,33 @@ declare module "bancho.js" {
 
 	}
 
+	type BanchoLobbyPlayerStatesTypes = {
+		Ready: Symbol,
+		NotReady: Symbol,
+		"Not Ready": Symbol
+		NoMap: Symbol,
+		"No Map": Symbol
+	}
+
+	type BanchoLobbyTeamModesTypes = {
+		HeadToHead: number,
+		TagCoop: number,
+		TeamVs: number,
+		TagTeamVs: number
+	}
+
+	type BanchoLobbyTeamsTypes = {
+		Blue: string
+		Red: string
+	}
+
+	type BanchoLobbyWinConditionsTypes = {
+		Score: number,
+		Accuracy: number,
+		Combo: number,
+		ScoreV2: number
+	}
+
 	/**
 	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.
 	 */
@@ -271,5 +607,9 @@ declare module "bancho.js" {
 	/**
 	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.
 	 */
+	export const BanchoLobbyPlayerStates: BanchoLobbyPlayerStatesTypes
+	export const BanchoLobbyTeamModes: BanchoLobbyTeamModesTypes
+	export const BanchoLobbyTeams: BanchoLobbyTeamsTypes
+	export const BanchoLobbyWinConditions: BanchoLobbyWinConditionsTypes
 	export const ConnectStates: ConnectStateTypes
 }

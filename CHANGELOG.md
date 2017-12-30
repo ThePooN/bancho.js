@@ -2,8 +2,14 @@
 
 ## Version 0.6
 
+- **Complete Multiplayer channels support, including:**
+    - Events
+    - Commands
+    - Slots
+    - Settings
 - Add rate limiter for officicially approved chat bots (part of the chat bots usergoup
 - sendMessage methods are now promises that will resolve whenever the message is sent, and will reject if we're disconnected
+- New theme for the docs!
 
 ## Version 0.5
 
