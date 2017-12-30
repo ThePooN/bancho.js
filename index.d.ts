@@ -510,6 +510,12 @@ declare module "bancho.js" {
 		pass: boolean
 	}
 
+	class BanchoMod {
+		enumValue: number
+		shortMod: string
+		longMod: string
+	}
+
 	/**
 	 * A Bancho channel user mode, or "IRC modes".
 	 * Used by Bancho to mark someone in a channel as an IRC user or a moderator.
@@ -584,6 +590,49 @@ declare module "bancho.js" {
 		ScoreV2: number
 	}
 
+	type BanchoModsTypes = {
+		enum: {
+			None: BanchoMod
+			NoFail: BanchoMod
+			Easy: BanchoMod
+			Hidden: BanchoMod
+			HardRock: BanchoMod
+			SuddenDeath: BanchoMod
+			DoubleTime: BanchoMod
+			Relax: BanchoMod
+			HalfTime: BanchoMod
+			Nightcore: BanchoMod
+			Flashlight: BanchoMod
+			Autoplay: BanchoMod
+			SpunOut: BanchoMod
+			Relax2: BanchoMod
+			Perfect: BanchoMod
+			Key4: BanchoMod
+			Key5: BanchoMod
+			Key6: BanchoMod
+			Key7: BanchoMod
+			Key8: BanchoMod
+			FadeIn: BanchoMod
+			Random: BanchoMod
+			LastMod: BanchoMod
+			Key9: BanchoMod
+			Key10: BanchoMod
+			Key1: BanchoMod
+			Key3: BanchoMod
+			Key2: BanchoMod
+		}
+		parseShortMod(shortMod: string): BanchoMod
+		/**
+		 * @param shortMods Either a string with short mods joined by spaces or an array
+		 */
+		parseShortMods(shortMods: string|string[]): BanchoMod[]
+		parseLongMod(longMod: string): BanchoMod
+		/**
+		 * @param longMods Either a string with long mods joined by spaces or an array
+		 */
+		parseLongMods(longMods: string|string[]): BanchoMod[]
+	}
+
 	/**
 	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.
 	 */
@@ -616,5 +665,6 @@ declare module "bancho.js" {
 	export const BanchoLobbyTeamModes: BanchoLobbyTeamModesTypes
 	export const BanchoLobbyTeams: BanchoLobbyTeamsTypes
 	export const BanchoLobbyWinConditions: BanchoLobbyWinConditionsTypes
+	export const BanchoMods: BanchoModsTypes
 	export const ConnectStates: ConnectStateTypes
 }
