@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>bancho.js Source: lib/BanchoLobby.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.dark.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">bancho.js</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BanchoChannel.html#event:JOIN">BanchoChannel#event:JOIN</a></li><li><a href="BanchoChannel.html#event:message">BanchoChannel#event:message</a></li><li><a href="BanchoChannel.html#event:PART">BanchoChannel#event:PART</a></li><li><a href="BanchoClient.html#event:CM">BanchoClient#event:CM</a></li><li><a href="BanchoClient.html#event:connected">BanchoClient#event:connected</a></li><li><a href="BanchoClient.html#event:disconnected">BanchoClient#event:disconnected</a></li><li><a href="BanchoClient.html#event:error">BanchoClient#event:error</a></li><li><a href="BanchoClient.html#event:JOIN">BanchoClient#event:JOIN</a></li><li><a href="BanchoClient.html#event:nochannel">BanchoClient#event:nochannel</a></li><li><a href="BanchoClient.html#event:nouser">BanchoClient#event:nouser</a></li><li><a href="BanchoClient.html#event:PART">BanchoClient#event:PART</a></li><li><a href="BanchoClient.html#event:PM">BanchoClient#event:PM</a></li><li><a href="BanchoClient.html#event:state">BanchoClient#event:state</a></li><li><a href="BanchoLobby.html#event:allPlayersReady">BanchoLobby#event:allPlayersReady</a></li><li><a href="BanchoLobby.html#event:beatmap">BanchoLobby#event:beatmap</a></li><li><a href="BanchoLobby.html#event:beatmapId">BanchoLobby#event:beatmapId</a></li><li><a href="BanchoLobby.html#event:freemod">BanchoLobby#event:freemod</a></li><li><a href="BanchoLobby.html#event:host">BanchoLobby#event:host</a></li><li><a href="BanchoLobby.html#event:hostCleared">BanchoLobby#event:hostCleared</a></li><li><a href="BanchoLobby.html#event:invalidBeatmapId">BanchoLobby#event:invalidBeatmapId</a></li><li><a href="BanchoLobby.html#event:matchAborted">BanchoLobby#event:matchAborted</a></li><li><a href="BanchoLobby.html#event:matchFinished">BanchoLobby#event:matchFinished</a></li><li><a href="BanchoLobby.html#event:matchSettings">BanchoLobby#event:matchSettings</a></li><li><a href="BanchoLobby.html#event:matchSize">BanchoLobby#event:matchSize</a></li><li><a href="BanchoLobby.html#event:matchStarted">BanchoLobby#event:matchStarted</a></li><li><a href="BanchoLobby.html#event:mods">BanchoLobby#event:mods</a></li><li><a href="BanchoLobby.html#event:name">BanchoLobby#event:name</a></li><li><a href="BanchoLobby.html#event:passwordChanged">BanchoLobby#event:passwordChanged</a></li><li><a href="BanchoLobby.html#event:passwordRemoved">BanchoLobby#event:passwordRemoved</a></li><li><a href="BanchoLobby.html#event:playerJoined">BanchoLobby#event:playerJoined</a></li><li><a href="BanchoLobby.html#event:playerLeft">BanchoLobby#event:playerLeft</a></li><li><a href="BanchoLobby.html#event:playerMoved">BanchoLobby#event:playerMoved</a></li><li><a href="BanchoLobby.html#event:playing">BanchoLobby#event:playing</a></li><li><a href="BanchoLobby.html#event:refereeAdded">BanchoLobby#event:refereeAdded</a></li><li><a href="BanchoLobby.html#event:refereeRemoved">BanchoLobby#event:refereeRemoved</a></li><li><a href="BanchoLobby.html#event:slots">BanchoLobby#event:slots</a></li><li><a href="BanchoLobby.html#event:slotsLocked">BanchoLobby#event:slotsLocked</a></li><li><a href="BanchoLobby.html#event:slotsUnlocked">BanchoLobby#event:slotsUnlocked</a></li><li><a href="BanchoLobby.html#event:teamMode">BanchoLobby#event:teamMode</a></li><li><a href="BanchoLobby.html#event:userNotFound">BanchoLobby#event:userNotFound</a></li><li><a href="BanchoLobby.html#event:userNotFoundUsername">BanchoLobby#event:userNotFoundUsername</a></li><li><a href="BanchoLobby.html#event:winCondition">BanchoLobby#event:winCondition</a></li><li><a href="BanchoMultiplayerChannel.html#event:JOIN">BanchoMultiplayerChannel#event:JOIN</a></li><li><a href="BanchoMultiplayerChannel.html#event:message">BanchoMultiplayerChannel#event:message</a></li><li><a href="BanchoMultiplayerChannel.html#event:PART">BanchoMultiplayerChannel#event:PART</a></li><li><a href="BanchoUser.html#event:message">BanchoUser#event:message</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#BanchoLobbyPlayerStates">BanchoLobbyPlayerStates</a></li><li><a href="global.html#BanchoLobbyTeamModes">BanchoLobbyTeamModes</a></li><li><a href="global.html#BanchoLobbyTeams">BanchoLobbyTeams</a></li><li><a href="global.html#BanchoLobbyWinConditions">BanchoLobbyWinConditions</a></li><li><a href="global.html#BanchoMods">BanchoMods</a></li><li><a href="global.html#ConnectStates">ConnectStates</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: lib/BanchoLobby.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const EventEmitter = require("events").EventEmitter;
+const nodesu = require("nodesu");
+const BanchoMods = require("./BanchoMods");
+const BanchoLobbyPlayer = require("./BanchoLobbyPlayer");
+const BanchoLobbyPlayerScore = require("./BanchoLobbyPlayerScore");
+const BanchoLobbyPlayerStates = require("./BanchoLobbyPlayerStates");
+const BanchoLobbyTeams = require("./BanchoLobbyTeams");
+const Regexes = require("./BanchoLobbyRegexes");
+const Teams = require("./BanchoLobbyTeams");
+
+/**
+ * Represents a Bancho multiplayer lobby
+ * 
+ * @prop {BanchoMultiplayerChannel} channel
+ * @prop {number} id Multiplayer lobby ID (used in multiplayer history links)
+ * @prop {string} name Name of the lobby, as seen in-game
+ * @prop {Array&lt;BanchoLobbyPlayer>} slots Array of BanchoLobbyPlayer determining each users' slot, from 0 to 15
+ * @prop {number} beatmapId
+ * @prop {nodesu.Beatmap} beatmap Beatmap fetched from the API (late/not as reliable, use beatmapId when possible)
+ * @prop {number} winCondition See BanchoLobbyWinConditions
+ * @prop {number} teamMode See BanchoLobbyTeamModes
+ * @prop {Array&lt;BanchoMod>} mods 
+ * @prop {boolean} freemod
+ * @prop {boolean} playing Whether we're currently playing or not
+ */
+class BanchoLobby extends EventEmitter {
+	constructor(channel) {
+		super();
+		this.channel = channel;
+		this.banchojs = this.channel.banchojs;
+		this.id = Number(channel.name.substring("#mp_".length));
+		this._name = "";
+		this._beatmapId = null;
+		this._beatmap = null;
+		this._teamMode = null;
+		this._winCondition = null;
+		this._mods = [];
+		this._freemod = false;
+		this._playing = false;
+		this._slots = this._createSlotsArray();
+
+		// Players cache. Even when players leave, we wanna leave them cached here
+		// for performance/API requests reasons.
+		this.players = {}; // stored by names
+		this.playersById = {};
+
+		this.slotsUpdatesQueue = [];
+		
+		this.channel.on("JOIN", (member) => {
+			if(member.user.isClient()) // We have just joined the channel
+				this.updateSettings(); // Let's retrieve all the properties of the lobby to begin with.
+		});
+		this.channel.on("message", (msg) => {
+			if(msg.user.ircUsername.toLowerCase() == "banchobot")
+				this.handleBanchoBotMessage(msg.message);
+		});
+
+		this.updateSettingsPromise = null;
+	}
+
+	/**
+	 * Synchronous handling of operations on the room slots to avoid race conditions.
+	 * Slots management involves resolving usernames from BanchoBot's messages and can lead to race conditions.
+	 * @private
+	 * @param {function} func 
+	 */
+	pushSlotsUpdateQueue(func) {
+		this.slotsUpdatesQueue.push(() => {
+			func // Execute current function
+				.then(() => {
+					this.slotsUpdatesQueue.shift(); // Remove current function from queue
+					if(this.slotsUpdatesQueue[0])
+						this.slotsUpdatesQueue[0](); // Execute next function, if any
+				})
+				.catch((err) => {
+					this.banchojs.emit("error", err);
+					this.slotsUpdatesQueue.shift(); // why isn't .finally() implemented. Promises please.
+					if(this.slotsUpdatesQueue[0])
+						this.slotsUpdatesQueue[0]();
+				});
+		});
+		if(this.slotsUpdatesQueue.length == 1)
+			this.slotsUpdatesQueue[0](); // If there's no currently running function, execute the newest now
+	}
+
+	/**
+	 * Find the regex corresponding to a BanchoBot's message and process them
+	 * @private
+	 * @param {string} str message from BanchoBot to parse
+	 */
+	handleBanchoBotMessage(str) {
+		const regex = Regexes.findRegex(str);
+		if(regex) {
+			const ret = regex.ret;
+			switch(regex.name) {
+				case "roomName":
+					this.name = ret.name;
+					break;
+				case "teamModeWinConditions":
+					this.teamMode = ret.teamMode;
+					this.winCondition = ret.winCondition;
+					break;
+				case "activeMods":
+					this.mods = ret.mods;
+					this.freemod = ret.freemod;
+					break;
+				case "playerChangedBeatmap":
+				case "refereeChangedBeatmap":
+				case "beatmapFromSettings":
+					this.beatmapId = ret.id;
+					this.beatmap = null;
+					this.banchojs.osuApi.beatmaps.getByBeatmapId(this.beatmapId)
+						.then((beatmap) => this.beatmap = beatmap)
+						.catch((err) => this.banchojs.emit("error", err));
+					break;
+				case "playerChangingBeatmap":
+					this.beatmapId = null;
+					this.beatmap = null;
+					break;
+				case "refereeChangedMods":
+					this.mods = ret.mods;
+					this.freemod = ret.freemod;
+					break;
+				case "playerJoined":
+					this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+						this.getPlayerByName(ret.username).then((player) => {
+							/**
+							 * @event BanchoLobby#playerJoined
+							 * @type {object}
+							 * @prop {BanchoLobbyPlayer} player
+							 * @prop {number} slot Starting from 0
+							 */
+							this.emit("playerJoined", {
+								player: player,
+								slot: (ret.slot - 1)
+							});
+							this.emit("slots", this.slots);
+							this.slots[ret.slot - 1] = player;
+							resolve();
+						}, reject);
+					}));
+					break;
+				case "playerMoved":
+					this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+						this.getPlayerByName(ret.username).then((player) => {
+							/**
+							 * @event BanchoLobby#playerMoved
+							 * @type {object}
+							 * @prop {BanchoLobbyPlayer} player
+							 * @prop {number} slot Starting from 0
+							 */
+							this.emit("playerMoved", {
+								player: player,
+								slot: (ret.slot - 1)
+							});
+							this.emit("slots", this.slots);
+							const oldSlot = this.getPlayerSlot(player);
+							this.slots[ret.slot - 1] = player;
+							this.slots[oldSlot] = null;
+							resolve();
+						}, reject);
+					}));
+					break;
+				case "playerLeft":
+					this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+						this.getPlayerByName(ret.username).then((player) => {
+							/**
+							 * @event BanchoLobby#playerLeft
+							 * @type {BanchoLobbyPlayer}
+							 */
+							this.emit("playerLeft", player);
+							if(player.isHost) {
+								this.emit("hostCleared");
+								this.emit("host", null);
+							}
+							this.emit("slots", this.slots);
+							this.slots[this.getPlayerSlot(player)] = null;
+						}, reject);
+					}));
+					break;
+				case "playerBecameTheHost":
+					this.getPlayerByName(ret.username).then((player) => {
+						/**
+						 * @event BanchoLobby#host
+						 * @type {BanchoLobbyPlayer}
+						 */
+						this.emit("host", player);
+						this.getHost().isHost = false;
+						player.isHost = true;
+					}, (err) => this.banchojs.emit("error", err));
+					break;
+				case "hostCleared":
+					const host = this.getHost();
+					if(host != null)
+						host.isHost = false;
+					/**
+					 * @event BanchoLobby#hostCleared
+					 */
+					this.emit("hostCleared");
+					this.emit("host", null);
+					break;
+				case "allPlayersReady":
+					/**
+					 * @event BanchoLobby#allPlayersReady
+					 */
+					this.emit("allPlayersReady");
+					for(const player of this.slots)
+						player.isReady = true;
+					break;
+				case "matchStarted":
+					/**
+					 * @event BanchoLobby#matchStarted
+					 */
+					this.emit("matchStarted");
+					for(const player of this.slots) {
+						if(player != null) {
+							player.isReady = false;
+							player.score = null;
+						}
+					}
+					this.playing = true;
+					break;
+				case "playerFinished":
+					this.getPlayerByName(ret.username).then((player) => {
+						player.score = new BanchoLobbyPlayerScore(ret.score, ret.pass);
+					}, (err) => this.banchojs.emit("error", err));
+					break;
+				case "matchFinished":
+				case "matchAborted":
+					/**
+					 * @event BanchoLobby#matchFinished
+					 */
+					/**
+					 * @event BanchoLobby#matchAborted
+					 */
+					this.emit(regex.name);
+					this.playing = false;
+					break;
+				case "invalidBeatmapId":
+				case "passwordRemoved":
+				case "passwordChanged":
+				case "userNotFound":
+				case "slotsLocked":
+				case "slotsUnlocked":
+					/**
+					 * @event BanchoLobby#invalidBeatmapId
+					 */
+					/**
+					 * @event BanchoLobby#passwordRemoved
+					 */
+					/**
+					 * @event BanchoLobby#passwordChanged
+					 */
+					/**
+					 * @event BanchoLobby#userNotFound
+					 */
+					/**
+					 * @event BanchoLobby#slotsLocked
+					 */
+					/**
+					 * @event BanchoLobby#slotsUnlocked
+					 */
+					this.emit(regex.name);
+					break;
+				case "refereeAdded":
+				case "refereeRemoved":
+				case "userNotFoundUsername":
+					/**
+					 * @event BanchoLobby#refereeAdded
+					 * @type {string} Username
+					 */
+					/**
+					 * @event BanchoLobby#refereeRemoved
+					 * @type {string} Username
+					 */
+					/**
+					 * @event BanchoLobby#userNotFoundUsername
+					 * @type {string} Username
+					 */
+					this.emit(regex.name, ret.username);
+					break;
+				case "matchSize":
+					/**
+					 * @event BanchoLobby#matchSize
+					 * @type {number}
+					 */
+					this.emit("matchSize", ret.size);
+					break;
+				case "matchSettings":
+					/**
+					 * @event BanchoLobby#matchSettings
+					 * @type {object}
+					 * @prop {number} size
+					 * @prop {number} teamMode See BanchoLobbyTeamModes
+					 * @prop {number} winCondition See BanchoLobbyWinConditions
+					 */
+					this.emit("matchSettings", ret);
+					if(ret.size)
+						this.emit("matchSize", ret.size);
+					break;
+			}
+		}
+	}
+
+	/**
+	 * Fetch the lobby from the osu! API.
+	 * 
+	 * @returns Promise&lt;nodesu.Multi>
+	 */
+	fetchFromAPI() {
+		return this.banchojs.osuApi.multi.getMatch(this.id);
+	}
+
+	/**
+	 * Set a given map in the lobby
+	 * @param {number|nodesu.Beatmap} map Either a beatmap ID or a Beatmap object from nodesu
+	 * @param {number} [gamemode=nodesu.Mode.osu] See nodesu.Mode
+	 * @async
+	 */
+	setMap(map, gamemode = nodesu.Mode.osu) {
+		return new Promise((resolve, reject) => {
+			if(map instanceof nodesu.Beatmap)
+				map = map.id;
+			else if(isNaN(map))
+				return reject(new Error("Not a valid number/beatmap"));
+
+			this.channel.sendMessage("!mp map "+map+" "+gamemode).catch(reject);
+			const validMapListener = () => {
+				resolve();
+				this.removeListener("beatmapId", validMapListener);
+				this.removeListener("invalidBeatmapId", invalidMapListener);
+			};
+			this.on("beatmapId", validMapListener);
+			const invalidMapListener = () => {
+				reject(new Error("Invalid map ID provided"));
+				this.removeListener("beatmapId", validMapListener);
+				this.removeListener("invalidBeatmapId", invalidMapListener);
+			};
+			this.on("invalidBeatmapId", invalidMapListener);
+		});
+	}
+
+	/**
+	 * Set given mods in the lobby
+	 * @param {Array&lt;BanchoMod>|string} mods Either an array of BanchoMods or a mods string joined by spaces
+	 * @param {boolean} freemod 
+	 * @async
+	 */
+	setMods(mods, freemod = false) {
+		return new Promise((resolve, reject) => {
+			let modsString = "!mp mods ";
+			if(typeof mods == "string")
+				modsString += mods+" ";
+			else if(Array.isArray(mods))
+				for(const mod of mods)
+					modsString += mod.shortMod+" ";
+			else
+				return reject(new Error("mods need to be string or array of BanchoMods"));
+
+			if(freemod)
+				modsString += "freemod";
+			this.channel.sendMessage(modsString).catch(reject);
+			const validModListener = () => {
+				resolve();
+				this.removeListener("mods", validModListener);
+			};
+			this.on("mods", validModListener);
+		});
+	}
+
+	/**
+	 * Sets the lobby's password
+	 * @param {string} password 
+	 * @async
+	 */
+	setPassword(password) {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp password "+password).catch(reject);
+			const changedListener = () => {
+				resolve();
+				this.removeListener("passwordChanged", changedListener);
+				this.removeListener("passwordRemoved", removedListener);
+			};
+			this.on("passwordChanged", changedListener);
+			const removedListener = () => {
+				resolve();
+				this.removeListener("passwordChanged", changedListener);
+				this.removeListener("passwordRemoved", removedListener);
+			};
+			this.on("passwordRemoved", removedListener);
+		});
+	}
+
+	/**
+	 * Adds referees to the lobby
+	 * @param {Array&lt;string>|string} ref A string or array of strings of referee(s) to add, referenced by their usernames or #&lt;userid>
+	 * @async
+	 */
+	addRef(ref) {
+		return new Promise((resolve, reject) => {
+			let refString;
+			if(typeof ref == "string")
+				refString = ref;
+			else if(Array.isArray(ref))
+				refString = ref.join(", ");
+			else
+				return reject(new Error("a string or an array of string must be passed"));
+	
+			this.channel.sendMessage("!mp addref "+refString).then(resolve, reject);
+		});
+	}
+
+	/**
+	 * Removes referees from the lobby
+	 * @param {Array&lt;string>|string} ref A string or array of strings of referee(s) to remove, referenced by their usernames or #&lt;userid>
+	 */
+	removeRef(ref) {
+		return new Promise((resolve, reject) => {
+			let refString;
+			if(typeof ref == "string")
+				refString = ref;
+			else if(Array.isArray(ref))
+				refString = ref.join(", ");
+			else
+				return reject(new Error("a string or an array of string must be passed"));
+
+			this.channel.sendMessage("!mp removeref "+refString).then(resolve, reject);
+		});
+	}
+
+	/**
+	 * Locks the lobby's slots and teams
+	 * @async
+	 */
+	lockSlots() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp lock").catch(reject);
+			const listener = () => {
+				resolve();
+				this.removeListener("slotsLocked", listener);
+			};
+			this.on("slotsLocked", listener);
+		});
+	}
+
+	/**
+	 * Unlocks the lobby's slots and teams
+	 * @async
+	 */
+	unlockSlots() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp unlock").catch(reject);
+			const listener = () => {
+				resolve();
+				this.removeListener("slotsUnlocked", listener);
+			};
+			this.on("slotsUnlocked", listener);
+		});
+	}
+
+	/**
+	 * Set the amount of open slots in the lobby
+	 * @param {number} size 
+	 * @async
+	 */
+	setSize(size) {
+		return new Promise((resolve, reject) => {
+			if(isNaN(size) &amp;&amp; size >= 1 &amp;&amp; size &lt;= 16)
+				return reject(new Error("how can the size not be a number between 1 and 16? try again."));
+			this.channel.sendMessage("!mp size "+size).catch(reject);
+			const listener = (newSize) => {
+				if(size == newSize) {
+					resolve();
+					this.removeListener("matchSize", listener);
+				}
+			};
+			this.on("matchSize", listener);
+		});
+	}
+
+	/**
+	 * Sets the settings of the lobby
+	 * @param {number} teamMode See BanchoLobbyTeamModes
+	 * @param {number} winCondition See BanchoLobbyWinConditions
+	 * @param {number} [size] 
+	 * @async
+	 */
+	setSettings(teamMode = this.teamMode, winCondition = this.winCondition, size) {
+		return new Promise((resolve, reject) => {
+			if(isNaN(teamMode) || isNaN(winCondition) || size != null &amp;&amp; isNaN(size))
+				return reject(new Error("one of the arguments isn't a number. try again"));
+			
+			this.channel.sendMessage("!mp set "+teamMode+" "+winCondition+((size != null) ? " "+size : "")).catch(reject);
+
+			const listener = (ret) => {
+				if(teamMode == ret.teamMode &amp;&amp; winCondition == ret.winCondition &amp;&amp; size == ret.size) {
+					resolve();
+					this.removeListener("matchSettings", listener);
+				}
+			};
+			this.on("matchSettings", listener);
+		});
+	}
+
+	/**
+	 * Moves a player from one slot to another
+	 * @param {BanchoLobbyPlayer} player
+	 * @param {number} slot starting from 0
+	 * @async
+	 */
+	movePlayer(player, slot) {
+		return new Promise((resolve, reject) => {
+			if(!(player instanceof BanchoLobbyPlayer))
+				return reject(new Error("invalid player"));
+			if(isNaN(slot) || slot &lt; 0 || slot > 15)
+				return reject(new Error("how can a slot not be a number between 0 and 15? try again."));
+			this.channel.sendMessage("!mp move #"+player.id+" "+(slot+1)).then(resolve, reject);
+		});
+	}
+
+	/**
+	 * Invites a player to the lobby
+	 * @param {string} player Referenced by their username or #&lt;userid>
+	 * @async
+	 */
+	invitePlayer(player) {
+		return new Promise((resolve, reject) => 
+			this.channel.sendMessage("!mp invite #"+player.id).then(resolve, reject)
+		);
+	}
+
+	/**
+	 * Sets a player as the host of the lobby
+	 * @param {string} player Referenced by their username or #&lt;userid>
+	 * @async
+	 */
+	setHost(player) {
+		return new Promise((resolve, reject) => 
+			this.channel.sendMessage("!mp host #"+player.id).then(resolve, reject)
+		);
+	}
+
+	/**
+	 * Kicks a player from the lobby
+	 * @param {string} player Referenced by their username or #&lt;userid>
+	 * @async
+	 */
+	kickPlayer(player) {
+		return new Promise((resolve, reject) => 
+			this.channel.sendMessage("!mp kick #"+player.id).then(resolve, reject)
+		);
+	}
+
+	/**
+	 * Get back the host from one's hand
+	 * @async
+	 */
+	clearHost() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp clearhost").catch(reject);
+			const listener = () => {
+				resolve();
+				this.removeListener("hostCleared", listener);
+			};
+			this.on("hostCleared", listener);
+		});
+	}
+
+	/**
+	 * Close the lobby
+	 * @async
+	 */
+	closeLobby() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp close").catch(reject);
+			const listener = (member) => {
+				if(member.user.isClient()) {
+					resolve();
+					this.channel.removeListener("PART", listener);
+				}
+			};
+			this.channel.on("PART", listener);
+		});
+	}
+
+	/**
+	 * Start the match
+	 * @async
+	 */
+	startMatch() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp start").catch(reject);
+			const listener = () => {
+				resolve();
+				this.removeListener("matchStarted", listener);
+			};
+			this.on("matchStarted", listener);
+		});
+	}
+
+	/**
+	 * Abort the match
+	 * @async
+	 */
+	abortMatch() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp abort").catch(reject);
+			const listener = () => {
+				resolve();
+				this.removeListener("matchAborted", listener);
+			};
+			this.on("matchAborted", listener);
+		});
+	}
+
+	/**
+	 * Change's one team
+	 * @param {BanchoLobbyPlayer} player 
+	 * @param {string} team See BanchoLobbyTeams
+	 * @async
+	 */
+	changeTeam(player, team) {
+		return new Promise((resolve, reject) => {
+			if(team != Teams.Blue &amp;&amp; team != Teams.Red)
+				return reject(new Error("invalid team"));
+			this.channel.sendMessage("!mp team #"+player.id+" "+team).then(resolve, reject);
+		});
+	}
+
+	/**
+	 * Fires !mp settings, updates properties and player slots
+	 * @async
+	 */
+	updateSettings() {
+		if(this.updateSettingsPromise != null)
+			return this.updateSettingsPromise;
+		
+		return this.updateSettingsPromise = new Promise((callerResolve, callerReject) => {
+			this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+				this.channel.sendMessage("!mp settings");
+				// Beginning of the !mp settings message will be handled by handleBanchoBotMessage; ending (player infos) will be handled in the following listener.
+				let amountOfPlayers = null;
+				const slots = this._createSlotsArray();
+				const listener = (msg) => {
+					if(msg.user.ircUsername.toLowerCase() == "banchobot") {
+						if(amountOfPlayers == null) {
+							const playersRegex = Regexes.regexes.playersAmount(msg.message);
+							if(playersRegex) {
+								amountOfPlayers = playersRegex.playersAmount;
+								if(amountOfPlayers == 0) {
+									this.slots = this._createSlotsArray();
+									resolve();
+									callerResolve();
+									this.updateSettingsPromise = null;
+									this.channel.removeListener("message", listener);
+								}
+							}
+						}
+						else {
+							const playerRegex = /^Slot (\d+) +(Not Ready|Ready|No Map) +https:\/\/osu\.ppy\.sh\/u\/(\d+) (.+)$/;
+							if(playerRegex.test(msg.message)) {
+								const match = playerRegex.exec(msg.message);
+								this.getPlayerById(Number(match[3])).then((player) => {
+									slots[Number(match[1])-1] = player;
+									player.state = BanchoLobbyPlayerStates[match[2]];
+									player.isHost = false;
+									player.team = null;
+									player.mods = (this.freemod) ? [] : this.mods;
+									let metadatasString = match[4].substring(player.user.username.length).trim();
+									if(metadatasString.length > 0) {
+										metadatasString = metadatasString.substr(1, metadatasString.length - 2);
+										for(let metadatasSplit of metadatasString.split("/")) {
+											metadatasSplit = metadatasSplit.trim();
+											switch(metadatasSplit) {
+												case "Host":
+													player.isHost = true;
+													break;
+												case "Team Blue":
+													player.team = BanchoLobbyTeams.Blue;
+													break;
+												case "Team Red":
+													player.team = BanchoLobbyTeams.Red;
+													break;
+												default:
+													player.mods = BanchoMods.parseLongMods(metadatasSplit);
+											}
+										}
+									}
+
+									let completedPlayers = 0;
+									for(const slot of slots) {
+										if(slot != null)
+											completedPlayers++;
+									}
+									if(completedPlayers == amountOfPlayers) {
+										this.slots = slots;
+										resolve();
+										callerResolve();
+										this.updateSettingsPromise = null;
+										this.channel.removeListener("message", listener);
+									}
+								}, (err) => {
+									reject(err);
+									callerReject(err);
+								});
+							}
+						}
+					}
+				};
+
+				this.channel.on("message", listener);
+			}));
+		});
+	}
+
+	/**
+	 * Gets the player who is currently host
+	 * @returns {BanchoLobbyPlayer}
+	 */
+	getHost() {
+		for(const player of this.slots)
+			if(player != null &amp;&amp; player.isHost)
+				return player;
+	}
+
+	/**
+	 * Gets the slot of a player
+	 * @param {BanchoLobbyPlayer} player 
+	 * @return {number}
+	 */
+	getPlayerSlot(player) {
+		for(const slotNum in this.slots)
+			if(this.slots[slotNum] == player)
+				return slotNum;
+	}
+
+	/**
+	 * Gets or instanciate a player by its username
+	 * @param {string} name 
+	 * @async
+	 */
+	getPlayerByName(name) {
+		return new Promise((resolve, reject) => {
+			if(this.players[name])
+				resolve(this.players[name]);
+			else {
+				const user = this.banchojs.getUser(name);
+				const player = new BanchoLobbyPlayer(this, user);
+				const cb = () => {
+					this.playersById[user.id] = player;
+					this.players[user.username] = player;
+					resolve(player);
+				};
+				if(!user.username || !user.id)
+					user.fetchFromAPI().then(cb).catch(reject);
+				else
+					cb();
+			}
+		});
+	}
+
+	/**
+	 * Gets or instanciate a player by its userid
+	 * @async
+	 */
+	getPlayerById(id) {
+		return new Promise((resolve, reject) => {
+			if(isNaN(id))
+				reject(new Error("id needs to be a number!"));
+			if(this.playersById[id])
+				resolve(this.playersById[id]);
+			else
+				this.banchojs.getUserById(id)
+					.then((user) => {
+						const player = new BanchoLobbyPlayer(this, this.banchojs.getUser(user.username));
+						this.playersById[id] = player;
+						this.players[user.username] = player;
+						resolve(player);
+					});
+		});
+	}
+
+	/**
+	 * Gets the mp link or however you name it.
+	 * @returns {string}
+	 */
+	getHistoryUrl() {
+		return "https://osu.ppy.sh/community/matches/"+this.id;
+	}
+
+	/**
+	 * Creates a slots array of 16 players
+	 * @private
+	 * @returns {Array&lt;null>}
+	 */
+	_createSlotsArray() {
+		const slots = [];
+		for(let i = 0; i &lt; 16; i++)
+			slots[i] = null;
+		return Object.seal(slots);
+	}
+
+	get beatmap() {
+		return this._beatmap;
+	}
+
+	/**
+	 * Fired when the beatmap property is updated from the API
+	 * @event BanchoLobby#beatmap
+	 * @type {nodesu.Beatmap}
+	 */
+	set beatmap(val) {
+		this._setter("beatmap", val);
+	}
+
+	get name() {
+		return this._name;
+	}
+
+	/**
+	 * Fired when the name of the lobby is updated
+	 * @event BanchoLobby#name
+	 * @type {string}
+	 */
+	set name(val) {
+		this._setter("name", val);
+	}
+
+	get beatmapId() {
+		return this._beatmapId;
+	}
+
+	/**
+	 * Fired when the beatmapId is updated
+	 * @event BanchoLobby#beatmapId
+	 * @type {number}
+	 */
+	set beatmapId(val) {
+		this._setter("beatmapId", val);
+	}
+
+	get teamMode() {
+		return this._teamMode;
+	}
+
+	/**
+	 * Fired when the team mode is updated
+	 * @event BanchoLobby#teamMode
+	 * @type {number}
+	 * @see BanchoLobbyTeamModes
+	 */
+	set teamMode(val) {
+		this._setter("teamMode", val);
+	}
+
+	get winCondition() {
+		return this._winCondition;
+	}
+
+	/**
+	 * Fired when the win condition is updated
+	 * @event BanchoLobby#winCondition
+	 * @type {number}
+	 * @see BanchoLobbyWinConditions
+	 */
+	set winCondition(val) {
+		this._setter("winCondition", val);
+	}
+
+	get mods() {
+		return this._mods;
+	}
+
+	/**
+	 * Fired when the lobby's mods are updated
+	 * @event BanchoLobby#mods
+	 * @type {Array&lt;BanchoMod>}
+	 */
+	set mods(val) {
+		this._setter("mods", val);
+	}
+
+	get freemod() {
+		return this._freemod;
+	}
+
+	/**
+	 * Fired when the lobby's freemod property is updated
+	 * @event BanchoLobby#freemod
+	 * @type {boolean}
+	 */
+	set freemod(val) {
+		this._setter("freemod", val);
+	}
+
+	get playing() {
+		return this._playing;
+	}
+
+	/**
+	 * Fired when the lobby starts or stops playing
+	 * @event BanchoLobby#playing
+	 * @type {Symbol}
+	 * @see {BanchoLobbyState}
+	 */
+	set playing(val) {
+		this._setter("playing", val);
+	}
+
+	get slots() {
+		return this._slots;
+	}
+
+	/**
+	 * Fired when the slots of the lobby are updated
+	 * @event BanchoLobby#slots
+	 * @type {Array&lt;BanchoLobbyPlayer>}
+	 */
+	set slots(val) {
+		this._setter("slots", val);
+	}
+
+	/**
+	 * Setter for all properties that can fire events
+	 * @param {string} prop Property's name
+	 * @param {any} val New property
+	 * @private
+	 */
+	_setter(prop, val) {
+		if(this[prop] != val) {
+			this.emit(prop, val);
+			this["_"+prop] = val;
+		}
+	}
+}
+
+module.exports = BanchoLobby;</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Sat Dec 30th 2017
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

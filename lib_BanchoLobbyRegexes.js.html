@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>bancho.js Source: lib/BanchoLobbyRegexes.js</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.dark.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">bancho.js</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BanchoChannel.html#event:JOIN">BanchoChannel#event:JOIN</a></li><li><a href="BanchoChannel.html#event:message">BanchoChannel#event:message</a></li><li><a href="BanchoChannel.html#event:PART">BanchoChannel#event:PART</a></li><li><a href="BanchoClient.html#event:CM">BanchoClient#event:CM</a></li><li><a href="BanchoClient.html#event:connected">BanchoClient#event:connected</a></li><li><a href="BanchoClient.html#event:disconnected">BanchoClient#event:disconnected</a></li><li><a href="BanchoClient.html#event:error">BanchoClient#event:error</a></li><li><a href="BanchoClient.html#event:JOIN">BanchoClient#event:JOIN</a></li><li><a href="BanchoClient.html#event:nochannel">BanchoClient#event:nochannel</a></li><li><a href="BanchoClient.html#event:nouser">BanchoClient#event:nouser</a></li><li><a href="BanchoClient.html#event:PART">BanchoClient#event:PART</a></li><li><a href="BanchoClient.html#event:PM">BanchoClient#event:PM</a></li><li><a href="BanchoClient.html#event:state">BanchoClient#event:state</a></li><li><a href="BanchoLobby.html#event:allPlayersReady">BanchoLobby#event:allPlayersReady</a></li><li><a href="BanchoLobby.html#event:beatmap">BanchoLobby#event:beatmap</a></li><li><a href="BanchoLobby.html#event:beatmapId">BanchoLobby#event:beatmapId</a></li><li><a href="BanchoLobby.html#event:freemod">BanchoLobby#event:freemod</a></li><li><a href="BanchoLobby.html#event:host">BanchoLobby#event:host</a></li><li><a href="BanchoLobby.html#event:hostCleared">BanchoLobby#event:hostCleared</a></li><li><a href="BanchoLobby.html#event:invalidBeatmapId">BanchoLobby#event:invalidBeatmapId</a></li><li><a href="BanchoLobby.html#event:matchAborted">BanchoLobby#event:matchAborted</a></li><li><a href="BanchoLobby.html#event:matchFinished">BanchoLobby#event:matchFinished</a></li><li><a href="BanchoLobby.html#event:matchSettings">BanchoLobby#event:matchSettings</a></li><li><a href="BanchoLobby.html#event:matchSize">BanchoLobby#event:matchSize</a></li><li><a href="BanchoLobby.html#event:matchStarted">BanchoLobby#event:matchStarted</a></li><li><a href="BanchoLobby.html#event:mods">BanchoLobby#event:mods</a></li><li><a href="BanchoLobby.html#event:name">BanchoLobby#event:name</a></li><li><a href="BanchoLobby.html#event:passwordChanged">BanchoLobby#event:passwordChanged</a></li><li><a href="BanchoLobby.html#event:passwordRemoved">BanchoLobby#event:passwordRemoved</a></li><li><a href="BanchoLobby.html#event:playerJoined">BanchoLobby#event:playerJoined</a></li><li><a href="BanchoLobby.html#event:playerLeft">BanchoLobby#event:playerLeft</a></li><li><a href="BanchoLobby.html#event:playerMoved">BanchoLobby#event:playerMoved</a></li><li><a href="BanchoLobby.html#event:playing">BanchoLobby#event:playing</a></li><li><a href="BanchoLobby.html#event:refereeAdded">BanchoLobby#event:refereeAdded</a></li><li><a href="BanchoLobby.html#event:refereeRemoved">BanchoLobby#event:refereeRemoved</a></li><li><a href="BanchoLobby.html#event:slots">BanchoLobby#event:slots</a></li><li><a href="BanchoLobby.html#event:slotsLocked">BanchoLobby#event:slotsLocked</a></li><li><a href="BanchoLobby.html#event:slotsUnlocked">BanchoLobby#event:slotsUnlocked</a></li><li><a href="BanchoLobby.html#event:teamMode">BanchoLobby#event:teamMode</a></li><li><a href="BanchoLobby.html#event:userNotFound">BanchoLobby#event:userNotFound</a></li><li><a href="BanchoLobby.html#event:userNotFoundUsername">BanchoLobby#event:userNotFoundUsername</a></li><li><a href="BanchoLobby.html#event:winCondition">BanchoLobby#event:winCondition</a></li><li><a href="BanchoMultiplayerChannel.html#event:JOIN">BanchoMultiplayerChannel#event:JOIN</a></li><li><a href="BanchoMultiplayerChannel.html#event:message">BanchoMultiplayerChannel#event:message</a></li><li><a href="BanchoMultiplayerChannel.html#event:PART">BanchoMultiplayerChannel#event:PART</a></li><li><a href="BanchoUser.html#event:message">BanchoUser#event:message</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#BanchoLobbyPlayerStates">BanchoLobbyPlayerStates</a></li><li><a href="global.html#BanchoLobbyTeamModes">BanchoLobbyTeamModes</a></li><li><a href="global.html#BanchoLobbyTeams">BanchoLobbyTeams</a></li><li><a href="global.html#BanchoLobbyWinConditions">BanchoLobbyWinConditions</a></li><li><a href="global.html#BanchoMods">BanchoMods</a></li><li><a href="global.html#ConnectStates">ConnectStates</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			
+
+		<h1 class="page-title">Source: lib/BanchoLobbyRegexes.js</h1>
+    
+<section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">const TeamModes = require("./BanchoLobbyTeamModes");
+const WinConditions = require("./BanchoLobbyWinConditions");
+const Mods = require("./BanchoMods");
+
+/**
+ * @name BanchoLobbyRegexes
+ * @description Regexes to parse BanchoBot's messages in multiplayer lobbies.
+ * @global
+ * @private
+ * @namespace BanchoLobbyRegexes
+ */
+module.exports = {
+	/**
+	 * Finds and execute the right regex on the given string
+	 * @name findRegex
+	 * @arg {string} str parsed string
+	 * @returns {object}
+	 * @memberof BanchoLobbyRegexes
+	 * @inner
+	 */
+	findRegex: function(str) {
+		for(const regexName in this.regexes) {
+			const regex = this.regexes[regexName];
+			const ret = regex(str);
+			if(ret)
+				return {
+					name: regexName,
+					ret: ret
+				};
+		}
+	},
+	/**
+	 * All the tested regexes
+	 * @type {object}
+	 * @memberof BanchoLobbyRegexes
+	 * @inner
+	 */
+	regexes: {
+		roomName: function(str) {
+			const r = /^Room name: (.+), History: https:\/\/osu\.ppy\.sh\/mp\/(\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					name: m[1],
+					id: Number(m[2])
+				};
+			}
+		},
+		teamModeWinConditions: function(str) {
+			const r = /^Team mode: (\w+), Win condition: (\w+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					teamMode: TeamModes[m[1]],
+					winCondition: WinConditions[m[2]]
+				};
+			}
+		},
+		activeMods: function(str) {
+			const r = /^Active mods: (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					mods: Mods.parseLongMods(m[1]),
+					freemod: m[1].indexOf("Freemod") != -1
+				};
+			}
+		},
+		playersAmount: function(str) {
+			const r = /^Players: (\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					playersAmount: Number(m[1])
+				};
+			}
+		},
+		playerChangedBeatmap: function(str) {
+			const r = /^Beatmap changed to: (.+) \(https:\/\/osu\.ppy\.sh\/b\/(\d+)\)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					name: m[1],
+					id: Number(m[2])
+				};
+			}
+		},
+		refereeChangedBeatmap: function(str) {
+			const r = /^Changed beatmap to https:\/\/osu\.ppy\.sh\/b\/(\d+) (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					id: Number(m[1]),
+					name: m[2]
+				};
+			}
+		},
+		beatmapFromSettings: function(str) {
+			const r = /^Beatmap: \(https:\/\/osu\.ppy\.sh\/b\/(\d+)\) (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					id: Number(m[1]),
+					name: m[2]
+				};
+			}
+		},
+		invalidBeatmapId: function(str) {
+			return str == "Invalid map ID provided";
+		},
+		playerChangingBeatmap: function(str) {
+			return (str == "Host is changing map...");
+		},
+		refereeChangedMods: function(str) {
+			const r = /^(Enabled (.+)|Disabled all mods), (disabled|enabled) FreeMod$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					mods: Mods.parseLongMods(m[2]),
+					freemod: m[3] == "enabled"
+				};
+			}
+		},
+		playerJoined: function(str) {
+			const r = /^(.+) joined in slot (\d+)\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1],
+					slot: Number(m[2])
+				};
+			}
+		},
+		playerMoved: function(str) {
+			const r = /^(.+) moved to slot (\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1],
+					slot: Number(m[2])
+				};
+			}
+		},
+		playerLeft: function(str) {
+			const r = /^(.+) left the game\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		playerBecameTheHost: function(str) {
+			const r = /^(.+) became the host\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		allPlayersReady: function(str) {
+			return str == "All players are ready";
+		},
+		matchStarted: function(str) {
+			return str == "The match has started!";
+		},
+		matchAborted: function(str) {
+			return str == "Aborted the match";
+		},
+		playerFinished: function(str) {
+			const r = /^(.+) finished playing \(Score: (\d+), (FAIL|PASS)ED\)\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1],
+					score: m[2],
+					pass: m[3] == "PASS"
+				};
+			}
+		},
+		matchFinished: function(str) {
+			return str == "The match has finished!";
+		},
+		passwordRemoved: function(str) {
+			return str == "Removed the match password";
+		},
+		passwordChanged: function(str) {
+			return str == "Changed the match password";
+		},
+		refereeAdded: function(str) {
+			const r = /^Added (.+) to the match referees$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		refereeRemoved: function(str) {
+			const r = /^Removed (.+) from the match referees$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		userNotFound: function(str) {
+			return str == "User not found";
+		},
+		userNotFoundUsername: function(str) {
+			const r = /^User not found: (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		slotsLocked: function(str) {
+			return str == "Locked the match";
+		},
+		slotsUnlocked: function(str) {
+			return str == "Unlocked the match";
+		},
+		matchSize: function(str) {
+			const r = /^Changed match to size (\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					size: Number(m[1])
+				};
+			}
+		},
+		matchSettings: function(str) {
+			const r = /^Changed match settings to ((\d+) slots, )?(HeadToHead|TagCoop|TeamVs|TagTeamVs)(, (Score|Accuracy|Combo|ScoreV))?$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					size: Number(m[2]),
+					teamMode: TeamModes[m[3]],
+					winCondition: WinConditions[m[5]]
+				};
+			}
+		},
+		hostCleared: function(str) {
+			return str == "Cleared match host";
+		}
+	}
+};</pre>
+    </article>
+</section>
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Sat Dec 30th 2017
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

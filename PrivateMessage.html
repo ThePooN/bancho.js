@@ -1,69 +1,123 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>JSDoc: Class: PrivateMessage</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>bancho.js Class: PrivateMessage</title>
 
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.dark.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
 </head>
 
 <body>
 
-<div id="main">
+<div class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">bancho.js</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="events.list.html" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="BanchoChannel.html#event:JOIN">BanchoChannel#event:JOIN</a></li><li><a href="BanchoChannel.html#event:message">BanchoChannel#event:message</a></li><li><a href="BanchoChannel.html#event:PART">BanchoChannel#event:PART</a></li><li><a href="BanchoClient.html#event:CM">BanchoClient#event:CM</a></li><li><a href="BanchoClient.html#event:connected">BanchoClient#event:connected</a></li><li><a href="BanchoClient.html#event:disconnected">BanchoClient#event:disconnected</a></li><li><a href="BanchoClient.html#event:error">BanchoClient#event:error</a></li><li><a href="BanchoClient.html#event:JOIN">BanchoClient#event:JOIN</a></li><li><a href="BanchoClient.html#event:nochannel">BanchoClient#event:nochannel</a></li><li><a href="BanchoClient.html#event:nouser">BanchoClient#event:nouser</a></li><li><a href="BanchoClient.html#event:PART">BanchoClient#event:PART</a></li><li><a href="BanchoClient.html#event:PM">BanchoClient#event:PM</a></li><li><a href="BanchoClient.html#event:state">BanchoClient#event:state</a></li><li><a href="BanchoLobby.html#event:allPlayersReady">BanchoLobby#event:allPlayersReady</a></li><li><a href="BanchoLobby.html#event:beatmap">BanchoLobby#event:beatmap</a></li><li><a href="BanchoLobby.html#event:beatmapId">BanchoLobby#event:beatmapId</a></li><li><a href="BanchoLobby.html#event:freemod">BanchoLobby#event:freemod</a></li><li><a href="BanchoLobby.html#event:host">BanchoLobby#event:host</a></li><li><a href="BanchoLobby.html#event:hostCleared">BanchoLobby#event:hostCleared</a></li><li><a href="BanchoLobby.html#event:invalidBeatmapId">BanchoLobby#event:invalidBeatmapId</a></li><li><a href="BanchoLobby.html#event:matchAborted">BanchoLobby#event:matchAborted</a></li><li><a href="BanchoLobby.html#event:matchFinished">BanchoLobby#event:matchFinished</a></li><li><a href="BanchoLobby.html#event:matchSettings">BanchoLobby#event:matchSettings</a></li><li><a href="BanchoLobby.html#event:matchSize">BanchoLobby#event:matchSize</a></li><li><a href="BanchoLobby.html#event:matchStarted">BanchoLobby#event:matchStarted</a></li><li><a href="BanchoLobby.html#event:mods">BanchoLobby#event:mods</a></li><li><a href="BanchoLobby.html#event:name">BanchoLobby#event:name</a></li><li><a href="BanchoLobby.html#event:passwordChanged">BanchoLobby#event:passwordChanged</a></li><li><a href="BanchoLobby.html#event:passwordRemoved">BanchoLobby#event:passwordRemoved</a></li><li><a href="BanchoLobby.html#event:playerJoined">BanchoLobby#event:playerJoined</a></li><li><a href="BanchoLobby.html#event:playerLeft">BanchoLobby#event:playerLeft</a></li><li><a href="BanchoLobby.html#event:playerMoved">BanchoLobby#event:playerMoved</a></li><li><a href="BanchoLobby.html#event:playing">BanchoLobby#event:playing</a></li><li><a href="BanchoLobby.html#event:refereeAdded">BanchoLobby#event:refereeAdded</a></li><li><a href="BanchoLobby.html#event:refereeRemoved">BanchoLobby#event:refereeRemoved</a></li><li><a href="BanchoLobby.html#event:slots">BanchoLobby#event:slots</a></li><li><a href="BanchoLobby.html#event:slotsLocked">BanchoLobby#event:slotsLocked</a></li><li><a href="BanchoLobby.html#event:slotsUnlocked">BanchoLobby#event:slotsUnlocked</a></li><li><a href="BanchoLobby.html#event:teamMode">BanchoLobby#event:teamMode</a></li><li><a href="BanchoLobby.html#event:userNotFound">BanchoLobby#event:userNotFound</a></li><li><a href="BanchoLobby.html#event:userNotFoundUsername">BanchoLobby#event:userNotFoundUsername</a></li><li><a href="BanchoLobby.html#event:winCondition">BanchoLobby#event:winCondition</a></li><li><a href="BanchoMultiplayerChannel.html#event:JOIN">BanchoMultiplayerChannel#event:JOIN</a></li><li><a href="BanchoMultiplayerChannel.html#event:message">BanchoMultiplayerChannel#event:message</a></li><li><a href="BanchoMultiplayerChannel.html#event:PART">BanchoMultiplayerChannel#event:PART</a></li><li><a href="BanchoUser.html#event:message">BanchoUser#event:message</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#BanchoLobbyPlayerStates">BanchoLobbyPlayerStates</a></li><li><a href="global.html#BanchoLobbyTeamModes">BanchoLobbyTeamModes</a></li><li><a href="global.html#BanchoLobbyTeams">BanchoLobbyTeams</a></li><li><a href="global.html#BanchoLobbyWinConditions">BanchoLobbyWinConditions</a></li><li><a href="global.html#BanchoMods">BanchoMods</a></li><li><a href="global.html#ConnectStates">ConnectStates</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
 
-    <h1 class="page-title">Class: PrivateMessage</h1>
-
-    
-
+</div>
+</div>
 
 
+<div class="container" id="toc-content">
+<div class="row">
 
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	<h1 class="page-title">Class: PrivateMessage</h1>
 <section>
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>PrivateMessage<span class="signature">(user, message)</span><span class="type-signature"></span></h2>
+        <h2>
+        PrivateMessage
+        </h2>
         
-            <div class="class-description">Message received in our private inbox</div>
+            <div class="class-description"><p>Message received in our private inbox</p></div>
         
     
 </header>
+
 
 <article>
     <div class="container-overview">
     
         
+<hr>
+<dt>
+    <h4 class="name" id="PrivateMessage"><span class="type-signature"></span>new PrivateMessage(user, message)</h4>
+    
+    
+</dt>
+<dd>
 
     
-    <h2>Constructor</h2>
-    
 
-    
-    <h4 class="name" id="PrivateMessage"><span class="type-signature"></span>new PrivateMessage<span class="signature">(user, message)</span><span class="type-signature"></span></h4>
     
 
     
 
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
     
+    
+        <h5>Parameters:</h5>
+        
 
-<table class="params">
+<table class="params table table-striped">
     <thead>
     <tr>
         
@@ -94,6 +148,7 @@
 <span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
 
 
+
             
             </td>
 
@@ -101,7 +156,7 @@
 
             
 
-            <td class="description last">User the message was sent by</td>
+            <td class="description last"><p>User the message was sent by</p></td>
         </tr>
 
     
@@ -117,6 +172,7 @@
 <span class="param-type">string</span>
 
 
+
             
             </td>
 
@@ -124,19 +180,24 @@
 
             
 
-            <td class="description last">Message body</td>
+            <td class="description last"><p>Message body</p></td>
         </tr>
 
     
     </tbody>
 </table>
 
+    
 
-
-
-
-
+    
 <dl class="details">
+    
+
+	
+
+	
+
+	
 
     
 
@@ -146,52 +207,52 @@
 
     
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
+	
 
-    
 
-    
 
-    
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="lib_PrivateMessage.js.html">lib/PrivateMessage.js</a>,
+				 <a href="lib_PrivateMessage.js.html#sunlight-1-line-8">line 8</a>
+			</li>
+		</ul>
+	</dd>
+	
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="lib_PrivateMessage.js.html">lib/PrivateMessage.js</a>, <a href="lib_PrivateMessage.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
+	
 
-    
+	
 
-    
-
-    
+	
 </dl>
 
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
+    
+</dd>
 
     
     </div>
@@ -224,8 +285,6 @@
     
 
     
-
-    
 </article>
 
 </section>
@@ -233,19 +292,132 @@
 
 
 
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
 </div>
 
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li></ul><h3>Events</h3><ul><li><a href="BanchoClient.html#event:CM">CM</a></li><li><a href="BanchoClient.html#event:connected">connected</a></li><li><a href="BanchoClient.html#event:disconnected">disconnected</a></li><li><a href="BanchoClient.html#event:error">error</a></li><li><a href="BanchoClient.html#event:JOIN">JOIN</a></li><li><a href="BanchoClient.html#event:nochannel">nochannel</a></li><li><a href="BanchoClient.html#event:nouser">nouser</a></li><li><a href="BanchoClient.html#event:PART">PART</a></li><li><a href="BanchoClient.html#event:PM">PM</a></li><li><a href="BanchoClient.html#event:state">state</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ConnectStates">ConnectStates</a></li></ul>
-</nav>
 
-<br class="clear">
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 28 2017 23:15:34 GMT+0100 (CET)
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on Sat Dec 30th 2017
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : true,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
 </body>
 </html>
