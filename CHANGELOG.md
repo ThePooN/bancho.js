@@ -2,6 +2,13 @@
 
 ## Version 0.6
 
+### Version 0.6.1
+
+- Add missing entries to typescript definitions and documentation
+- BanchoChannel: return the same Promise if a join/part request is already ongoing
+
+### Version 0.6.0
+
 - **Complete Multiplayer channels support, including:**
     - Events
     - Commands
