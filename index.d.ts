@@ -9,8 +9,9 @@ declare module "bancho.js" {
 		 * @param password IRC Password of the user to connect to Bancho (see https://osu.ppy.sh/p/irc)
 		 * @param host Custom IRC host (for proxy-ing from a firewall for example)
 		 * @param port Custom IRC port
+		 * @param apiKey osu! API key for API requests (see https://osu.ppy.sh/p/api)
 		 */
-		constructor(username: string, password: string, host?: string, port?: number)
+		constructor(username: string, password: string, host?: string, port?: number, apiKey?: string)
 	
 		/**
 		 * Populated with a Nodesu client, if api key is passed to the constructor
