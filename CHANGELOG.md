@@ -2,6 +2,12 @@
 
 ## Version 0.6
 
+### Version 0.6.3
+
+- Add player property to BanchoLobbyPlayerScore
+- Multiplayer: Emit all events after setting vars
+- Multiplayer: Rename matchSize event to size (and document size property)
+
 ### Version 0.6.2
 
 - Multiplayer: Fix setting host not working if there was no host when room was joined
