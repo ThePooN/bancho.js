@@ -276,6 +276,10 @@ declare module "bancho.js" {
 		 */
 		slots: Array<BanchoLobbyPlayer>
 		/**
+		 * Current size of the lobby
+		 */
+		size: number
+		/**
 		 * Beatmap fetched from the API (late/not as reliable, use beatmapId when possible)
 		 * 
 		 */
