@@ -459,7 +459,7 @@ declare module "bancho.js" {
 			teamMode: number
 			winCondition: number
 		}) => void): this
-		on(event: "matchSize", listener: (size: number) => void): this
+		on(event: "size", listener: (size: number) => void): this
 		on(event: "matchStarted", listener: () => void): this
 		on(event: "mods", listener: (mods: Array<BanchoMod>) => void): this
 		on(event: "name", listener: (name: string) => void): this
