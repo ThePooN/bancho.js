@@ -509,6 +509,7 @@ declare module "bancho.js" {
 	class BanchoLobbyPlayerScore {
 		score: number
 		pass: boolean
+		player: BanchoLobbyPlayer
 	}
 
 	class BanchoMod {
