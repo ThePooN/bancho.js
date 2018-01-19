@@ -2,6 +2,12 @@
 
 ## Version 0.6
 
+### Version 0.6.4
+
+- Multiplayer: Fix lobby.setSize() never resolving
+- Multiplayer: Fix beatmapFromSettings regex
+- Multiplayer: Emit a new event beatmapNotFound if the map isn't on the osu! API
+
 ### Version 0.6.3
 
 - Add player property to BanchoLobbyPlayerScore
