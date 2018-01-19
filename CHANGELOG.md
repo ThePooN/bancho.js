@@ -2,6 +2,11 @@
 
 ## Version 0.6
 
+### Version 0.6.2
+
+- Multiplayer: Fix setting host not working if there was no host when room was joined
+- Multiplayer: update vars before emitting event
+
 ### Version 0.6.1
 
 - Add missing entries to typescript definitions and documentation
