@@ -394,7 +394,12 @@ declare module "bancho.js" {
 		/**
 		 * Start the match
 		 */
-		startMatch(): Promise<null>
+		startMatch(timeout?: number): Promise<null>
+
+		/**
+		 * Abort an ongoing timer
+		 */
+		abortTimer(): Promise<null>
 
 		/**
 		 * Abort the match
