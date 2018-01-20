@@ -2,6 +2,14 @@
 
 ## Version 0.6
 
+### Version 0.6.5
+
+- Multiplayer: Fix incorrectly parsed mods
+- Multiplayer: Don't fetch beatmap again if it's the same
+- BanchoChannel: Fix join/leave functions not returning a promise but an internal callback when a request is already ongoing.
+- Multiplayer: fix kickPlayer(player) and invitePlayer(player) kicking/inviting undefined (:
+- Update npm packages
+
 ### Version 0.6.4
 
 - Multiplayer: Fix lobby.setSize() never resolving
