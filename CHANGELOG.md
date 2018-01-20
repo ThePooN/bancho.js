@@ -2,6 +2,16 @@
 
 ## Version 0.6
 
+### Version 0.6.6
+
+- Multiplayer: fix setHost(player)
+- Multiplayer: Fix movePlayer(player, slot) not finding player.
+- Multiplayer: Fix winConditions/size potentially updating to null when they aren't specified in Bancho's !mp set answer
+- BanchoMods: fix shortMods parsing
+- Multiplayer regexes: Fix matchSettings regex not recognizing ScoreV2
+- Multiplayer: Reset players when they join the lobby
+- BanchoLobby: add abortTimer and add timeout parameter to startMatch
+
 ### Version 0.6.5
 
 - Multiplayer: Fix incorrectly parsed mods
