@@ -230,6 +230,7 @@ class BanchoLobby extends EventEmitter {
 							 * @prop {BanchoLobbyPlayer} player
 							 * @prop {number} slot Starting from 0
 							 */
+							player.reset();
 							this.slots[ret.slot - 1] = player;
 							this.emit("playerJoined", {
 								player: player,
@@ -397,8 +398,10 @@ class BanchoLobby extends EventEmitter {
 					 * @prop {number} winCondition See BanchoLobbyWinConditions
 					 */
 					this.teamMode = ret.teamMode;
-					this.winCondition = ret.winCondition;
-					this.size = ret.size;
+					if(!isNaN(ret.winCondition))
+						this.winCondition = ret.winCondition;
+					if(!isNaN(ret.size))
+						this.size = ret.size;
 					this.emit("matchSettings", ret);
 					break;
 			}
@@ -592,8 +595,6 @@ class BanchoLobby extends EventEmitter {
 		return new Promise((resolve, reject) => {
 			if(isNaN(teamMode) || isNaN(winCondition) || size != null &amp;&amp; isNaN(size))
 				return reject(new Error("one of the arguments isn't a number. try again"));
-			
-			this.channel.sendMessage("!mp set "+teamMode+" "+winCondition+((size != null) ? " "+size : "")).catch(reject);
 
 			const listener = (ret) => {
 				if(teamMode == ret.teamMode &amp;&amp; winCondition == ret.winCondition &amp;&amp; size == ret.size) {
@@ -602,6 +603,8 @@ class BanchoLobby extends EventEmitter {
 				}
 			};
 			this.on("matchSettings", listener);
+			
+			this.channel.sendMessage("!mp set "+teamMode+" "+winCondition+((size != null) ? " "+size : "")).catch(reject);
 		});
 	}
 
@@ -617,7 +620,7 @@ class BanchoLobby extends EventEmitter {
 				return reject(new Error("invalid player"));
 			if(isNaN(slot) || slot &lt; 0 || slot > 15)
 				return reject(new Error("how can a slot not be a number between 0 and 15? try again."));
-			this.channel.sendMessage("!mp move #"+player.id+" "+(slot+1)).then(resolve, reject);
+			this.channel.sendMessage("!mp move #"+player.user.id+" "+(slot+1)).then(resolve, reject);
 		});
 	}
 
@@ -639,7 +642,7 @@ class BanchoLobby extends EventEmitter {
 	 */
 	setHost(player) {
 		return new Promise((resolve, reject) => 
-			this.channel.sendMessage("!mp host #"+player.id).then(resolve, reject)
+			this.channel.sendMessage("!mp host "+player).then(resolve, reject)
 		);
 	}
 
@@ -688,16 +691,35 @@ class BanchoLobby extends EventEmitter {
 
 	/**
 	 * Start the match
+	 * @param {number} [timeout] Timeout before the game starts. Defaults to 0
 	 * @async
 	 */
-	startMatch() {
+	startMatch(timeout = null) {
 		return new Promise((resolve, reject) => {
-			this.channel.sendMessage("!mp start").catch(reject);
-			const listener = () => {
-				resolve();
-				this.removeListener("matchStarted", listener);
-			};
-			this.on("matchStarted", listener);
+			this.channel.sendMessage("!mp start "+(timeout != null ? timeout : ""))
+				.then(() => {
+					if(timeout > 0)
+						resolve();
+				})
+				.catch(reject);
+			
+			if(timeout == null) {
+				const listener = () => {
+					resolve();
+					this.removeListener("matchStarted", listener);
+				};
+				this.on("matchStarted", listener);
+			}
+		});
+	}
+
+	/**
+	 * Aborts an ongoing timer
+	 * @async
+	 */
+	abortTimer() {
+		return new Promise((resolve, reject) => {
+			this.channel.sendMessage("!mp aborttimer").then(resolve).catch(reject);
 		});
 	}
 

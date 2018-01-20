@@ -320,7 +320,7 @@ module.exports = {
 			}
 		},
 		matchSettings: function(str) {
-			const r = /^Changed match settings to ((\d+) slots, )?(HeadToHead|TagCoop|TeamVs|TagTeamVs)(, (Score|Accuracy|Combo|ScoreV))?$/;
+			const r = /^Changed match settings to ((\d+) slots, )?(HeadToHead|TagCoop|TeamVs|TagTeamVs)(, (Score|Accuracy|Combo|ScoreV2))?$/;
 			if(r.test(str)) {
 				const m = r.exec(str);
 				return {

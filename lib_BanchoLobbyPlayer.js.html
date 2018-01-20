@@ -102,6 +102,10 @@ class BanchoLobbyPlayer {
 	constructor(lobby, user) {
 		this.lobby = lobby;
 		this.user = user;
+		this.reset();
+	}
+
+	reset() {
 		this.state = BanchoLobbyPlayerStates["Not Ready"];
 		this.isHost = false;
 		this.team = null;

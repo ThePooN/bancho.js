@@ -127,19 +127,19 @@ module.exports = {
 	enum: Object.freeze(BanchoMods),
 	parseShortMod: function(string) {
 		for(const modName in BanchoMods)
-			if(BanchoMods[modName].longMod == string)
+			if(BanchoMods[modName].shortMod.toLowerCase() == string.toLowerCase())
 				return BanchoMods[modName];
 		return null;
 	},
 	parseShortMods: function(string) {
 		if(typeof string != "string")
 			return null;
-		const splits = string.split(" ");
+		const splits = string.split(", ");
 		const mods = [];
 		for(let i = 0; i &lt; splits.length; i++) {
-			const longMod = this.parseShortMod(splits[i]);
-			if(longMod)
-				mods.push();
+			const shortMod = this.parseShortMod(splits[i]);
+			if(shortMod)
+				mods.push(shortMod);
 		}
 		return mods;
 	},
