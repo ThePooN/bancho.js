@@ -2,6 +2,10 @@
 
 ## Version 0.6
 
+### Version 0.6.7
+
+- Multiplayer: Append every possibles !mp command with a random string to work around Bancho's anti-spam
+
 ### Version 0.6.6
 
 - Multiplayer: fix setHost(player)
