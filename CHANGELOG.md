@@ -2,6 +2,10 @@
 
 ## Version 0.6
 
+### Version 0.6.8
+
+- BanchoLobby: add startTimer(timeout)
+
 ### Version 0.6.7
 
 - Multiplayer: Fix setting player.isReady to false instead of manipulating player.state
