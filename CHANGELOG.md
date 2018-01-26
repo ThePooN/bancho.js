@@ -2,6 +2,13 @@
 
 ## Version 0.6
 
+### Version 0.6.9
+
+- Multiplayer: Set players' state to NotReady when the beatmap, the mods or the match settings are changed
+- BanchoLobby: new event "playerChangedTeam"
+- BanchoLobby.startTimer: make the parameter non-optional and add the method to typings
+- Multiplayer: Unready everyone when one changes their team, also doesn't unready people when they don't have the map anymore in most cases
+
 ### Version 0.6.8
 
 - BanchoLobby: add startTimer(timeout)
