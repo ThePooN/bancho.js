@@ -474,6 +474,10 @@ declare module "bancho.js" {
 		on(event: "name", listener: (name: string) => void): this
 		on(event: "passwordChanged", listener: () => void): this
 		on(event: "passwordRemoved", listener: () => void): this
+		on(event: "playerChangedTeam", listener: (obj: {
+			player: BanchoLobbyPlayer
+			team: string
+		}) => void): this
 		on(event: "playerJoined", listener: (obj: {
 			player: BanchoLobbyPlayer
 			slot: number
