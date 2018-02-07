@@ -1,6 +1,6 @@
 {
   "name": "bancho.js",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "description": "Interface with Bancho over IRC, made easy and reliable",
   "main": "index.js",
   "types": "index.d.ts",
