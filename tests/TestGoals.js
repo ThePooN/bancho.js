@@ -5,6 +5,7 @@
  */
 const TestGoals = {
 	ChannelMessage: Symbol("ChannelMessage"),
+	PrivateSelfMessage: Symbol("PrivateSelfMessage"),
 	PrivateMessage: Symbol("PrivateMessage"),
 	JoinEvent: Symbol("JoinEvent"),
 	JoinPromise: Symbol("JoinPromise"),

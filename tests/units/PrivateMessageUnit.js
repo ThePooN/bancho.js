@@ -10,19 +10,26 @@ class PrivateMessageUnit extends TestUnit {
 	run() {
 		return new Promise((resolve, reject) => {
 			const message = Math.random().toString(36).substring(8);
-			let returned = false;
-			this.client.on("PM", async (msg) => {
-				if(msg.user.isClient() && msg.message == message) {
-					this.fulFillGoal(TestGoals.PrivateMessage);
-					returned = true;
+			let gotSelf = false;
+			let gotFromBancho = false;
+			function resolveIfDone() {
+				if(gotSelf && gotFromBancho)
 					resolve();
+			}
+			this.client.on("PM", (msg) => {
+				if(msg.self && msg.user.isClient()) {
+					gotSelf = true;
+					this.fulFillGoal(TestGoals.PrivateSelfMessage);
+					resolveIfDone();
+				}
+				else if(msg.user.isClient() && msg.message == message) {
+					gotFromBancho = true;
+					this.fulFillGoal(TestGoals.PrivateMessage);
+					resolveIfDone();
 				}
 			});
 			this.client.getUser(this.config["irc_user"]).sendMessage(message);
-			setTimeout(() => {
-				if(!returned)
-					reject(new Error("Didn't receive message after timeout!"));
-			}, 10000);
+			setTimeout(() => reject(new Error("Didn't receive message after timeout!")), 10000);
 		});
 	}
 }
