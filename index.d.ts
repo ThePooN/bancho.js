@@ -22,6 +22,11 @@ declare module "bancho.js" {
 		 * Get a BanchoUser instance for the specified user
 		 */
 		getUser(username: string): BanchoUser
+	
+		/**
+		 * Get a BanchoUser representing ourself
+		 */
+		getSelf(): BanchoUser
 
 		/**
 		 * Get a BanchoUser instance for the specified user id
