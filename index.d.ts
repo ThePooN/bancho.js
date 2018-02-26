@@ -36,7 +36,13 @@ declare module "bancho.js" {
 		/**
 		 * Get a BanchoChannel instance for the specified name
 		 */
-		getChannel(channelName: string): BanchoChannel|MultiplayerBanchoChannel
+		getChannel(channelName: string): BanchoChannel|BanchoMultiplayerChannel
+
+		/**
+		 * Creates a multiplayer lobby and return its channel.
+		 * @param name Lobby name
+		 */
+		createLobby(name: string): Promise<BanchoMultiplayerChannel>
 	
 		/**
 		 * Connects to Bancho, rejects an Error if connection fails
