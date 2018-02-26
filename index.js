@@ -3,8 +3,8 @@
  * @prop {BanchoClient} BanchoClient The BanchoClient class (Client alias is kept for history purposes)
  * @prop {OutgoingBanchoMessage} OutgoingBanchoMessage The OutgoingMessage class to produce messages
  * @prop {ConnectStates} ConnectStates An enum containing all the possible ConnectStates of bancho.js
- * @prop {BanchoLobbyPlayerStates} BanchoLobbyPlayerStates An enum contains the different player states for players in lobbies
- * @prop {BanchoLobbyTeamModes} BanchoLobbyTeamModes An enum contains the 4 different team modes in Bancho
+ * @prop {BanchoLobbyPlayerStates} BanchoLobbyPlayerStates An enum containing the different player states for players in lobbies
+ * @prop {BanchoLobbyTeamModes} BanchoLobbyTeamModes An enum containing the 4 different team modes in Bancho
  * @prop {BanchoLobbyTeams} BanchoLobbyTeams An enum containing the 2 different teams in a multiplayer lobby
  * @prop {BanchoLobbyWinConditions} BanchoLobbyWinConditions An enum containing the 4 win conditions on Bancho
  */
