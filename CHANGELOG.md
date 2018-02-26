@@ -2,6 +2,13 @@
 
 ## Version 0.7
 
+### Version 0.7.1
+
+- BanchoLobby: do not attempt to set maps or mods if they are comparable and identical
+- BanchoClient: add createLobby(name) method
+
+### Version 0.7.0
+
 - BanchoClient: add getSelf() method, returning a BanchoUser instance representing the current user
 - BanchoMessage: Add self property, set to true if message was sent by the current bancho.js instance
 
