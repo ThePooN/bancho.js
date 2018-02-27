@@ -10,5 +10,6 @@ client.connect().then(() => {
 		stdin.pause();
 		const username = d.toString().trim();
 		await client.getUser(username).where().then((country) => console.log(username+" is online from "+country+"!")).catch((e) => console.error(e.message));
+		client.disconnect();
 	});
 }).catch(console.error);
