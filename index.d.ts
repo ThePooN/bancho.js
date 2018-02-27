@@ -182,6 +182,11 @@ declare module "bancho.js" {
 		whois(): Promise<BanchoWhoisReturn>
 
 		/**
+		 * Fires a !where command to BanchoBot about this user.
+		 */
+		where(): Promise<string>
+
+		/**
 		 * Registers a listener for messages from this user
 		 * @param listener the callback with the message
 		 */

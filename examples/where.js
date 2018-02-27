@@ -1,0 +1,14 @@
+const config = require("../config.json");
+const Banchojs = require(".."); // Replace .. by bancho.js when coding outside of the library
+const client = new Banchojs.BanchoClient(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"]);
+
+client.connect().then(() => {
+	console.log("We're online!");
+	console.log("Please type an username to run the !where command on:");
+	const stdin = process.openStdin();
+	stdin.on("data", async (d) => {
+		stdin.pause();
+		const username = d.toString().trim();
+		await client.getUser(username).where().then((country) => console.log(username+" is online from "+country+"!")).catch((e) => console.error(e.message));
+	});
+}).catch(console.error);
