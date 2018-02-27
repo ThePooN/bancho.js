@@ -13,6 +13,7 @@ const TestGoals = {
 	PartPromise: Symbol("PartPromise"),
 	UserAPIFetch: Symbol("UserAPIFetch"),
 	Whois: Symbol("Whois"),
+	Where: Symbol("Where"),
 
 	MultiplayerLobbyExists: Symbol("MultiplayerLobbyExists"),
 	MultiplayerLobbySetMap: Symbol("MultiplayerLobbySetMap"),
