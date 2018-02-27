@@ -14,6 +14,7 @@ const TestGoals = {
 	UserAPIFetch: Symbol("UserAPIFetch"),
 	Whois: Symbol("Whois"),
 	Where: Symbol("Where"),
+	Stats: Symbol("Stats"),
 
 	MultiplayerLobbyExists: Symbol("MultiplayerLobbyExists"),
 	MultiplayerLobbySetMap: Symbol("MultiplayerLobbySetMap"),

@@ -177,14 +177,25 @@ declare module "bancho.js" {
 		sendMessage(message: string): Promise<null>
 
 		/**
-		 * Fires a WHOIS request to the server about this user.
+		 * Fires an IRC WHOIS request to the server about this user. Only works on online users.
+	 	 * Throws if the user can't be found or is offline.
 		 */
 		whois(): Promise<BanchoWhoisReturn>
 
 		/**
-		 * Fires a !where command to BanchoBot about this user.
+		 * Fires a !where command to BanchoBot about this user. Only works on online users.
+	 	 * Throws if the user can't be found or is offline.
 		 */
 		where(): Promise<string>
+
+		/**
+		 * Fires a !stats command to BanchoBot about this user. Works on online and offline users.
+		 * Will update the username, id, rankedScore, ppRank and playcount properties of this user.
+		 * Status, levels and accuracy are stored in the returned object, as they are inaccurate data (missing decimals).
+		 * It is recommended to get levels and accuracy by polling the osu! API instead.
+		 * Throws if the user can't be found.
+		 */
+		stats(): Promise<BanchoBotStatsReturn>
 
 		/**
 		 * Registers a listener for messages from this user
@@ -209,6 +220,29 @@ declare module "bancho.js" {
 		 * Channels list the user is in
 		 */
 		channels: Array<BanchoChannel>
+	}
+
+	/**
+	 * Contains properties returned by the BanchoBot !stats command that can't be set in BanchoUser.
+	 */
+	class BanchoBotStatsReturn {
+		user: BanchoUser
+		/**
+		 * Truncated value of levels (eg. 102)
+		 */
+		level: number
+		/**
+		 * Rounded value of accuracy (eg. 98.83)
+		 */
+		accuracy: number
+		/**
+		 * In-game status (eg. Afk, Idle, Playing...)
+		 */
+		status: string
+		/**
+		 * Set to true if user is online *in-game*.
+		 */
+		online: boolean
 	}
 
 	/**
