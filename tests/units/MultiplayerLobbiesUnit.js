@@ -1,8 +1,8 @@
 const TestUnit = require("../TestUnit").TestUnit;
 const TestGoals = require("../TestGoals");
-const BanchoMods = require("../../lib/BanchoMods");
-const TeamModes = require("../../lib/BanchoLobbyTeamModes");
-const WinConditions = require("../../lib/BanchoLobbyWinConditions");
+const BanchoMods = require("../../").BanchoMods;
+const TeamModes = require("../../").BanchoLobbyTeamModes;
+const WinConditions = require("../../").BanchoLobbyWinConditions;
 
 class MultiplayerLobbiesUnit extends TestUnit {
 	constructor() {

@@ -12,11 +12,11 @@ class Banchojs {
 	constructor() {
 		this.Client = this.BanchoClient = require("./lib/BanchoClient");
 		this.OutgoingBanchoMessage = require("./lib/OutgoingBanchoMessage");
-		this.ConnectStates = require("./lib/ConnectStates");
-		this.BanchoLobbyPlayerStates = require("./lib/BanchoLobbyPlayerStates");
-		this.BanchoLobbyTeamModes = require("./lib/BanchoLobbyTeamModes");
-		this.BanchoLobbyTeams = require("./lib/BanchoLobbyTeams");
-		this.BanchoLobbyWinConditions = require("./lib/BanchoLobbyWinConditions");
+		this.ConnectStates = require("./lib/Enums/ConnectStates");
+		this.BanchoLobbyPlayerStates = require("./lib/Multiplayer/Enums/BanchoLobbyPlayerStates");
+		this.BanchoLobbyTeamModes = require("./lib/Multiplayer/Enums/BanchoLobbyTeamModes");
+		this.BanchoLobbyTeams = require("./lib/Multiplayer/Enums/BanchoLobbyTeams");
+		this.BanchoLobbyWinConditions = require("./lib/Multiplayer/Enums/BanchoLobbyWinConditions");
 	}
 }
 
