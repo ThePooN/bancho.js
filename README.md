@@ -7,9 +7,18 @@
 
 # Introduction
 
-bancho.js is designed to be the best library when it comes to interacting with bancho in real-time. It connects over its IRC interface and enables you to do anything you can do over IRC - and much more to come!
+bancho.js is designed to be the best library when it comes to interacting with Bancho in real-time. It connects over its IRC interface and enables you to do anything, **from chatting to managing multiplayer lobbies**!
 
-It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg), followed by osu! French Championship and osu!SQL in the near future, and maybe your own project!
+It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg) and [osu! French Championship Hiver 2018](https://ofc.thepoon.fr), followed by osu!SQL in the near future, and maybe your own project!  
+Please let me know of your use of bancho.js! I'll gladly avertise your projects here :)
+
+# Useful Links
+
+- **Documentation**: [https://bancho.js.org](https://bancho.js.org)
+- NPM package: [https://npmjs.com/package/bancho.js](https://npmjs.com/package/bancho.js)
+- Git repository: [https://git.cartooncraft.fr/ThePooN/bancho.js](https://git.cartooncraft.fr/ThePooN/bancho.js)
+- GitHub mirror: [https://github.com/ThePooN/bancho.js](https://github.com/ThePooN/bancho.js)
+- Discord server (support/discussion): [https://discord.gg/ThePooN](https://discord.gg/ThePooN)
 
 # Disclaimer
 
@@ -22,28 +31,21 @@ This will print all your incoming PMs to the console:
 const client = new Banchojs.BanchoClient(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"]);
 client.connect().then(() => {
 	console.log("We're online! Now listening for incoming messages.");
-	client.on("PM", (message) => {
-		console.log(message.user.ircUsername+": "+message.message);
-	});
+	client.on("PM", (message) => console.log(message.user.ircUsername+": "+message.message));
 }).catch(console.error);
 ```
 Output:
 ```
 Ghouru: notice me senpai
 ```
-There are much more possibilities, including firing API requests from any `BanchoUser` object. Learn more about all the features in the Documentation!
+This library doesn't limit iself to sending messages though! It also has **complete multiplayer support** and firing API requests from BanchoUser objects. **Learn more with in the [provided examples](https://github.com/ThePooN/bancho.js/tree/master/examples) and [documentation](https://bancho.js.org)!**
 
-# Documentation
+# Contributing
 
-End-user documentation is now hosted on https://bancho.js.org!  
-Developers documentation can be generated using `npm run doc:dev`. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information.
+This library is very near completion. Thanks to everyone who supported and are now (directly or not) using the project!  
+There must still be some improvements to be done though. Feel free to hop on my [Discord server](https://discord.gg/ThePooN) so we can figure out issues and improve the code!  
+You can financially support this project by [subscribing](https://twitch.tv/ThePooN02/subscribe) to my Twitch channel or [donating](https://streamlabs.com/ThePooN02)!
 
 # License
 
 It is licensed as GPL 3.0. The entire license text is available in the [LICENSE](/LICENSE) file, however I recommend you to take a look at this [short summary](https://choosealicense.com/licenses/gpl-3.0/) to get a better idea!
-
-# Support The Development
-
-I'm just a 17 years old teenager, and you may know me better as an [osu! player](https://osu.ppy.sh/u/ThePooN) and [Twitch streamer](https://twitch.tv/ThePooN02). I'm also studying computer sciences at university in Reims.  
-If this library helped you or anybody you know or just appreciate the free time I spend on this project, feel free to support me by [subscribing](https://twitch.tv/ThePooN02/subscribe) to my Twitch channel or [donating](https://streamlabs.com/ThePooN02)!  
-Most of the time spent on this library will also be livestreamed on the same aforementioned Twitch channel.
