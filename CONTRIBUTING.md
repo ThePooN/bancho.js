@@ -13,4 +13,9 @@ I'll also require you to pass the CI tests. The `irc` test requires you to set u
 
 Feel free to create issues as well, and MR your work once you're finished.
 
-Thanks for contributing! 💙💙💙
+## Testing & Examples
+
+You're very welcomed to write test units for the tests you write, when possible. Providing examples for new features is a plus.  
+Every examples and test units should always work at any commit in the project.
+
+### Thanks for contributing! 💙💙💙
