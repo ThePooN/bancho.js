@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>bancho.js Source: lib/BanchoWhoisReturn.js</title>
+	<title>bancho.js Class: BanchoBotStatsReturn</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -74,35 +74,284 @@
 <div class="row">
 
 	
-	<div class="col-md-12">
+	<div class="col-md-8">
 	
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: lib/BanchoWhoisReturn.js</h1>
-    
+	<h1 class="page-title">Class: BanchoBotStatsReturn</h1>
 <section>
-    <article>
-        <pre
-            class="sunlight-highlight-javascript linenums">/**
- * Class describing what is returned after a WHOIS query on an online user
- * 
- * @prop {string} name Name of the queried user
- * @prop {number} userId User id of the queried user
- * @prop {Array&lt;BanchoChannel>} channels Array with every channels the user is in
- */
-class BanchoWhoisReturn {
-	constructor(name) {
-		this.name = name;
-		this.userId = null;
-		this.channels = [];
-	}
-}
 
-module.exports = BanchoWhoisReturn;</pre>
-    </article>
+<header>
+    
+        <h2>
+        BanchoBotStatsReturn
+        </h2>
+        
+            <div class="class-description"><p>Contains properties returned by the BanchoBot !stats command that can't be set in BanchoUser.</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+<hr>
+<dt>
+    <h4 class="name" id="BanchoBotStatsReturn"><span class="type-signature"></span>new BanchoBotStatsReturn()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>user</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="BanchoUser.html">BanchoUser</a></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>level</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Truncated value of levels (eg. 102)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accuracy</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>In-game status (eg. Afk, Idle, Playing...)</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>online</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Set to true if user is online <em>in-game</em>.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="lib_StatsCommand_BanchoBotStatsReturn.js.html">lib/StatsCommand/BanchoBotStatsReturn.js</a>,
+				 <a href="lib_StatsCommand_BanchoBotStatsReturn.js.html#sunlight-1-line-10">line 10</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
 </section>
-
 
 
 
@@ -112,6 +361,10 @@ module.exports = BanchoWhoisReturn;</pre>
 
 	<div class="clearfix"></div>
 
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
 	
 
 </div>
@@ -140,7 +393,7 @@ module.exports = BanchoWhoisReturn;</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

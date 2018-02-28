@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>bancho.js Source: lib/BanchoMods.js</title>
+	<title>bancho.js Source: lib/Multiplayer/BanchoLobbyRegexes.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -79,87 +79,270 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: lib/BanchoMods.js</h1>
+		<h1 class="page-title">Source: lib/Multiplayer/BanchoLobbyRegexes.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">const BanchoMod = require("./BanchoMod");
+            class="sunlight-highlight-javascript linenums">const TeamModes = require("./Enums/BanchoLobbyTeamModes");
+const WinConditions = require("./Enums/BanchoLobbyWinConditions");
+const Mods = require("./Enums/BanchoMods");
 
 /**
- * Enum with osu! mods
- * @enum
- * @type {BanchoMod}
- * @readonly
+ * @name BanchoLobbyRegexes
+ * @description Regexes to parse BanchoBot's messages in multiplayer lobbies.
+ * @global
+ * @private
+ * @namespace BanchoLobbyRegexes
  */
-const BanchoMods = {
-	None: new BanchoMod(0, "none", "None"),
-	NoFail: new BanchoMod(1, "nf", "NoFail"),
-	Easy: new BanchoMod(2, "ez", "Easy"),
-	Hidden: new BanchoMod(8, "hd", "Hidden"),
-	HardRock: new BanchoMod(16, "hr", "HardRock"),
-	SuddenDeath: new BanchoMod(32, "sd", "SuddenDeath"),
-	DoubleTime: new BanchoMod(64, "dt", "DoubleTime"),
-	Relax: new BanchoMod(128, "rx", "Relax"),
-	HalfTime: new BanchoMod(256, "ht", "HalfTime"),
-	Nightcore: new BanchoMod(512, "nc", "Nightcore"),
-	Flashlight: new BanchoMod(1024, "fl", "Flashlight"),
-	Autoplay: new BanchoMod(2048, "at", "Auto"),
-	SpunOut: new BanchoMod(4096, "so", "SpunOut"),
-	Relax2: new BanchoMod(8192, "ap", "Relax2"),
-	Perfect: new BanchoMod(16384, "pf", "Perfect"),
-	Key4: new BanchoMod(32768, "k4", "Key4"),
-	Key5: new BanchoMod(65536, "k5", "Key5"),
-	Key6: new BanchoMod(131072, "k6", "Key6"),
-	Key7: new BanchoMod(262144, "k7", "Key7"),
-	Key8: new BanchoMod(524288, "k8", "Key8"),
-	FadeIn: new BanchoMod(1048576, "fi", "FadeIn"),
-	Random: new BanchoMod(2097152, "rn", "Random"),
-	LastMod: new BanchoMod(4194304, "lm", "LastMod"),
-	Key9: new BanchoMod(16777216, "k9", "Key9"),
-	Key10: new BanchoMod(33554432, "k10", "Key10"),
-	Key1: new BanchoMod(67108864, "k1", "Key1"),
-	Key3: new BanchoMod(134217728, "k3", "Key3"),
-	Key2: new BanchoMod(268435456, "k2", "Key2")
-};
-
 module.exports = {
-	enum: Object.freeze(BanchoMods),
-	parseShortMod: function(string) {
-		for(const modName in BanchoMods)
-			if(BanchoMods[modName].shortMod.toLowerCase() == string.toLowerCase())
-				return BanchoMods[modName];
-		return null;
-	},
-	parseShortMods: function(string) {
-		if(typeof string != "string")
-			return null;
-		const splits = string.split(", ");
-		const mods = [];
-		for(let i = 0; i &lt; splits.length; i++) {
-			const shortMod = this.parseShortMod(splits[i]);
-			if(shortMod)
-				mods.push(shortMod);
+	/**
+	 * Finds and execute the right regex on the given string
+	 * @name findRegex
+	 * @arg {string} str parsed string
+	 * @returns {object}
+	 * @memberof BanchoLobbyRegexes
+	 * @inner
+	 */
+	findRegex: function(str) {
+		for(const regexName in this.regexes) {
+			const regex = this.regexes[regexName];
+			const ret = regex(str);
+			if(ret)
+				return {
+					name: regexName,
+					ret: ret
+				};
 		}
-		return mods;
 	},
-	parseLongMod: function(string) {
-		for(const modName in BanchoMods)
-			if(BanchoMods[modName].longMod == string)
-				return BanchoMods[modName];
-		return null;
-	},
-	parseLongMods: function(string) {
-		if(typeof string != "string")
-			return null;
-		const splits = string.split(", ");
-		const mods = [];
-		for(let i = 0; i &lt; splits.length; i++) {
-			const longMod = this.parseLongMod(splits[i]);
-			if(longMod)
-				mods.push(longMod);
+	/**
+	 * All the tested regexes
+	 * @type {object}
+	 * @memberof BanchoLobbyRegexes
+	 * @inner
+	 */
+	regexes: {
+		roomName: function(str) {
+			const r = /^Room name: (.+), History: https:\/\/osu\.ppy\.sh\/mp\/(\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					name: m[1],
+					id: Number(m[2])
+				};
+			}
+		},
+		teamModeWinConditions: function(str) {
+			const r = /^Team mode: (\w+), Win condition: (\w+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					teamMode: TeamModes[m[1]],
+					winCondition: WinConditions[m[2]]
+				};
+			}
+		},
+		activeMods: function(str) {
+			const r = /^Active mods: (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					mods: Mods.parseLongMods(m[1]),
+					freemod: m[1].indexOf("Freemod") != -1
+				};
+			}
+		},
+		playersAmount: function(str) {
+			const r = /^Players: (\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					playersAmount: Number(m[1])
+				};
+			}
+		},
+		playerChangedBeatmap: function(str) {
+			const r = /^Beatmap changed to: (.+) \(https:\/\/osu\.ppy\.sh\/b\/(\d+)\)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					name: m[1],
+					id: Number(m[2])
+				};
+			}
+		},
+		playerChangedTeam: function(str) {
+			const r = /^(.+) changed to (Blue|Red)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					name: m[1],
+					team: m[2]
+				};
+			}
+		},
+		refereeChangedBeatmap: function(str) {
+			const r = /^Changed beatmap to https:\/\/osu\.ppy\.sh\/b\/(\d+) (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					id: Number(m[1]),
+					name: m[2]
+				};
+			}
+		},
+		beatmapFromSettings: function(str) {
+			const r = /^Beatmap: https:\/\/osu\.ppy\.sh\/b\/(\d+) (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					id: Number(m[1]),
+					name: m[2]
+				};
+			}
+		},
+		invalidBeatmapId: function(str) {
+			return str == "Invalid map ID provided";
+		},
+		playerChangingBeatmap: function(str) {
+			return (str == "Host is changing map...");
+		},
+		refereeChangedMods: function(str) {
+			const r = /^(Enabled (.+)|Disabled all mods), (disabled|enabled) FreeMod$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					mods: Mods.parseLongMods(m[2]),
+					freemod: m[3] == "enabled"
+				};
+			}
+		},
+		playerJoined: function(str) {
+			const r = /^(.+) joined in slot (\d+)\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1],
+					slot: Number(m[2])
+				};
+			}
+		},
+		playerMoved: function(str) {
+			const r = /^(.+) moved to slot (\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1],
+					slot: Number(m[2])
+				};
+			}
+		},
+		playerLeft: function(str) {
+			const r = /^(.+) left the game\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		playerBecameTheHost: function(str) {
+			const r = /^(.+) became the host\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		allPlayersReady: function(str) {
+			return str == "All players are ready";
+		},
+		matchStarted: function(str) {
+			return str == "The match has started!";
+		},
+		matchAborted: function(str) {
+			return str == "Aborted the match";
+		},
+		playerFinished: function(str) {
+			const r = /^(.+) finished playing \(Score: (\d+), (FAIL|PASS)ED\)\.$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1],
+					score: m[2],
+					pass: m[3] == "PASS"
+				};
+			}
+		},
+		matchFinished: function(str) {
+			return str == "The match has finished!";
+		},
+		passwordRemoved: function(str) {
+			return str == "Removed the match password";
+		},
+		passwordChanged: function(str) {
+			return str == "Changed the match password";
+		},
+		refereeAdded: function(str) {
+			const r = /^Added (.+) to the match referees$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		refereeRemoved: function(str) {
+			const r = /^Removed (.+) from the match referees$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		userNotFound: function(str) {
+			return str == "User not found";
+		},
+		userNotFoundUsername: function(str) {
+			const r = /^User not found: (.+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					username: m[1]
+				};
+			}
+		},
+		slotsLocked: function(str) {
+			return str == "Locked the match";
+		},
+		slotsUnlocked: function(str) {
+			return str == "Unlocked the match";
+		},
+		matchSize: function(str) {
+			const r = /^Changed match to size (\d+)$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					size: Number(m[1])
+				};
+			}
+		},
+		matchSettings: function(str) {
+			const r = /^Changed match settings to ((\d+) slots, )?(HeadToHead|TagCoop|TeamVs|TagTeamVs)(, (Score|Accuracy|Combo|ScoreV2))?$/;
+			if(r.test(str)) {
+				const m = r.exec(str);
+				return {
+					size: Number(m[2]),
+					teamMode: TeamModes[m[3]],
+					winCondition: WinConditions[m[5]]
+				};
+			}
+		},
+		hostCleared: function(str) {
+			return str == "Cleared match host";
 		}
-		return mods;
 	}
 };</pre>
     </article>
@@ -202,7 +385,7 @@ module.exports = {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

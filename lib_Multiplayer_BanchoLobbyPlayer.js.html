@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>bancho.js Source: lib/BanchoMultiplayerChannel.js</title>
+	<title>bancho.js Source: lib/Multiplayer/BanchoLobbyPlayer.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,32 +79,42 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: lib/BanchoMultiplayerChannel.js</h1>
+		<h1 class="page-title">Source: lib/Multiplayer/BanchoLobbyPlayer.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">const BanchoLobby = require("./Multiplayer/BanchoLobby");
-const BanchoChannel = require("./BanchoChannel");
+            class="sunlight-highlight-javascript linenums">const BanchoLobbyPlayerStates = require("./Enums/BanchoLobbyPlayerStates");
 
 /**
- * Represents a multiplayer channel on Bancho.
- * It is a classic discussion channel, with commands related to the linked lobby on Bancho.
+ * Represents a player in a lobby
+ * Don't consider the player in the lobby unless it is in the slots array
  * 
  * @prop {BanchoLobby} lobby
- * 
- * @extends BanchoChannel
- * @extends EventEmitter
+ * @prop {BanchoUser} user
+ * @prop {Symbol} state ready/not ready/no map, see BanchoLobbyPlayerState
+ * @prop {boolean} isHost
+ * @prop {String} team Blue or Red, see BanchoLobbyTeams
+ * @prop {Array&lt;BanchoMod>} mods
+ * @prop {BanchoLobbyPlayerScore} score
  */
-class BanchoMultiplayerChannel extends BanchoChannel {
-	constructor(banchojs, name) {
-		super(banchojs, name);
+class BanchoLobbyPlayer {
+	constructor(lobby, user) {
+		this.lobby = lobby;
+		this.user = user;
+		this.reset();
+	}
 
-		this.lobby = new BanchoLobby(this);
+	reset() {
+		this.state = BanchoLobbyPlayerStates["Not Ready"];
+		this.isHost = false;
+		this.team = null;
+		this.mods = [];
+		this.score = null;
 	}
 }
 
-module.exports = BanchoMultiplayerChannel;</pre>
+module.exports = BanchoLobbyPlayer;</pre>
     </article>
 </section>
 

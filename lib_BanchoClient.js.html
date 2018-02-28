@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -91,8 +91,8 @@ const BanchoUser = require("./BanchoUser");
 const BanchoChannel = require("./BanchoChannel");
 const BanchoRateLimiter = require("./BanchoRateLimiter");
 const BanchoMultiplayerChannel = require("./BanchoMultiplayerChannel");
-const ConnectStates = require("./ConnectStates");
-const IrcCommands = require("./IrcCommands");
+const ConnectStates = require("./Enums/ConnectStates");
+const IrcCommands = require("./Enums/IrcCommands");
 const Nodesu = require("nodesu");
 
 const ignoredSplits = [
@@ -113,21 +113,59 @@ const ignoredSplits = [
 class BanchoClient extends EventEmitter {
 	/**
 	 * @constructor
-	 * @param {string} username Username of the user to connect to Bancho
-	 * @param {string} password IRC Password of the user to connect to Bancho (see https://osu.ppy.sh/p/irc)
-	 * @param {string} [host="irc.ppy.sh"] Custom IRC host (for proxy-ing from a firewall for example)
-	 * @param {number} [port=6667] Custom IRC port
-	 * @param {string} [apiKey] osu! API key for API requests (see https://osu.ppy.sh/p/api)
+	 * @param {BanchoClientOptions} options
 	 */
-	constructor(username, password, host = "irc.ppy.sh", port = 6667, apiKey) {
+	constructor(optionsOrUsername = {}, password, host = "irc.ppy.sh", port = 6667, apiKey, limiterTimeSpan = 6000, limiterPrivate = 4, limiterPublic = 3) {
 		super();
+		if(optionsOrUsername != null &amp;&amp; typeof optionsOrUsername == "string" &amp;&amp; password != null &amp;&amp; typeof password == "string") {
+			process.emitWarning("You're using the deprecated way of constructing a BanchoClient object! Please refer to the documentation for the up-to-date constructor. This constructor will be removed in Release 1.0.0.");
+			this.username = optionsOrUsername;
+			this.password = password;
+			this.host = host;
+			this.port = port;
+			if(apiKey)
+				this.osuApi = new Nodesu.Client(apiKey, {
+					parseData: true
+				});
+			this.rateLimiter = new BanchoRateLimiter(limiterTimeSpan, limiterPrivate, limiterPublic);
+		}
+		else if(typeof optionsOrUsername == "object") {
+			/**
+			 * Options for a BanchoClient.
+			 * @typedef {object} BanchoClientOptions
+			 * @prop {string} username Username of the user to connect to Bancho
+			 * @prop {string} password IRC Password of the user to connect to Bancho (see https://osu.ppy.sh/p/irc)
+			 * @prop {string} [host="irc.ppy.sh"] Custom IRC host (for proxy-ing from a firewall for example)
+			 * @prop {number} [port=6667] Custom IRC port
+			 * @prop {string} [apiKey] osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
+			 * @prop {number} [limiterTimespan=6000] Span of milliseconds in you may not exceed the following limits. Default *should* be safe for normal users, recommended value for chat bot accounts is 60000.
+			 * @prop {number} [limiterPrivate=4] Amount of private messages (PMs &amp; messages in multiplayer channels) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 270 (300 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
+			 * @prop {number} [limiterPublic=3] Amount of public messages (messages that aren't private) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 54 (60 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
+			 */
+			const options = {
+				host: "irc.ppy.sh",
+				port: 6667,
+				limiterTimespan: 6000,
+				limiterPrivate: 4,
+				limiterPublic: 3
+			};
+			for(const key in optionsOrUsername)
+				if(optionsOrUsername.hasOwnProperty(key))
+					if(optionsOrUsername[key] != null)
+						options[key] = optionsOrUsername[key];
+			this.username = options.username;
+			this.password = options.password;
+			this.host = options.host;
+			this.port = options.port;
+			if(options.apiKey)
+				this.osuApi = new Nodesu.Client(options.apiKey, {
+					parseData: true
+				});
+			this.rateLimiter = new BanchoRateLimiter(options.limiterTimespan, options.limiterPrivate, options.limiterPublic);
+		}
 		this.setMaxListeners(50);
-		if(!username || !password)
+		if(!this.username || !this.password)
 			throw new Error("You gotta gimme an username and a password to connect to Bancho dumbass");
-		this.username = username;
-		this.password = password;
-		this.host = host;
-		this.port = port;
 		
 		this.client = null;
 		this.connectState = ConnectStates.Disconnected;
@@ -136,14 +174,9 @@ class BanchoClient extends EventEmitter {
 		this.connectCallback = null;
 		this.joinCallbacks = [];
 		this.partCallbacks = [];
-		if(apiKey)
-			this.osuApi = new Nodesu.Client(apiKey, {
-				parseData: true
-			});
 		this.users = {};
 		this.usersById = {};
 		this.channels = {};
-		this.rateLimiter = new BanchoRateLimiter(60000, (300-30), (60-6)); // 10% margins to protect from accuracy issues (because of bancho/network...)
 
 		// Register our own error listener so there are no uncaught exceptions
 		// for exceptions WE throw for the end-user that don't need to be caught (such as timeouts)
@@ -530,7 +563,7 @@ module.exports = BanchoClient;</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

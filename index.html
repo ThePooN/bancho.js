@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -101,21 +101,25 @@
 
     <section class="readme-section">
         <article><h1>bancho.js</h1><p><a href="https://nodei.co/npm/bancho.js/"><img src="https://nodei.co/npm/bancho.js.png?compact=true" alt="NPM"></a><br><a href="https://git.cartooncraft.fr/ThePooN/bancho.js/commits/master"><img src="https://git.cartooncraft.fr/ThePooN/bancho.js/badges/master/pipeline.svg" alt="pipeline status"></a></p>
-<h2>Current release: v0.7.1</h2><h1>Introduction</h1><p>bancho.js is designed to be the best library when it comes to interacting with bancho in real-time. It connects over its IRC interface and enables you to do anything you can do over IRC - and much more to come!</p>
-<p>It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably <a href="https://ohc.gg">OHC.gg</a>, followed by osu! French Championship and osu!SQL in the near future, and maybe your own project!</p>
+<h2>Current release: v0.8.0</h2><h1>Introduction</h1><p>bancho.js is designed to be the best library when it comes to interacting with Bancho in real-time. It connects over its IRC interface and enables you to do anything, <strong>from chatting to managing multiplayer lobbies</strong>!</p>
+<p>It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably <a href="https://ohc.gg">OHC.gg</a> and <a href="https://ofc.thepoon.fr">osu! French Championship Hiver 2018</a>, followed by osu!SQL in the near future, and maybe your own project!<br>Please let me know of your use of bancho.js! I'll gladly avertise your projects here :)</p>
+<h1>Useful Links</h1><ul>
+<li><strong>Documentation</strong>: <a href="https://bancho.js.org">https://bancho.js.org</a></li>
+<li>NPM package: <a href="https://npmjs.com/package/bancho.js">https://npmjs.com/package/bancho.js</a></li>
+<li>Git repository: <a href="https://git.cartooncraft.fr/ThePooN/bancho.js">https://git.cartooncraft.fr/ThePooN/bancho.js</a></li>
+<li>GitHub mirror: <a href="https://github.com/ThePooN/bancho.js">https://github.com/ThePooN/bancho.js</a></li>
+<li>Discord server (support/discussion): <a href="https://discord.gg/ThePooN">https://discord.gg/ThePooN</a></li>
+</ul>
 <h1>Disclaimer</h1><p>The osu! staff <em>tolerates</em> running bots on your own osu! account, however you aren't allowed to create a dedicated osu! account to your bot without acknowledging the staff. <strong>Any attempt to do so will be considered multi-accounting, which is against the osu! Terms of Use.</strong><br>I highly recommended you to get in touch with peppy when hosting a public bot. If your bot is recognized by the staff, you'll get higher rate limits dedicated to chat bots, which are the rate limits this library uses.</p>
 <h1>Getting Started</h1><p>This will print all your incoming PMs to the console:</p>
 <pre class="prettyprint source lang-javascript"><code>const client = new Banchojs.BanchoClient(config[&quot;irc_user&quot;], config[&quot;irc_pass&quot;], config[&quot;irc_host&quot;], config[&quot;irc_port&quot;]);
 client.connect().then(() => {
     console.log(&quot;We're online! Now listening for incoming messages.&quot;);
-    client.on(&quot;PM&quot;, (message) => {
-        console.log(message.user.ircUsername+&quot;: &quot;+message.message);
-    });
+    client.on(&quot;PM&quot;, (message) => console.log(message.user.ircUsername+&quot;: &quot;+message.message));
 }).catch(console.error);</code></pre><p>Output:</p>
-<pre class="prettyprint source"><code>Ghouru: notice me senpai</code></pre><p>There are much more possibilities, including firing API requests from any <code>BanchoUser</code> object. Learn more about all the features in the Documentation!</p>
-<h1>Documentation</h1><p>End-user documentation is now hosted on https://bancho.js.org!<br>Developers documentation can be generated using <code>npm run doc:dev</code>. See <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> for more information.</p>
-<h1>License</h1><p>It is licensed as GPL 3.0. The entire license text is available in the <a href="/LICENSE">LICENSE</a> file, however I recommend you to take a look at this <a href="https://choosealicense.com/licenses/gpl-3.0/">short summary</a> to get a better idea!</p>
-<h1>Support The Development</h1><p>I'm just a 17 years old teenager, and you may know me better as an <a href="https://osu.ppy.sh/u/ThePooN">osu! player</a> and <a href="https://twitch.tv/ThePooN02">Twitch streamer</a>. I'm also studying computer sciences at university in Reims.<br>If this library helped you or anybody you know or just appreciate the free time I spend on this project, feel free to support me by <a href="https://twitch.tv/ThePooN02/subscribe">subscribing</a> to my Twitch channel or <a href="https://streamlabs.com/ThePooN02">donating</a>!<br>Most of the time spent on this library will also be livestreamed on the same aforementioned Twitch channel.</p></article>
+<pre class="prettyprint source"><code>Ghouru: notice me senpai</code></pre><p>This library doesn't limit iself to sending messages though! It also has <strong>complete multiplayer support</strong> and firing API requests from BanchoUser objects. <strong>Learn more with in the <a href="https://github.com/ThePooN/bancho.js/tree/master/examples">provided examples</a> and <a href="https://bancho.js.org">documentation</a>!</strong></p>
+<h1>Contributing</h1><p>This library is very near completion. Thanks to everyone who supported and are now (directly or not) using the project!<br>There must still be some improvements to be done though. Feel free to hop on my <a href="https://discord.gg/ThePooN">Discord server</a> so we can figure out issues and improve the code!<br>You can financially support this project by <a href="https://twitch.tv/ThePooN02/subscribe">subscribing</a> to my Twitch channel or <a href="https://streamlabs.com/ThePooN02">donating</a>!</p>
+<h1>License</h1><p>It is licensed as GPL 3.0. The entire license text is available in the <a href="/LICENSE">LICENSE</a> file, however I recommend you to take a look at this <a href="https://choosealicense.com/licenses/gpl-3.0/">short summary</a> to get a better idea!</p></article>
     </section>
 
 
@@ -161,7 +165,7 @@ client.connect().then(() => {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

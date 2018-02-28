@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -87,7 +87,8 @@
             class="sunlight-highlight-javascript linenums">const EventEmitter = require("events").EventEmitter;
 const Nodesu = require("nodesu");
 const OutgoingBanchoMessage = require("./OutgoingBanchoMessage");
-const BanchoWhoisReturn = require("./BanchoWhoisReturn");
+const BanchoWhoisReturn = require("./IrcCommands/whois/BanchoWhoisReturn");
+const BanchoBotStatsCommand = require("./StatsCommand/BanchoBotStatsCommand");
 
 /**
  * Bancho User
@@ -129,6 +130,8 @@ class BanchoUser extends EventEmitter {
 		this.whoisEndCallback = null;
 		this.whoisUserNotFoundCallback = null;
 		this.whoisPromise = null;
+		this.wherePromise = null;
+		this.statsPromise = null;
 		this.listenersInitialized = false;
 	}
 
@@ -208,8 +211,10 @@ class BanchoUser extends EventEmitter {
 	}
 
 	/**
-	 * Fires a WHOIS request to the server about this user.
+	 * Fires an IRC WHOIS request to the server about this user. Only works on online users.
+	 * Throws if the user can't be found or is offline.
 	 * 
+	 * @async
 	 * @return {Promise&lt;BanchoWhoisReturn>}
 	 */
 	whois() {
@@ -239,6 +244,60 @@ class BanchoUser extends EventEmitter {
 				this.banchojs.send("WHOIS "+this.ircUsername);
 			});
 		return this.whoisPromise;
+	}
+
+	/**
+	 * Fires a !where command to BanchoBot about this user. Only works on online users.
+	 * Throws if the user can't be found or is offline.
+	 * 
+	 * @async
+	 * @return {Promise&lt;string>}
+	 */
+	where() {
+		if(!this.wherePromise)
+			this.wherePromise = new Promise((resolve, reject) => {
+				const answerRegex = /(.+) is in (.+)/;
+				const BanchoBot = this.banchojs.getUser("BanchoBot");
+				const afterAnswer = () => {
+					BanchoBot.removeListener("message", listener);
+					this.wherePromise = null;
+				};
+				const listener = (message) => {
+					if(message.message == "The user is currently not online.") {
+						reject(new Error("User is offline"));
+						return afterAnswer();
+					}
+					const m = answerRegex.exec(message.message);
+					if(m &amp;&amp; m[1] == this.ircUsername) {
+						resolve(m[2]);
+						afterAnswer();
+					}
+				};
+				BanchoBot.on("message", listener);
+				BanchoBot.sendMessage("!where "+this.ircUsername);
+			});
+		return this.wherePromise;
+	}
+
+	/**
+	 * Fires a !stats command to BanchoBot about this user. Works on online and offline users.
+	 * Will update the username, id, rankedScore, ppRank and playcount properties of this user.
+	 * Status, levels and accuracy are stored in the returned object, as they are inaccurate data (missing decimals).
+	 * It is recommended to get levels and accuracy by polling the osu! API instead.
+	 * Throws if the user can't be found.
+	 * 
+	 * @async
+	 * @return {Promise&lt;BanchoBotStatsReturn>}
+	 */
+	stats() {
+		if(!this.statsPromise)
+			this.statsPromise = new Promise(async (resolve, reject) => {
+				const statsCommand = new BanchoBotStatsCommand(this);
+				statsCommand.run()
+					.then(resolve, reject)
+					.then(() => this.statsPromise = null);
+			});
+		return this.statsPromise;
 	}
 
 	get id() {
@@ -296,7 +355,7 @@ module.exports = BanchoUser;</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -864,7 +864,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
-				 <a href="lib_BanchoUser.js.html#sunlight-1-line-31">line 31</a>
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-32">line 32</a>
 			</li>
 		</ul>
 	</dd>
@@ -981,7 +981,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
-				 <a href="lib_BanchoUser.js.html#sunlight-1-line-71">line 71</a>
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-74">line 74</a>
 			</li>
 		</ul>
 	</dd>
@@ -1108,7 +1108,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
-				 <a href="lib_BanchoUser.js.html#sunlight-1-line-109">line 109</a>
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-112">line 112</a>
 			</li>
 		</ul>
 	</dd>
@@ -1266,7 +1266,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
-				 <a href="lib_BanchoUser.js.html#sunlight-1-line-120">line 120</a>
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-123">line 123</a>
 			</li>
 		</ul>
 	</dd>
@@ -1351,7 +1351,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="whois"><span class="type-signature"></span>whois()</h4>
+    <h4 class="name" id="stats"><span class="type-signature">&lt;async> </span>stats()</h4>
     
     
 </dt>
@@ -1359,7 +1359,7 @@
 
     
     <div class="description">
-        <p>Fires a WHOIS request to the server about this user.</p>
+        <p>Fires a !stats command to BanchoBot about this user. Works on online and offline users.<br>Will update the username, id, rankedScore, ppRank and playcount properties of this user.<br>Status, levels and accuracy are stored in the returned object, as they are inaccurate data (missing decimals).<br>It is recommended to get levels and accuracy by polling the osu! API instead.<br>Throws if the user can't be found.</p>
     </div>
     
 
@@ -1406,7 +1406,223 @@
 		<ul class="dummy">
 			<li>
 				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
-				 <a href="lib_BanchoUser.js.html#sunlight-1-line-129">line 129</a>
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-206">line 206</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;<a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a>></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="where"><span class="type-signature">&lt;async> </span>where()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Fires a !where command to BanchoBot about this user. Only works on online users.<br>Throws if the user can't be found or is offline.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-170">line 170</a>
+			</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;string></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="whois"><span class="type-signature">&lt;async> </span>whois()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Fires an IRC WHOIS request to the server about this user. Only works on online users.<br>Throws if the user can't be found or is offline.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+	<dt class="tag-source method-doc-label method-doc-details-label">Source:</dt>
+	<dd class="tag-source">
+		<ul class="dummy">
+			<li>
+				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-134">line 134</a>
 			</li>
 		</ul>
 	</dd>
@@ -1528,7 +1744,7 @@
 		<ul class="dummy">
 			<li>
 				<a href="lib_BanchoUser.js.html">lib/BanchoUser.js</a>,
-				 <a href="lib_BanchoUser.js.html#sunlight-1-line-53">line 53</a>
+				 <a href="lib_BanchoUser.js.html#sunlight-1-line-56">line 56</a>
 			</li>
 		</ul>
 	</dd>
@@ -1603,7 +1819,7 @@
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

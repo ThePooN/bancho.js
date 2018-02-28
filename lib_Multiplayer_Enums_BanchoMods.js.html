@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>bancho.js Source: lib/BanchoLobbyPlayerStates.js</title>
+	<title>bancho.js Source: lib/Multiplayer/Enums/BanchoMods.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -79,27 +79,89 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: lib/BanchoLobbyPlayerStates.js</h1>
+		<h1 class="page-title">Source: lib/Multiplayer/Enums/BanchoMods.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">/**
- * Contains the different player states for players in lobbies: Ready, Not Ready, No Map.
- * Alias for NotReady: "Not Ready"
- * Alias for NoMap: "No Map"
- * @readonly
- * @enum {Symbol}
- */
-const BanchoLobbyPlayerStates = {
-	Ready: Symbol("Ready"),
-	NotReady: Symbol("Not Ready"),
-	NoMap: Symbol("No Map"),
-};
-BanchoLobbyPlayerStates["Not Ready"] = BanchoLobbyPlayerStates.NotReady;
-BanchoLobbyPlayerStates["No Map"] = BanchoLobbyPlayerStates.NoMap;
+            class="sunlight-highlight-javascript linenums">const BanchoMod = require("../BanchoMod");
 
-module.exports = Object.freeze(BanchoLobbyPlayerStates);</pre>
+/**
+ * Enum with osu! mods
+ * @enum
+ * @type {BanchoMod}
+ * @readonly
+ */
+const BanchoMods = {
+	None: new BanchoMod(0, "none", "None"),
+	NoFail: new BanchoMod(1, "nf", "NoFail"),
+	Easy: new BanchoMod(2, "ez", "Easy"),
+	Hidden: new BanchoMod(8, "hd", "Hidden"),
+	HardRock: new BanchoMod(16, "hr", "HardRock"),
+	SuddenDeath: new BanchoMod(32, "sd", "SuddenDeath"),
+	DoubleTime: new BanchoMod(64, "dt", "DoubleTime"),
+	Relax: new BanchoMod(128, "rx", "Relax"),
+	HalfTime: new BanchoMod(256, "ht", "HalfTime"),
+	Nightcore: new BanchoMod(512, "nc", "Nightcore"),
+	Flashlight: new BanchoMod(1024, "fl", "Flashlight"),
+	Autoplay: new BanchoMod(2048, "at", "Auto"),
+	SpunOut: new BanchoMod(4096, "so", "SpunOut"),
+	Relax2: new BanchoMod(8192, "ap", "Relax2"),
+	Perfect: new BanchoMod(16384, "pf", "Perfect"),
+	Key4: new BanchoMod(32768, "k4", "Key4"),
+	Key5: new BanchoMod(65536, "k5", "Key5"),
+	Key6: new BanchoMod(131072, "k6", "Key6"),
+	Key7: new BanchoMod(262144, "k7", "Key7"),
+	Key8: new BanchoMod(524288, "k8", "Key8"),
+	FadeIn: new BanchoMod(1048576, "fi", "FadeIn"),
+	Random: new BanchoMod(2097152, "rn", "Random"),
+	LastMod: new BanchoMod(4194304, "lm", "LastMod"),
+	Key9: new BanchoMod(16777216, "k9", "Key9"),
+	Key10: new BanchoMod(33554432, "k10", "Key10"),
+	Key1: new BanchoMod(67108864, "k1", "Key1"),
+	Key3: new BanchoMod(134217728, "k3", "Key3"),
+	Key2: new BanchoMod(268435456, "k2", "Key2")
+};
+
+module.exports = {
+	enum: Object.freeze(BanchoMods),
+	parseShortMod: function(string) {
+		for(const modName in BanchoMods)
+			if(BanchoMods[modName].shortMod.toLowerCase() == string.toLowerCase())
+				return BanchoMods[modName];
+		return null;
+	},
+	parseShortMods: function(string) {
+		if(typeof string != "string")
+			return null;
+		const splits = string.split(", ");
+		const mods = [];
+		for(let i = 0; i &lt; splits.length; i++) {
+			const shortMod = this.parseShortMod(splits[i]);
+			if(shortMod)
+				mods.push(shortMod);
+		}
+		return mods;
+	},
+	parseLongMod: function(string) {
+		for(const modName in BanchoMods)
+			if(BanchoMods[modName].longMod == string)
+				return BanchoMods[modName];
+		return null;
+	},
+	parseLongMods: function(string) {
+		if(typeof string != "string")
+			return null;
+		const splits = string.split(", ");
+		const mods = [];
+		for(let i = 0; i &lt; splits.length; i++) {
+			const longMod = this.parseLongMod(splits[i]);
+			if(longMod)
+				mods.push(longMod);
+		}
+		return mods;
+	}
+};</pre>
     </article>
 </section>
 
@@ -140,7 +202,7 @@ module.exports = Object.freeze(BanchoLobbyPlayerStates);</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

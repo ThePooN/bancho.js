@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -98,11 +98,93 @@ class Banchojs {
 	constructor() {
 		this.Client = this.BanchoClient = require("./lib/BanchoClient");
 		this.OutgoingBanchoMessage = require("./lib/OutgoingBanchoMessage");
-		this.ConnectStates = require("./lib/ConnectStates");
-		this.BanchoLobbyPlayerStates = require("./lib/BanchoLobbyPlayerStates");
-		this.BanchoLobbyTeamModes = require("./lib/BanchoLobbyTeamModes");
-		this.BanchoLobbyTeams = require("./lib/BanchoLobbyTeams");
-		this.BanchoLobbyWinConditions = require("./lib/BanchoLobbyWinConditions");
+		this.ConnectStates = require("./lib/Enums/ConnectStates");
+		this.BanchoLobbyPlayerStates = require("./lib/Multiplayer/Enums/BanchoLobbyPlayerStates");
+		this.BanchoLobbyTeamModes = require("./lib/Multiplayer/Enums/BanchoLobbyTeamModes");
+		this.BanchoLobbyTeams = require("./lib/Multiplayer/Enums/BanchoLobbyTeams");
+		this.BanchoLobbyWinConditions = require("./lib/Multiplayer/Enums/BanchoLobbyWinConditions");
+		this.BanchoMods = require("./lib/Multiplayer/Enums/BanchoMods");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoMod.
+	 * 
+	 * @param {any} mod 
+	 */
+	isBanchoMod(mod) {
+		return mod instanceof require("./lib/Multiplayer/BanchoMod");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoUser.
+	 * 
+	 * @param {any} user 
+	 */
+	isBanchoUser(user) {
+		return user instanceof require("./lib/BanchoUser");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoChannel.
+	 * 
+	 * @param {any} channel 
+	 */
+	isBanchoChannel(channel) {
+		return channel instanceof require("./lib/BanchoChannel");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoMultiplayerChannel.
+	 * 
+	 * @param {any} channel 
+	 */
+	isBanchoMultiplayerChannel(channel) {
+		return channel instanceof require("./lib/BanchoMultiplayerChannel");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoLobby.
+	 * 
+	 * @param {any} lobby 
+	 */
+	isBanchoLobby(lobby) {
+		return lobby instanceof require("./lib/Multiplayer/BanchoLobby");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoChannelMember.
+	 * 
+	 * @param {any} member 
+	 */
+	isBanchoChannelMember(member) {
+		return member instanceof require("./lib/Multiplayer/BanchoChannelMember");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of BanchoMessage.
+	 * 
+	 * @param {any} message 
+	 */
+	isBanchoMessage(message) {
+		return message instanceof require("./lib/Multiplayer/BanchoMessage");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of ChannelMessage.
+	 * 
+	 * @param {any} message 
+	 */
+	isChannelMessage(message) {
+		return message instanceof require("./lib/Multiplayer/ChannelMessage");
+	}
+
+	/**
+	 * Compares the provided object and return true if the object is an instance of PrivateMessage.
+	 * 
+	 * @param {any} message 
+	 */
+	isPrivateMessage(message) {
+		return message instanceof require("./lib/Multiplayer/PrivateMessage");
 	}
 }
 
@@ -147,7 +229,7 @@ module.exports = new Banchojs();</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>bancho.js Source: lib/IrcCommands.js</title>
+	<title>bancho.js Source: lib/Multiplayer/BanchoMod.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -79,60 +79,27 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: lib/IrcCommands.js</h1>
+		<h1 class="page-title">Source: lib/Multiplayer/BanchoMod.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">const WelcomeCommand = require("./IrcCommands/WelcomeCommand");
-const BadAuthCommand = require("./IrcCommands/BadAuthCommand");
-const JoinCommand = require("./IrcCommands/JoinCommand");
-const PartCommand = require("./IrcCommands/PartCommand");
-const MessageCommand = require("./IrcCommands/MessageCommand");
-const UserNotFoundCommand = require("./IrcCommands/UserNotFoundCommand");
-const ChannelNotFoundCommand = require("./IrcCommands/ChannelNotFoundCommand");
-const ChannelTopicCommand = require("./IrcCommands/ChannelTopicCommand");
-const NamesCommand = require("./IrcCommands/NamesCommand");
-const ModeCommand = require("./IrcCommands/ModeCommand");
-const WhoisChannelsCommand = require("./IrcCommands/whois/WhoisChannelsCommand.js");
-const WhoisEndCommand = require("./IrcCommands/whois/WhoisEndCommand.js");
-const WhoisUserCommand = require("./IrcCommands/whois/WhoisUserCommand.js");
-
-/**
- * Contains all the active IRC incoming commands
- * @readonly
- * @enum {IrcCommand}
- * @private
+            class="sunlight-highlight-javascript linenums">/**
+ * Represents an osu! mod with properties to parse/send them to Bancho
+ * 
+ * @prop {number} enumValue The value as it is stored by osu! servers and returned by the osu! API
+ * @prop {string} shortMod Mod usually in a 2 letters format, used by !mp mods
+ * @prop {string} longMod Mod in its full name, without spaces. Used by Bancho when printing mods.
  */
-const IrcCommands = {
-	/** @type {WelcomeCommand} */
-	"001": new WelcomeCommand(),
-	/** @type {WhoisUserCommand} */
-	"311": new WhoisUserCommand(),
-	/** @type {WhoisChannelsCommand} */
-	"319": new WhoisChannelsCommand(),
-	/** @type {WhoisEndCommand} */
-	"318": new WhoisEndCommand(),
-	/** @type {ChannelTopicCommand} */
-	"332": new ChannelTopicCommand(),
-	/** @type {NamesCommand} */
-	"353": new NamesCommand(),
-	/** @type {UserNotFoundCommand} */
-	"401": new UserNotFoundCommand(),
-	/** @type {ChannelNotFoundCommand} */
-	"403": new ChannelNotFoundCommand(),
-	/** @type {BadAuthCommand} */
-	"464": new BadAuthCommand(),
-	/** @type {JoinCommand} */
-	"JOIN": new JoinCommand(),
-	/** @type {PartCommand} */
-	"PART": new PartCommand(),
-	/** @type {ModeCommand} */
-	"MODE": new ModeCommand(),
-	/** @type {MessageCommand} */
-	"PRIVMSG": new MessageCommand()
-};
-module.exports = Object.freeze(IrcCommands);</pre>
+class BanchoMod {
+	constructor(enumValue, shortMod, longMod) {
+		this.enumValue = enumValue;
+		this.shortMod = shortMod;
+		this.longMod = longMod;
+	}
+}
+
+module.exports = BanchoMod;</pre>
     </article>
 </section>
 
@@ -173,7 +140,7 @@ module.exports = Object.freeze(IrcCommands);</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Mon Feb 26th 2018
+		on Wed Feb 28th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>

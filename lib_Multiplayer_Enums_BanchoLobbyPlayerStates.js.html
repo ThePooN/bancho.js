@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>bancho.js Source: lib/BanchoMultiplayerChannel.js</title>
+	<title>bancho.js Source: lib/Multiplayer/Enums/BanchoLobbyPlayerStates.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,32 +79,27 @@
 		<div id="main">
 			
 
-		<h1 class="page-title">Source: lib/BanchoMultiplayerChannel.js</h1>
+		<h1 class="page-title">Source: lib/Multiplayer/Enums/BanchoLobbyPlayerStates.js</h1>
     
 <section>
     <article>
         <pre
-            class="sunlight-highlight-javascript linenums">const BanchoLobby = require("./Multiplayer/BanchoLobby");
-const BanchoChannel = require("./BanchoChannel");
-
-/**
- * Represents a multiplayer channel on Bancho.
- * It is a classic discussion channel, with commands related to the linked lobby on Bancho.
- * 
- * @prop {BanchoLobby} lobby
- * 
- * @extends BanchoChannel
- * @extends EventEmitter
+            class="sunlight-highlight-javascript linenums">/**
+ * Contains the different player states for players in lobbies: Ready, Not Ready, No Map.
+ * Alias for NotReady: "Not Ready"
+ * Alias for NoMap: "No Map"
+ * @readonly
+ * @enum {Symbol}
  */
-class BanchoMultiplayerChannel extends BanchoChannel {
-	constructor(banchojs, name) {
-		super(banchojs, name);
+const BanchoLobbyPlayerStates = {
+	Ready: Symbol("Ready"),
+	NotReady: Symbol("Not Ready"),
+	NoMap: Symbol("No Map"),
+};
+BanchoLobbyPlayerStates["Not Ready"] = BanchoLobbyPlayerStates.NotReady;
+BanchoLobbyPlayerStates["No Map"] = BanchoLobbyPlayerStates.NoMap;
 
-		this.lobby = new BanchoLobby(this);
-	}
-}
-
-module.exports = BanchoMultiplayerChannel;</pre>
+module.exports = Object.freeze(BanchoLobbyPlayerStates);</pre>
     </article>
 </section>
 
