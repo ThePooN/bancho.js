@@ -112,7 +112,7 @@
 </ul>
 <h1>Disclaimer</h1><p>The osu! staff <em>tolerates</em> running bots on your own osu! account, however you aren't allowed to create a dedicated osu! account to your bot without acknowledging the staff. <strong>Any attempt to do so will be considered multi-accounting, which is against the osu! Terms of Use.</strong><br>I highly recommended you to get in touch with peppy when hosting a public bot. If your bot is recognized by the staff, you'll get higher rate limits dedicated to chat bots, which are the rate limits this library uses.</p>
 <h1>Getting Started</h1><p>This will print all your incoming PMs to the console:</p>
-<pre class="prettyprint source lang-javascript"><code>const client = new Banchojs.BanchoClient(config[&quot;irc_user&quot;], config[&quot;irc_pass&quot;], config[&quot;irc_host&quot;], config[&quot;irc_port&quot;]);
+<pre class="prettyprint source lang-javascript"><code>const client = new Banchojs.BanchoClient({username: &quot;ThePooN&quot;, password:&quot;verysecret&quot;});
 client.connect().then(() => {
     console.log(&quot;We're online! Now listening for incoming messages.&quot;);
     client.on(&quot;PM&quot;, (message) => console.log(message.user.ircUsername+&quot;: &quot;+message.message));
