@@ -9,7 +9,7 @@ class StatsUnit extends TestUnit {
 
 	run() {
 		return new Promise((resolve, reject) => 
-			this.client.getUser(this.config["irc_user"]).stats().then(() => resolve(this.fulFillGoal(TestGoals.Stats)), reject)
+			this.client.getSelf().stats().then(() => resolve(this.fulFillGoal(TestGoals.Stats)), reject)
 		);
 	}
 }

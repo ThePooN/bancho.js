@@ -1,8 +1,11 @@
 {
-	"irc_host": "irc.ppy.sh",
-	"irc_port": 6667,
-	"irc_user": "",
-	"irc_pass": "",
-	"api_key": "",
-	"user_id": ""
+	"host": "irc.ppy.sh",
+	"port": 6667,
+	"username": "",
+	"password": "",
+	"apiKey": "",
+	"userId": 0,
+	"limiterTimespan": 6000,
+	"limiterPrivate": 4,
+	"limiterPublic": 3
 }

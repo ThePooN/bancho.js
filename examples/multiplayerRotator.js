@@ -1,6 +1,5 @@
-const config = require("../config.json");
 const Banchojs = require(".."); // Replace .. by bancho.js when coding outside of the library
-const client = new Banchojs.BanchoClient(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"], config["api_key"]);
+const client = new Banchojs.BanchoClient(require("../config.json"));
 
 const beatmaps = [75, 1262832, 714001, 1378285, 1385398, 1373950];
 let currentBeatmapIndex = 0;

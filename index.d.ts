@@ -3,15 +3,7 @@ declare module "bancho.js" {
 	import * as nodesu from "nodesu";
 
 	export class BanchoClient extends EventEmitter {
-		
-		/**
-		 * @param username Username of the user to connect to Bancho
-		 * @param password IRC Password of the user to connect to Bancho (see https://osu.ppy.sh/p/irc)
-		 * @param host Custom IRC host (for proxy-ing from a firewall for example)
-		 * @param port Custom IRC port
-		 * @param apiKey osu! API key for API requests (see https://osu.ppy.sh/p/api)
-		 */
-		constructor(username: string, password: string, host?: string, port?: number, apiKey?: string)
+		constructor(options: BanchoClientOptions)
 	
 		/**
 		 * Populated with a Nodesu client, if api key is passed to the constructor
@@ -632,6 +624,44 @@ declare module "bancho.js" {
 	 */
 	class PrivateMessage extends BanchoMessage {
 
+	}
+
+	/**
+	 * Options for a BanchoClient.
+	 */
+	type BanchoClientOptions = {
+		/**
+		 * Username of the user to connect to Bancho
+		 */
+		username: string,
+		/**
+		 * IRC Password of the user to connect to Bancho (see https://osu.ppy.sh/p/irc)
+		 */
+		password: string,
+		/**
+		 * Custom IRC host (for proxy-ing from a firewall for example)
+		 */
+		[host="irc.ppy.sh"]: string,
+		/**
+		 * Custom IRC port
+		 */
+		[port=6667]: number,
+		/**
+		 * osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
+		 */
+		[apiKey]: string,
+		/**
+		 * Span of milliseconds in you may not exceed the following limits. Default *should* be safe for normal users, recommended value for chat bot accounts is 60000.
+		 */
+		[limiterTimespan=6000]: number,
+		/**
+		 * Amount of private messages (PMs & messages in multiplayer channels) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 270 (300 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
+		 */
+		[limiterPrivate=4]: number,
+		/**
+		 * Amount of public messages (messages that aren't private) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 54 (60 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
+		 */
+		[limiterPublic=3]: number
 	}
 
 	type BanchoLobbyPlayerStatesTypes = {

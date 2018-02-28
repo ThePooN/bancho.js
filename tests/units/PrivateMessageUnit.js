@@ -28,7 +28,7 @@ class PrivateMessageUnit extends TestUnit {
 					resolveIfDone();
 				}
 			});
-			this.client.getUser(this.config["irc_user"]).sendMessage(message);
+			this.client.getSelf().sendMessage(message);
 			setTimeout(() => reject(new Error("Didn't receive message after timeout!")), 10000);
 		});
 	}

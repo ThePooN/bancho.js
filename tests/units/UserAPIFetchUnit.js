@@ -26,7 +26,7 @@ class UserAPIFetchUnit extends TestUnit {
 					}
 				}
 
-				if(user.id != config.user_id) {
+				if(user.id != config["userId"]) {
 					returned = true;
 					reject(new Error("User id doesn't match!"));
 					return;

@@ -12,7 +12,7 @@ class MultiplayerLobbiesUnit extends TestUnit {
 
 	async run() {
 		const roomName = Math.random().toString(36).substring(8);
-		setTimeout(() => {
+		const timeout = setTimeout(() => {
 			throw new Error("Multiplayer tests haven't completed after 25 seconds!");
 		}, 25000);
 
@@ -44,6 +44,7 @@ class MultiplayerLobbiesUnit extends TestUnit {
 		this.fulFillGoal(TestGoals.MultiplayerLobbyAbortMatch);
 		await channel.lobby.closeLobby();
 		this.fulFillGoal(TestGoals.MultiplayerLobbyCloseLobby);
+		clearTimeout(timeout);
 	}
 }
 
