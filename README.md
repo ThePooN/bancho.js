@@ -28,7 +28,7 @@ I highly recommended you to get in touch with peppy when hosting a public bot. I
 # Getting Started
 This will print all your incoming PMs to the console:
 ```javascript
-const client = new Banchojs.BanchoClient(config["irc_user"], config["irc_pass"], config["irc_host"], config["irc_port"]);
+const client = new Banchojs.BanchoClient({username: "ThePooN", password:"verysecret"});
 client.connect().then(() => {
 	console.log("We're online! Now listening for incoming messages.");
 	client.on("PM", (message) => console.log(message.user.ircUsername+": "+message.message));
