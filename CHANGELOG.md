@@ -1,5 +1,15 @@
 # Pre-release
 
+## Version 0.8
+
+- Library folders restructure (add Enums, Multiplayer and Multiplayer/Enums folder)
+- Main class: export BanchoMods, add "is" methods in main class (isBanchoMod, isBanchoUser...)
+- Update npm dependencies
+- BanchoUser: add where() and stats() methods
+- README/Contributing guide overhaul
+- BanchoClient: constructor overhaul, now only takes a single object parameter with custom rate limits.  
+  See documentation or config.json.example
+
 ## Version 0.7
 
 ### Version 0.7.1
