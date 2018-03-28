@@ -24,7 +24,7 @@ Please let me know of your use of bancho.js! I'll gladly avertise your projects 
 
 The osu! staff *tolerates* running bots on your own osu! account, however you aren't allowed to create a dedicated osu! account to your bot without acknowledging the staff. **Any attempt to do so will be considered multi-accounting, which is against the osu! Terms of Use.**  
 I highly recommended you to get in touch with peppy when hosting a public bot. If your bot is recognized by the staff, you'll get higher (and known!) rate limits dedicated to chat bots.  
-Normal accounts have undisclosed rate limits. This library, by default, use limits that are somewhat tested on user accounts but there's no guarantee provided. The test suite should always run fine though.
+Normal accounts have undisclosed rate limits. This library, by default, uses limits that are somewhat tested on user accounts but there's no guarantee provided. The test suite should always run fine though.
 
 # Getting Started
 
@@ -40,7 +40,7 @@ Output:
 ```
 Ghouru: notice me senpai
 ```
-This library doesn't limit iself to sending messages though! It also has **complete multiplayer support** and the ability of firing API requests from BanchoUser objects, and much more! **Learn more with the [provided examples](https://github.com/ThePooN/bancho.js/tree/master/examples) and [documentation](https://bancho.js.org)!**
+This library doesn't limit itself to sending messages though! It also has **complete multiplayer support** and the ability of firing API requests from BanchoUser objects, and much more! **Learn more with the [provided examples](https://github.com/ThePooN/bancho.js/tree/master/examples) and [documentation](https://bancho.js.org)!**
 
 # Contributing
 
