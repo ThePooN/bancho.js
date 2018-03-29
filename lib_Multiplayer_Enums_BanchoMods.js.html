@@ -33,7 +33,7 @@
 			<li class="dropdown">
 				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
+					<li><a href="BanchoBotStatsReturn.html">BanchoBotStatsReturn</a></li><li><a href="BanchoChannel.html">BanchoChannel</a></li><li><a href="BanchoChannelMember.html">BanchoChannelMember</a></li><li><a href="BanchoChannelMemberMode.html">BanchoChannelMemberMode</a></li><li><a href="BanchoClient.html">BanchoClient</a></li><li><a href="Banchojs.html">Banchojs</a></li><li><a href="BanchoLobby.html">BanchoLobby</a></li><li><a href="BanchoLobbyPlayer.html">BanchoLobbyPlayer</a></li><li><a href="BanchoLobbyPlayerScore.html">BanchoLobbyPlayerScore</a></li><li><a href="BanchoMessage.html">BanchoMessage</a></li><li><a href="BanchoMod.html">BanchoMod</a></li><li><a href="BanchoMods.html">BanchoMods</a></li><li><a href="BanchoMultiplayerChannel.html">BanchoMultiplayerChannel</a></li><li><a href="BanchoUser.html">BanchoUser</a></li><li><a href="BanchoWhoisReturn.html">BanchoWhoisReturn</a></li><li><a href="ChannelMessage.html">ChannelMessage</a></li><li><a href="OutgoingBanchoMessage.html">OutgoingBanchoMessage</a></li><li><a href="PrivateMessage.html">PrivateMessage</a></li>
 				</ul>
 			</li>
 			
@@ -47,7 +47,7 @@
 			<li class="dropdown">
 				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
 				<ul class="dropdown-menu ">
-					<li><a href="global.html#BanchoLobbyPlayerStates">BanchoLobbyPlayerStates</a></li><li><a href="global.html#BanchoLobbyTeamModes">BanchoLobbyTeamModes</a></li><li><a href="global.html#BanchoLobbyTeams">BanchoLobbyTeams</a></li><li><a href="global.html#BanchoLobbyWinConditions">BanchoLobbyWinConditions</a></li><li><a href="global.html#BanchoMods">BanchoMods</a></li><li><a href="global.html#ConnectStates">ConnectStates</a></li>
+					<li><a href="global.html#BanchoLobbyPlayerStates">BanchoLobbyPlayerStates</a></li><li><a href="global.html#BanchoLobbyTeamModes">BanchoLobbyTeamModes</a></li><li><a href="global.html#BanchoLobbyTeams">BanchoLobbyTeams</a></li><li><a href="global.html#BanchoLobbyWinConditions">BanchoLobbyWinConditions</a></li><li><a href="global.html#ConnectStates">ConnectStates</a></li>
 				</ul>
 			</li>
 			
@@ -86,13 +86,7 @@
         <pre
             class="sunlight-highlight-javascript linenums">const BanchoMod = require("../BanchoMod");
 
-/**
- * Enum with osu! mods
- * @enum
- * @type {BanchoMod}
- * @readonly
- */
-const BanchoMods = {
+const Enum = Object.freeze({
 	None: new BanchoMod(0, "none", "None"),
 	NoFail: new BanchoMod(1, "nf", "NoFail"),
 	Easy: new BanchoMod(2, "ez", "Easy"),
@@ -121,47 +115,181 @@ const BanchoMods = {
 	Key1: new BanchoMod(67108864, "k1", "Key1"),
 	Key3: new BanchoMod(134217728, "k3", "Key3"),
 	Key2: new BanchoMod(268435456, "k2", "Key2")
-};
+});
 
-module.exports = {
-	enum: Object.freeze(BanchoMods),
-	parseShortMod: function(string) {
-		for(const modName in BanchoMods)
-			if(BanchoMods[modName].shortMod.toLowerCase() == string.toLowerCase())
-				return BanchoMods[modName];
+/**
+ * Static class with a property for each mods and methods to manipulate them.
+ * 
+ * @class BanchoMods
+ * @prop {BanchoMod} None
+ * @prop {BanchoMod} NoFail
+ * @prop {BanchoMod} Easy
+ * @prop {BanchoMod} Hidden
+ * @prop {BanchoMod} HardRock
+ * @prop {BanchoMod} SuddenDeath
+ * @prop {BanchoMod} DoubleTime
+ * @prop {BanchoMod} Relax
+ * @prop {BanchoMod} HalfTime
+ * @prop {BanchoMod} Nightcore
+ * @prop {BanchoMod} Flashlight
+ * @prop {BanchoMod} Autoplay
+ * @prop {BanchoMod} SpunOut
+ * @prop {BanchoMod} Relax2
+ * @prop {BanchoMod} Perfect
+ * @prop {BanchoMod} Key4
+ * @prop {BanchoMod} Key5
+ * @prop {BanchoMod} Key6
+ * @prop {BanchoMod} Key7
+ * @prop {BanchoMod} Key8
+ * @prop {BanchoMod} FadeIn
+ * @prop {BanchoMod} Random
+ * @prop {BanchoMod} LastMod
+ * @prop {BanchoMod} Key9
+ * @prop {BanchoMod} Key10
+ * @prop {BanchoMod} Key1
+ * @prop {BanchoMod} Key3
+ * @prop {BanchoMod} Key2
+ */
+class BanchoMods {
+	constructor() {
+		for(const key in Enum)
+			if(Enum.hasOwnProperty(key))
+				this[key] = Enum[key];
+		this.enum = Enum;
+	}
+
+	/**
+	 * Parse mods in their bit flags form and returns them in an array of BanchoMods.
+	 * 
+	 * @param {number} bits Mods combination in bit flags form
+	 * @param {boolean} [returnNone=true] Returns [BanchoMods.None] if bits is equal to 0
+	 * @returns {BanchoMods[]}
+	 */
+	parseBitFlags(bits, returnNone = true) {
+		if(bits == 0)
+			if(returnNone)
+				return [Enum.None];
+			else
+				return [];
+
+		const mods = [];
+		for(const modName in Enum)
+			if(Enum.hasOwnProperty(modName)) {
+				const mod = Enum[modName];
+				if(mod != Enum.None &amp;&amp; (bits &amp; mod.enumValue) == mod.enumValue)
+					mods.push(mod);
+			}
+
+		return mods;
+	}
+
+	/**
+	 * Returns a bits flag integer representing the passed mods.
+	 * 
+	 * @param {BanchoMods[]} mods
+	 * @returns {number}
+	 */
+	returnBitFlags(mods) {
+		let ret = 0;
+		for(const mod of mods)
+			ret += mod.enumValue;
+		return ret;
+	}
+
+	/**
+	 * Parse a mod in its short form (eg. HD). Case insensitive.
+	 * 
+	 * @param {String} string
+	 * @returns {BanchoMod}
+	 */
+	parseShortMod(string) {
+		for(const modName in Enum)
+			if(Enum[modName].shortMod.toLowerCase() == string.toLowerCase())
+				return Enum[modName];
 		return null;
-	},
-	parseShortMods: function(string) {
-		if(typeof string != "string")
+	}
+
+	/**
+	 * Parse a short mods combination as a string or array of strings.
+	 * Accepted string formats: "HDDT", "HD, DT", "HD DT". The amount of spaces doesn't matter. Allowed seperators are comma and spaces.
+	 * @param {string|array} input 
+	 */
+	parseShortMods(input) {
+		let splits = [];
+		if(Array.isArray(input))
+			splits = input;
+		else if(typeof input == "string") {
+			if(input.indexOf(",") != -1)
+				splits = input.split(",");
+			else if(input.indexOf(" ") != -1)
+				splits = input.split(" ");
+			else if(input.length % 2 == 0) {
+				splits[0] = "";
+				for(const char of input)
+					if(splits[splits.length - 1].length &lt; 2)
+						splits[splits.length - 1] += char;
+					else
+						splits[splits.length] = char;
+			}
+			else
+				return [input];
+		}
+		else
 			return null;
-		const splits = string.split(", ");
+
 		const mods = [];
 		for(let i = 0; i &lt; splits.length; i++) {
-			const shortMod = this.parseShortMod(splits[i]);
+			const shortMod = this.parseShortMod(splits[i].trim());
 			if(shortMod)
 				mods.push(shortMod);
 		}
 		return mods;
-	},
-	parseLongMod: function(string) {
-		for(const modName in BanchoMods)
-			if(BanchoMods[modName].longMod == string)
-				return BanchoMods[modName];
+	}
+
+	/**
+	 * Parse a mod in its long form (eg. Hidden). Case insensitive.
+	 * 
+	 * @param {String} string
+	 * @returns {BanchoMod}
+	 */
+	parseLongMod(string) {
+		for(const modName in Enum)
+			if(Enum[modName].longMod.toLowerCase() == string.toLowerCase())
+				return Enum[modName];
 		return null;
-	},
-	parseLongMods: function(string) {
-		if(typeof string != "string")
+	}
+
+	/**
+	 * Parse a long mods combination as a string or array of strings.
+	 * Accepted string formats: "Hidden, DoubleTime", "Hidden DoubleTime". The amount of spaces doesn't matter. Allowed seperators are comma and spaces.
+	 * @param {string|array} input 
+	 */
+	parseLongMods(input) {
+		let splits = [];
+		if(Array.isArray(input))
+			splits = input;
+		else if(typeof input == "string") {
+			if(input.indexOf(",") != -1)
+				splits = input.split(",");
+			else if(input.indexOf(" ") != -1)
+				splits = input.split(" ");
+			else
+				splits = [input];
+		}
+		else
 			return null;
-		const splits = string.split(", ");
+
 		const mods = [];
 		for(let i = 0; i &lt; splits.length; i++) {
-			const longMod = this.parseLongMod(splits[i]);
+			const longMod = this.parseLongMod(splits[i].trim());
 			if(longMod)
 				mods.push(longMod);
 		}
 		return mods;
 	}
-};</pre>
+}
+
+module.exports = new BanchoMods();</pre>
     </article>
 </section>
 
@@ -202,7 +330,7 @@ module.exports = {
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Wed Feb 28th 2018
+		on Thu Mar 29th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
