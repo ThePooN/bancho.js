@@ -15,6 +15,7 @@ const TestGoals = {
 	Whois: Symbol("Whois"),
 	Where: Symbol("Where"),
 	Stats: Symbol("Stats"),
+	BanchoMods: Symbol("BanchoMods"),
 
 	MultiplayerLobbyExists: Symbol("MultiplayerLobbyExists"),
 	MultiplayerLobbySetMap: Symbol("MultiplayerLobbySetMap"),
@@ -28,7 +29,7 @@ const TestGoals = {
 	MultiplayerLobbyClearHost: Symbol("MultiplayerLobbyClearHost"),
 	MultiplayerLobbyStartMatch: Symbol("MultiplayerLobbyStartMatch"),
 	MultiplayerLobbyAbortMatch: Symbol("MultiplayerLobbyAbortMatch"),
-	MultiplayerLobbyCloseLobby: Symbol("MultiplayerLobbyCloseLobby")	
+	MultiplayerLobbyCloseLobby: Symbol("MultiplayerLobbyCloseLobby")
 };
 
 module.exports = Object.freeze(TestGoals);
