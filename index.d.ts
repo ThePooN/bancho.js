@@ -142,6 +142,7 @@ declare module "bancho.js" {
 		rankedScore: number
 		totalScore: number
 		ppRank: number
+		level: number
 		ppRaw: number
 		accuracy: number
 		countRankSS: number
@@ -627,6 +628,98 @@ declare module "bancho.js" {
 	}
 
 	/**
+	 * Static class with a property for each mods and methods to manipulate them
+	 */
+	class BanchoMods {
+		None: BanchoMod
+		NoFail: BanchoMod
+		Easy: BanchoMod
+		Hidden: BanchoMod
+		HardRock: BanchoMod
+		SuddenDeath: BanchoMod
+		DoubleTime: BanchoMod
+		Relax: BanchoMod
+		HalfTime: BanchoMod
+		Nightcore: BanchoMod
+		Flashlight: BanchoMod
+		Autoplay: BanchoMod
+		SpunOut: BanchoMod
+		Relax2: BanchoMod
+		Perfect: BanchoMod
+		Key4: BanchoMod
+		Key5: BanchoMod
+		Key6: BanchoMod
+		Key7: BanchoMod
+		Key8: BanchoMod
+		FadeIn: BanchoMod
+		Random: BanchoMod
+		LastMod: BanchoMod
+		Key9: BanchoMod
+		Key10: BanchoMod
+		Key1: BanchoMod
+		Key3: BanchoMod
+		Key2: BanchoMod
+		enum: {
+			None: BanchoMod
+			NoFail: BanchoMod
+			Easy: BanchoMod
+			Hidden: BanchoMod
+			HardRock: BanchoMod
+			SuddenDeath: BanchoMod
+			DoubleTime: BanchoMod
+			Relax: BanchoMod
+			HalfTime: BanchoMod
+			Nightcore: BanchoMod
+			Flashlight: BanchoMod
+			Autoplay: BanchoMod
+			SpunOut: BanchoMod
+			Relax2: BanchoMod
+			Perfect: BanchoMod
+			Key4: BanchoMod
+			Key5: BanchoMod
+			Key6: BanchoMod
+			Key7: BanchoMod
+			Key8: BanchoMod
+			FadeIn: BanchoMod
+			Random: BanchoMod
+			LastMod: BanchoMod
+			Key9: BanchoMod
+			Key10: BanchoMod
+			Key1: BanchoMod
+			Key3: BanchoMod
+			Key2: BanchoMod
+		}
+		/**
+		 * Parse mods in their bit flags form and returns them in an array of BanchoMods.
+		 * @param bits Mods combination in bit flags form
+		 * @param returnNone Returns [BanchoMods.None] if bits is equal to 0 
+		 */
+		parseBitFlags(bits: number, [returnNone=true]: boolean): BanchoMod[]
+		/**
+		 * Returns a bits flag integer representing the passed mods.
+		 */
+		returnBitFlags(mods: BanchoMod[]): number
+		/**
+		 * Parse a mod in its short form (eg. HD). Case insensitive.
+		 */
+		parseShortMod(shortMod: string): BanchoMod
+		/**
+		 * Parse a short mods combination as a string or array of strings.
+	 	 * @param shortMods Accepted string formats: "HDDT", "HD, DT", "HD DT". The amount of spaces doesn't matter. Allowed seperators are comma and spaces.
+		 */
+		parseShortMods(shortMods: string|string[]): BanchoMod[]
+		/**
+		 * Parse a mod in its long form (eg. Hidden). Case insensitive.
+		 */
+		parseLongMod(longMod: string): BanchoMod
+		/**
+		 * Parse a long mods combination as a string or array of strings.
+		 * @param longMods Accepted string formats: "Hidden, DoubleTime", "Hidden DoubleTime". The amount of spaces doesn't matter. Allowed seperators are comma and spaces.
+		 */
+		parseLongMods(longMods: string|string[]): BanchoMod[]
+	}
+
+	/**
 	 * Options for a BanchoClient.
 	 */
 	type BanchoClientOptions = {
@@ -689,49 +782,6 @@ declare module "bancho.js" {
 		Accuracy: number,
 		Combo: number,
 		ScoreV2: number
-	}
-
-	type BanchoModsTypes = {
-		enum: {
-			None: BanchoMod
-			NoFail: BanchoMod
-			Easy: BanchoMod
-			Hidden: BanchoMod
-			HardRock: BanchoMod
-			SuddenDeath: BanchoMod
-			DoubleTime: BanchoMod
-			Relax: BanchoMod
-			HalfTime: BanchoMod
-			Nightcore: BanchoMod
-			Flashlight: BanchoMod
-			Autoplay: BanchoMod
-			SpunOut: BanchoMod
-			Relax2: BanchoMod
-			Perfect: BanchoMod
-			Key4: BanchoMod
-			Key5: BanchoMod
-			Key6: BanchoMod
-			Key7: BanchoMod
-			Key8: BanchoMod
-			FadeIn: BanchoMod
-			Random: BanchoMod
-			LastMod: BanchoMod
-			Key9: BanchoMod
-			Key10: BanchoMod
-			Key1: BanchoMod
-			Key3: BanchoMod
-			Key2: BanchoMod
-		}
-		parseShortMod(shortMod: string): BanchoMod
-		/**
-		 * @param shortMods Either a string with short mods joined by spaces or an array
-		 */
-		parseShortMods(shortMods: string|string[]): BanchoMod[]
-		parseLongMod(longMod: string): BanchoMod
-		/**
-		 * @param longMods Either a string with long mods joined by spaces or an array
-		 */
-		parseLongMods(longMods: string|string[]): BanchoMod[]
 	}
 
 	/**
