@@ -2,6 +2,16 @@
 
 ## Version 0.8
 
+### Version 0.8.1
+
+- **SECURITY: Fix OutgoingBanchoMessage not only keeping 1st line of message. This patches an IRC command insertion security breach.**
+- Rewrite BanchoMods (there should be no breaking changes, only improvements)
+- Add level property to BanchoUser
+- Update npm dependencies
+- Fix documentation errors
+
+### Version 0.8.0
+
 - Library folders restructure (add Enums, Multiplayer and Multiplayer/Enums folder)
 - Main class: export BanchoMods, add "is" methods in main class (isBanchoMod, isBanchoUser...)
 - Update npm dependencies
