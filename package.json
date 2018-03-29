@@ -21,14 +21,14 @@
   "author": "ThePooN",
   "license": "GPL-3.0",
   "devDependencies": {
-    "@types/node": "^8.9.4",
-    "chalk": "^2.3.1",
-    "eslint": "^4.18.1",
+    "@types/node": "^8.10.1",
+    "chalk": "^2.3.2",
+    "eslint": "^4.19.1",
     "ink-docstrap": "^1.3.2",
     "jsdoc": "^3.5.5",
     "log-symbols": "^2.2.0"
   },
   "dependencies": {
-    "nodesu": "^0.6.3"
+    "nodesu": "^0.6.4"
   }
 }
