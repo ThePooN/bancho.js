@@ -529,6 +529,7 @@ declare module "bancho.js" {
 		on(event: "playerJoined", listener: (obj: {
 			player: BanchoLobbyPlayer
 			slot: number
+			team: string
 		}) => void): this
 		on(event: "playerMoved", listener: (obj: {
 			player; BanchoLobbyPlayer
