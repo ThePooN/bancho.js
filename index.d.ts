@@ -200,7 +200,7 @@ declare module "bancho.js" {
 	/**
 	 * Class describing what is returned after a WHOIS query on an online user
 	 */
-	class BanchoWoisReturn {
+	class BanchoWhoisReturn {
 		/**
 		 * Username of the queried user
 		 */
@@ -353,7 +353,7 @@ declare module "bancho.js" {
 		 * @param map Either a beatmap ID or a Beatmap object from nodesu
 		 * @param gamemode See nodesu.Mode
 		 */
-		setMap(map: number|nodesu.Beatmap, [gamemode=nodesu.Mode.osu]: number): Promise<null>
+		setMap(map: number|nodesu.Beatmap, gamemode: nodesu.Mode): Promise<null>
 
 		/**
 		 * Set given mods in the lobby
@@ -398,7 +398,7 @@ declare module "bancho.js" {
 		 * @param teamMode See BanchoLobbyTeamModes
 		 * @param winCondition See BanchoLobbyWinConditions
 		 */
-		setSettings(teamMode: number, winCondition: number, [size]: number): Promise<null>
+		setSettings(teamMode: number, winCondition: number, size: number): Promise<null>
 		
 		/**
 		 * Moves a player from one slot to another
@@ -735,27 +735,27 @@ declare module "bancho.js" {
 		/**
 		 * Custom IRC host (for proxy-ing from a firewall for example)
 		 */
-		[host="irc.ppy.sh"]: string,
+		host?: "irc.ppy.sh",
 		/**
 		 * Custom IRC port
 		 */
-		[port=6667]: number,
+		port?: 6667,
 		/**
 		 * osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
 		 */
-		[apiKey]: string,
+		apiKey?: string,
 		/**
 		 * Span of milliseconds in you may not exceed the following limits. Default *should* be safe for normal users, recommended value for chat bot accounts is 60000.
 		 */
-		[limiterTimespan=6000]: number,
+		limiterTimespan?: 6000,
 		/**
 		 * Amount of private messages (PMs & messages in multiplayer channels) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 270 (300 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
 		 */
-		[limiterPrivate=4]: number,
+		limiterPrivate?: 4,
 		/**
 		 * Amount of public messages (messages that aren't private) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 54 (60 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
 		 */
-		[limiterPublic=3]: number
+		limiterPublic?: 3
 	}
 
 	type BanchoLobbyPlayerStatesTypes = {
