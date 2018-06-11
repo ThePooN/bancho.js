@@ -16,6 +16,7 @@ const TestGoals = {
 	Where: Symbol("Where"),
 	Stats: Symbol("Stats"),
 	BanchoMods: Symbol("BanchoMods"),
+	MultiplayerScoresSorting: Symbol("MultiplayerScoresSorting"),
 
 	MultiplayerLobbyExists: Symbol("MultiplayerLobbyExists"),
 	MultiplayerLobbySetMap: Symbol("MultiplayerLobbySetMap"),
