@@ -7,7 +7,7 @@
 
 # Introduction
 
-bancho.js is designed to be the best library when it comes to interacting with Bancho in real-time. It connects over its IRC interface and enables you to do anything, **from chatting to managing multiplayer lobbies**!
+bancho.js is designed to be the best library when it comes to interacting with Bancho in real-time. It connects over its IRC interface and enables you to do anything Bancho enables you to do, **from chatting to managing multiplayer lobbies**!
 
 It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg) and [osu! French Championship Hiver 2018](https://ofc.thepoon.fr), followed by osu!SQL in the near future, and maybe your own project!  
 Please let me know of your use of bancho.js! I'll gladly avertise your projects here :)
@@ -28,9 +28,10 @@ Normal accounts have undisclosed rate limits. This library, by default, uses lim
 
 # Getting Started
 
-This will print all your incoming PMs to the console:
+Let's get straight into it with a working example. This will print all your incoming PMs to the console:
 ```javascript
-const client = new Banchojs.BanchoClient({username: "ThePooN", password:"verysecret"});
+const Banchojs = require("bancho.js");
+const client = new Banchojs.BanchoClient({username: "ThePooN", password:"your_irc_password"});
 client.connect().then(() => {
 	console.log("We're online! Now listening for incoming messages.");
 	client.on("PM", (message) => console.log(message.user.ircUsername+": "+message.message));
@@ -40,6 +41,7 @@ Output:
 ```
 Ghouru: notice me senpai
 ```
+All you need to do to run this example is install bancho.js into your project (`npm i --save bancho.js`), paste this code into a file and replace my credentials with yours, from https://osu.ppy.sh/p/irc.  
 This library doesn't limit itself to sending messages though! It also has **complete multiplayer support** and the ability of firing API requests from BanchoUser objects, and much more! **Learn more with the [provided examples](https://github.com/ThePooN/bancho.js/tree/master/examples) and [documentation](https://bancho.js.org)!**
 
 # Contributing
