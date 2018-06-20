@@ -109,6 +109,7 @@ const Teams = require("./Enums/BanchoLobbyTeams");
  * @prop {Array&lt;BanchoMod>} mods 
  * @prop {boolean} freemod
  * @prop {boolean} playing Whether we're currently playing or not
+ * @prop {Array&lt;BanchoLobbyPlayerScore>} scores Scores set during the currently ongoing match, or the previous match. Emptied when a new match starts. Sorted by pass and score once match is finished.
  */
 class BanchoLobby extends EventEmitter {
 	constructor(channel) {
@@ -116,6 +117,7 @@ class BanchoLobby extends EventEmitter {
 		this.channel = channel;
 		this.banchojs = this.channel.banchojs;
 		this.id = Number(channel.name.substring("#mp_".length));
+		this.scores = [];
 		this._name = "";
 		this._beatmapId = null;
 		this._beatmap = null;
@@ -133,6 +135,7 @@ class BanchoLobby extends EventEmitter {
 		this.playersById = {};
 
 		this.slotsUpdatesQueue = [];
+		this.playerCreationQueue = [];
 		
 		this.channel.on("JOIN", (member) => {
 			if(member.user.isClient()) // We have just joined the channel
@@ -153,22 +156,42 @@ class BanchoLobby extends EventEmitter {
 	 * @param {function} func 
 	 */
 	pushSlotsUpdateQueue(func) {
-		this.slotsUpdatesQueue.push(() => {
-			func // Execute current function
-				.then(() => {
-					this.slotsUpdatesQueue.shift(); // Remove current function from queue
-					if(this.slotsUpdatesQueue[0])
-						this.slotsUpdatesQueue[0](); // Execute next function, if any
-				})
-				.catch((err) => {
-					this.banchojs.emit("error", err);
-					this.slotsUpdatesQueue.shift(); // why isn't .finally() implemented. Promises please.
-					if(this.slotsUpdatesQueue[0])
-						this.slotsUpdatesQueue[0]();
-				});
-		});
+		this.slotsUpdatesQueue.push(func);
 		if(this.slotsUpdatesQueue.length == 1)
-			this.slotsUpdatesQueue[0](); // If there's no currently running function, execute the newest now
+			this.slotsUpdatesQueue[0](this.slotsUpdateCallback); // If there's no currently running function, execute the newest now
+	}
+
+	/**
+	 * Called by a function in the slots update queue when the next one can be called.
+	 * @private
+	 */
+	slotsUpdateCallback() {
+		this.slotsUpdatesQueue.shift();
+		if(this.slotsUpdatesQueue[0])
+			this.slotsUpdatesQueue[0](this.slotsUpdateCallback);
+	}
+
+	/**
+	 * Synchronous handling of BanchoLobbyPlayer object creations.
+	 * As every first fetch of a BanchoLobbyPlayer object involves an API call and
+	 * we only want one BanchoLobbyPlayer at a time, we need to make creations of them async.
+	 * @private
+	 * @param {function} func 
+	 */
+	pushPlayerCreationQueue(func) {
+		this.playerCreationQueue.push(func);
+		if(this.playerCreationQueue.length == 1)
+			this.playerCreationQueue[0](this.playersCreationCallback); // If there's no currently running function, execute the newest now
+	}
+
+	/**
+	 * Called by a function in the players creation queue when the next one can be called.
+	 * @private
+	 */
+	playersCreationCallback() {
+		this.playerCreationQueue.shift();
+		if(this.playerCreationQueue[0])
+			this.playerCreationQueue[0](this.playersCreationCallback);
 	}
 
 	/**
@@ -204,8 +227,10 @@ class BanchoLobby extends EventEmitter {
 
 						this.banchojs.osuApi.beatmaps.getByBeatmapId(this.beatmapId)
 							.then((beatmap) => {
-								if(beatmap[0])
-									this.beatmap = beatmap[0];
+								if(beatmap[0]) {
+									if(beatmap[0].id == this.beatmapId)
+										this.beatmap = beatmap[0];
+								}
 								else
 									/**
 									 * Emitted when a selected map is not found on the osu! API.
@@ -249,27 +274,30 @@ class BanchoLobby extends EventEmitter {
 							player.state = BanchoLobbyPlayerStates.NotReady;
 					break;
 				case "playerJoined":
-					this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+					this.pushSlotsUpdateQueue(() => {
 						this.getPlayerByName(ret.username).then((player) => {
 							/**
 							 * @event BanchoLobby#playerJoined
 							 * @type {object}
 							 * @prop {BanchoLobbyPlayer} player
 							 * @prop {number} slot Starting from 0
+							 * @prop {string} team Blue or Red
 							 */
 							player.reset();
+							player.team = ret.team;
 							this.slots[ret.slot - 1] = player;
 							this.emit("playerJoined", {
 								player: player,
-								slot: (ret.slot - 1)
+								slot: (ret.slot - 1),
+								team: ret.team
 							});
 							this.emit("slots", this.slots);
-							resolve();
-						}, reject);
-					}));
+							this.slotsUpdateCallback();
+						}, (err) => { this.banchojs.emit("error", err); this.slotsUpdateCallback(); });
+					});
 					break;
 				case "playerMoved":
-					this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+					this.pushSlotsUpdateQueue(() => {
 						this.getPlayerByName(ret.username).then((player) => {
 							/**
 							 * @event BanchoLobby#playerMoved
@@ -285,26 +313,28 @@ class BanchoLobby extends EventEmitter {
 								slot: (ret.slot - 1)
 							});
 							this.emit("slots", this.slots);
-							resolve();
-						}, reject);
-					}));
+							this.slotsUpdateCallback();
+						}, (err) => { this.banchojs.emit("error", err); this.slotsUpdateCallback(); });
+					});
 					break;
 				case "playerLeft":
-					this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+					this.pushSlotsUpdateQueue(() => {
 						this.getPlayerByName(ret.username).then((player) => {
 							/**
 							 * @event BanchoLobby#playerLeft
 							 * @type {BanchoLobbyPlayer}
 							 */
-							this.slots[this.getPlayerSlot(player)] = null;
+							const slot = this.getPlayerSlot(player);
+							this.slots[slot] = null;
 							this.emit("playerLeft", player);
 							if(player.isHost) {
 								this.emit("hostCleared");
 								this.emit("host", null);
 							}
 							this.emit("slots", this.slots);
-						}, reject);
-					}));
+							this.slotsUpdateCallback();
+						}, (err) => { this.banchojs.emit("error", err); this.slotsUpdateCallback(); });
+					});
 					break;
 				case "playerBecameTheHost":
 					this.getPlayerByName(ret.username).then((player) => {
@@ -347,6 +377,7 @@ class BanchoLobby extends EventEmitter {
 							player.score = null;
 						}
 					}
+					this.scores.length = 0;
 					this.playing = true;
 					this.emit("matchStarted");
 					break;
@@ -357,19 +388,33 @@ class BanchoLobby extends EventEmitter {
 					 */
 					this.getPlayerByName(ret.username).then((player) => {
 						player.score = new BanchoLobbyPlayerScore(ret.score, ret.pass, player);
+						this.scores.push(player.score);
 						this.emit("playerFinished", player.score);
 					}, (err) => this.banchojs.emit("error", err));
 					break;
-				case "matchFinished":
 				case "matchAborted":
-					/**
-					 * @event BanchoLobby#matchFinished
-					 */
 					/**
 					 * @event BanchoLobby#matchAborted
 					 */
 					this.playing = false;
-					this.emit(regex.name);
+					this.emit("matchAborted");
+					break;
+				case "matchFinished":
+					/**
+					 * @event BanchoLobby#matchFinished
+					 * @type {Array.&lt;BanchoLobbyPlayerScore>} Sorted scores array
+					 */
+					// Due to players resolving, matchFinished may be emitted and scores sorted before every playerFinished are done being processed.
+					// For some reason, even though a Promise may not have anything async, the "then" functions may still be executed asynchronously...
+					// However, they seem to be executed in order for some reason. So a workaround for this is to wait for the callback of a resolved Promise to be called.
+					Promise.resolve().then(() => {
+						// This ensures sorting/emitting is executed after all names are resolved.
+						this.pushPlayerCreationQueue(() => {
+							this.sortScores();
+							this.emit(regex.name, this.scores);
+							this.playersCreationCallback();
+						});
+					});					
 					break;
 				case "invalidBeatmapId":
 				case "passwordRemoved":
@@ -498,8 +543,11 @@ class BanchoLobby extends EventEmitter {
 				// If we can compare mods and if they're the same, we can immediately resolve.
 				if(JSON.stringify(mods) == JSON.stringify(this.mods) &amp;&amp; freemod == this.freemod)
 					return resolve();
+				
+				let value = 0;
 				for(const mod of mods)
-					modsString += mod.shortMod+" ";
+					value += mod.enumValue;
+				modsString += value + " ";
 			}
 			else
 				return reject(new Error("mods need to be string or array of BanchoMods"));
@@ -803,7 +851,7 @@ class BanchoLobby extends EventEmitter {
 		return new Promise((resolve, reject) => {
 			if(team != Teams.Blue &amp;&amp; team != Teams.Red)
 				return reject(new Error("invalid team"));
-			this.channel.sendMessage("!mp team #"+player.id+" "+team).then(resolve, reject);
+			this.channel.sendMessage("!mp team #"+player.user.id+" "+team).then(resolve, reject);
 		});
 	}
 
@@ -816,7 +864,7 @@ class BanchoLobby extends EventEmitter {
 			return this.updateSettingsPromise;
 		
 		return this.updateSettingsPromise = new Promise((callerResolve, callerReject) => {
-			this.pushSlotsUpdateQueue(new Promise((resolve, reject) => {
+			this.pushSlotsUpdateQueue(() => {
 				this.channel.sendMessage("!mp settings "+this.randomString());
 				// Beginning of the !mp settings message will be handled by handleBanchoBotMessage; ending (player infos) will be handled in the following listener.
 				let amountOfPlayers = null;
@@ -829,7 +877,7 @@ class BanchoLobby extends EventEmitter {
 								amountOfPlayers = playersRegex.playersAmount;
 								if(amountOfPlayers == 0) {
 									this.slots = this._createSlotsArray();
-									resolve();
+									this.slotsUpdateCallback();
 									callerResolve();
 									this.updateSettingsPromise = null;
 									this.channel.removeListener("message", listener);
@@ -874,13 +922,13 @@ class BanchoLobby extends EventEmitter {
 									}
 									if(completedPlayers == amountOfPlayers) {
 										this.slots = slots;
-										resolve();
+										this.slotsUpdateCallback();
 										callerResolve();
 										this.updateSettingsPromise = null;
 										this.channel.removeListener("message", listener);
 									}
 								}, (err) => {
-									reject(err);
+									this.slotsUpdateCallback();
 									callerReject(err);
 								});
 							}
@@ -889,7 +937,7 @@ class BanchoLobby extends EventEmitter {
 				};
 
 				this.channel.on("message", listener);
-			}));
+			});
 		});
 	}
 
@@ -920,22 +968,33 @@ class BanchoLobby extends EventEmitter {
 	 * @async
 	 */
 	getPlayerByName(name) {
-		return new Promise((resolve, reject) => {
+		return new Promise((callerResolve, callerReject) => {
 			if(this.players[name])
-				resolve(this.players[name]);
-			else {
-				const user = this.banchojs.getUser(name);
-				const player = new BanchoLobbyPlayer(this, user);
-				const cb = () => {
-					this.playersById[user.id] = player;
-					this.players[user.username] = player;
-					resolve(player);
-				};
-				if(!user.username || !user.id)
-					user.fetchFromAPI().then(cb).catch(reject);
-				else
-					cb();
-			}
+				return callerResolve(this.players[name]);
+
+			this.pushPlayerCreationQueue(() => {
+				if(this.players[name]) {
+					callerResolve(this.players[name]);
+					this.playersCreationCallback();
+				}
+				else {
+					const user = this.banchojs.getUser(name);
+					const player = new BanchoLobbyPlayer(this, user);
+					const cb = () => {
+						this.playersById[user.id] = player;
+						this.players[user.username] = player;
+						callerResolve(player);
+						this.playersCreationCallback();
+					};
+					if(!user.username || !user.id)
+						user.fetchFromAPI().then(cb).catch((err) => {
+							callerReject(err);
+							this.playersCreationCallback();
+						});
+					else
+						cb();
+				}
+			});
 		});
 	}
 
@@ -944,19 +1003,27 @@ class BanchoLobby extends EventEmitter {
 	 * @async
 	 */
 	getPlayerById(id) {
-		return new Promise((resolve, reject) => {
+		return new Promise((callerResolve, callerReject) => {
 			if(isNaN(id))
-				reject(new Error("id needs to be a number!"));
+				return callerReject(new Error("id needs to be a number!"));
 			if(this.playersById[id])
-				resolve(this.playersById[id]);
-			else
-				this.banchojs.getUserById(id)
-					.then((user) => {
-						const player = new BanchoLobbyPlayer(this, this.banchojs.getUser(user.username));
-						this.playersById[id] = player;
-						this.players[user.username] = player;
-						resolve(player);
-					});
+				return callerResolve(this.playersById[id]);
+
+			this.pushPlayerCreationQueue(() => {
+				if(this.playersById[id]) {
+					callerResolve(this.playersById[id]);
+					this.playersCreationCallback();
+				}
+				else
+					this.banchojs.getUserById(id)
+						.then((user) => {
+							const player = new BanchoLobbyPlayer(this, this.banchojs.getUser(user.username));
+							this.playersById[id] = player;
+							this.players[user.username] = player;
+							callerResolve(player);
+							this.playersCreationCallback();
+						});
+			});
 		});
 	}
 
@@ -978,6 +1045,24 @@ class BanchoLobby extends EventEmitter {
 		for(let i = 0; i &lt; 16; i++)
 			slots[i] = null;
 		return Object.seal(slots);
+	}
+
+	/**
+	 * Sort scores by pass and score.
+	 */
+	sortScores() {
+		this.scores.sort((a, b) => {
+			if(a.pass &amp;&amp; !b.pass)
+				return -1;
+			else if(!a.pass &amp;&amp; b.pass)
+				return 1;
+			else if(a.score > b.score)
+				return -1;
+			else if(b.score > a.score)
+				return 1;
+			else
+				return 0;
+		});
 	}
 
 	get beatmap() {
@@ -1179,7 +1264,7 @@ module.exports = BanchoLobby;</pre>
 <span class="jsdoc-message">
 	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
 	
-		on Thu Mar 29th 2018
+		on Wed Jun 20th 2018
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
