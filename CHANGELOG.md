@@ -1,5 +1,16 @@
 # Pre-release
 
+## Version 0.9
+
+- BanchoLobby: Scores sorting
+- BanchoLobby: Pass the sorted scores array when a match is finished
+- BanchoLobby: Add more examples
+- BanchoLobby: Rewrite synchronous queues
+- BanchoLobby: Fix playerJoined event not working in TeamVS
+- BanchoLobby: Fix changeTeam method not working
+- BanchoLobby: Fix race condition with beatmap changing
+- Emit PART for every channel on disconnection
+
 ## Version 0.8
 
 ### Version 0.8.1
