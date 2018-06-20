@@ -311,6 +311,10 @@ declare module "bancho.js" {
 		 */
 		id: number
 		/**
+		 * Multiplayer lobby ID (used in multiplayer history links)
+		 */
+		scores: Array<BanchoLobbyPlayerScore>
+		/**
 		 * Name of the lobby, as seein in-game
 		 */
 		name: string
@@ -489,6 +493,11 @@ declare module "bancho.js" {
 		 * Gets the mp link or however you name it.
 		 */
 		getHistoryUrl(): string
+
+		/**
+		 * Sort scores by pass and score.
+		 */
+		sortScores(): void
 
 
 		on(event: "allPlayersReady", listener: () => void): this
