@@ -77,7 +77,7 @@ declare module "bancho.js" {
 		 * Registers a listener for the disconnection events.
 		 * @param listener the callback
 		 */
-		on(event: "disconnected", listener: () => void): this
+		on(event: "disconnected", listener: (error: Error) => void): this
 		
 		/**
 		 * Registers a listener for errors.
