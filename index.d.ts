@@ -627,7 +627,7 @@ declare module "bancho.js" {
 	 * The type for channel messages.
 	 */
 	class ChannelMessage extends BanchoMessage {
-		channel: string
+		channel: BanchoChannel
 	}
 
 	/**
