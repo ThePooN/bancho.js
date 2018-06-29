@@ -640,7 +640,7 @@ declare module "bancho.js" {
 	/**
 	 * Static class with a property for each mods and methods to manipulate them
 	 */
-	class BanchoMods {
+	class BanchoModsTypes {
 		None: BanchoMod
 		NoFail: BanchoMod
 		Easy: BanchoMod
@@ -704,7 +704,7 @@ declare module "bancho.js" {
 		 * @param bits Mods combination in bit flags form
 		 * @param returnNone Returns [BanchoMods.None] if bits is equal to 0 
 		 */
-		parseBitFlags(bits: number, [returnNone=true]: boolean): BanchoMod[]
+		parseBitFlags(bits: number, returnNone?: boolean): BanchoMod[]
 		/**
 		 * Returns a bits flag integer representing the passed mods.
 		 */
