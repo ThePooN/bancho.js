@@ -822,21 +822,21 @@ declare module "bancho.js" {
 	/** Compares the provided object and return true if the object is an instance of BanchoMod. */
 	export function isBanchoMod(mod): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoUser. */
-	export function isBanchoUser(mod): boolean
+	export function isBanchoUser(user): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoChannel. */
-	export function isBanchoChannel(mod): boolean
+	export function isBanchoChannel(channel): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoMultiplayerChannel. */
-	export function isBanchoMultiplayerChannel(mod): boolean
+	export function isBanchoMultiplayerChannel(channel): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoLobby. */
-	export function isBanchoLobby(mod): boolean
+	export function isBanchoLobby(lobby): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoChannelMember. */
-	export function isBanchoChannelMember(mod): boolean
+	export function isBanchoChannelMember(member): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoMessage. */
-	export function isBanchoMessage(mod): boolean
+	export function isBanchoMessage(message): boolean
 	/** Compares the provided object and return true if the object is an instance of ChannelMessage. */
-	export function isChannelMessage(mod): boolean
+	export function isChannelMessage(message): boolean
 	/** Compares the provided object and return true if the object is an instance of PrivateMessage. */
-	export function isPrivateMessage(mod): boolean
+	export function isPrivateMessage(message): boolean
 
 	/**
 	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.

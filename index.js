@@ -71,7 +71,7 @@ class Banchojs {
 	 * @param {any} member 
 	 */
 	isBanchoChannelMember(member) {
-		return member instanceof require("./lib/Multiplayer/BanchoChannelMember");
+		return member instanceof require("./lib/BanchoChannelMember");
 	}
 
 	/**
@@ -80,7 +80,7 @@ class Banchojs {
 	 * @param {any} message 
 	 */
 	isBanchoMessage(message) {
-		return message instanceof require("./lib/Multiplayer/BanchoMessage");
+		return message instanceof require("./lib/BanchoMessage");
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Banchojs {
 	 * @param {any} message 
 	 */
 	isChannelMessage(message) {
-		return message instanceof require("./lib/Multiplayer/ChannelMessage");
+		return message instanceof require("./lib/ChannelMessage");
 	}
 
 	/**
@@ -98,7 +98,7 @@ class Banchojs {
 	 * @param {any} message 
 	 */
 	isPrivateMessage(message) {
-		return message instanceof require("./lib/Multiplayer/PrivateMessage");
+		return message instanceof require("./lib/PrivateMessage");
 	}
 }
 
