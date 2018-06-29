@@ -617,7 +617,7 @@ declare module "bancho.js" {
 	/**
 	 * Bancho incoming message
 	 */
-	class BanchoMessage {
+	export class BanchoMessage {
 		user: BanchoUser
 		message: string
 		self: boolean
@@ -626,14 +626,14 @@ declare module "bancho.js" {
 	/**
 	 * The type for channel messages.
 	 */
-	class ChannelMessage extends BanchoMessage {
+	export class ChannelMessage extends BanchoMessage {
 		channel: BanchoChannel
 	}
 
 	/**
 	 * The type for private messages.
 	 */
-	class PrivateMessage extends BanchoMessage {
+	export class PrivateMessage extends BanchoMessage {
 		recipient: BanchoUser
 	}
 

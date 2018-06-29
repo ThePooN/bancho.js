@@ -11,6 +11,9 @@
 class Banchojs {
 	constructor() {
 		this.Client = this.BanchoClient = require("./lib/BanchoClient");
+		this.BanchoMessage = require("./lib/BanchoMessage");
+		this.PrivateMessage = require("./lib/PrivateMessage");
+		this.ChannelMessage = require("./lib/ChannelMessage");
 		this.OutgoingBanchoMessage = require("./lib/OutgoingBanchoMessage");
 		this.ConnectStates = require("./lib/Enums/ConnectStates");
 		this.BanchoLobbyPlayerStates = require("./lib/Multiplayer/Enums/BanchoLobbyPlayerStates");
