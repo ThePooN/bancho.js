@@ -634,7 +634,7 @@ declare module "bancho.js" {
 	 * The type for private messages.
 	 */
 	class PrivateMessage extends BanchoMessage {
-
+		recipient: BanchoUser
 	}
 
 	/**
