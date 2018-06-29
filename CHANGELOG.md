@@ -2,6 +2,14 @@
 
 ## Version 0.9
 
+### Version 0.9.1
+
+- PrivateMessage: add recipient property
+- Export BanchoMessage, PrivateMessage, ChannelMessage
+- Many fixes on TypeScript typings
+
+### Version 0.9.0
+
 - BanchoLobby: Scores sorting
 - BanchoLobby: Pass the sorted scores array when a match is finished
 - BanchoLobby: Add more examples
