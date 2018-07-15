@@ -744,11 +744,11 @@ declare module "bancho.js" {
 		/**
 		 * Custom IRC host (for proxy-ing from a firewall for example)
 		 */
-		host?: "irc.ppy.sh",
+		host: string,
 		/**
 		 * Custom IRC port
 		 */
-		port?: 6667,
+		port: number,
 		/**
 		 * osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
 		 */
@@ -756,15 +756,15 @@ declare module "bancho.js" {
 		/**
 		 * Span of milliseconds in you may not exceed the following limits. Default *should* be safe for normal users, recommended value for chat bot accounts is 60000.
 		 */
-		limiterTimespan?: 6000,
+		limiterTimespan?: number,
 		/**
 		 * Amount of private messages (PMs & messages in multiplayer channels) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 270 (300 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
 		 */
-		limiterPrivate?: 4,
+		limiterPrivate?: number,
 		/**
 		 * Amount of public messages (messages that aren't private) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 54 (60 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
 		 */
-		limiterPublic?: 3
+		limiterPublic?: number
 	}
 
 	type BanchoLobbyPlayerStatesTypes = {
