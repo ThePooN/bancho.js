@@ -621,6 +621,7 @@ declare module "bancho.js" {
 		user: BanchoUser
 		message: string
 		self: boolean
+		readonly content: string
 	}
 
 	/**
