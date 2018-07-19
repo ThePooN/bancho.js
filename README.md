@@ -14,7 +14,7 @@ Please let me know of your use of bancho.js! I'll gladly avertise your projects 
 
 # Useful Links
 
-- **Documentation**: [https://bancho.js.org](https://bancho.js.org)
+- **Documentation**: [https://bancho.js.org](https://bancho.js.org) (Use dropdowns at the top)
 - NPM package: [https://npmjs.com/package/bancho.js](https://npmjs.com/package/bancho.js)
 - Git repository: [https://git.cartooncraft.fr/ThePooN/bancho.js](https://git.cartooncraft.fr/ThePooN/bancho.js)
 - GitHub mirror: [https://github.com/ThePooN/bancho.js](https://github.com/ThePooN/bancho.js)
