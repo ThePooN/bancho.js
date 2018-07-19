@@ -53,3 +53,4 @@ You can financially support this project by [subscribing](https://twitch.tv/TheP
 # License
 
 It is licensed as GPL 3.0. The entire license text is available in the [LICENSE](/LICENSE) file, however I recommend you to take a look at this [short summary](https://choosealicense.com/licenses/gpl-3.0/) to get a better idea!
+
