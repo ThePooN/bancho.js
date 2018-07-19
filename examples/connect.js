@@ -7,3 +7,4 @@ client.connect().then(() => {
 		console.log(`${message.user.ircUsername}: ${message.message}`);
 	});
 }).catch(console.error);
+
