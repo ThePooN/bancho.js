@@ -31,17 +31,17 @@ Normal accounts have undisclosed rate limits. This library, by default, uses lim
 Let's get straight into it with a working example. This will print all your incoming PMs to the console:
 ```javascript
 const Banchojs = require("bancho.js");
-const client = new Banchojs.BanchoClient({username: "ThePooN", password:"your_irc_password"});
+const client = new Banchojs.BanchoClient({ username: "ThePooN", password: "your_irc_password" });
 client.connect().then(() => {
 	console.log("We're online! Now listening for incoming messages.");
-	client.on("PM", (message) => console.log(message.user.ircUsername+": "+message.message));
+	client.on("PM", (message) => console.log(`${message.user.ircUsername}: ${message.message}`));
 }).catch(console.error);
 ```
 Output:
 ```
 Ghouru: notice me senpai
 ```
-All you need to do to run this example is install bancho.js into your project (`npm i --save bancho.js`), paste this code into a file and replace my credentials with yours, from https://osu.ppy.sh/p/irc.  
+All you need to do to run this example is install bancho.js into your project (`npm i bancho.js`), paste this code into a file and replace my credentials with yours, from https://osu.ppy.sh/p/irc.  
 This library doesn't limit itself to sending messages though! It also has **complete multiplayer support** and the ability of firing API requests from BanchoUser objects, and much more! **Learn more with the [provided examples](https://github.com/ThePooN/bancho.js/tree/master/examples) and [documentation](https://bancho.js.org)!**
 
 # Contributing
