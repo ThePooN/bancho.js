@@ -2,6 +2,13 @@
 
 ## Version 0.9
 
+### Version 0.9.2
+
+- Message: add content getter
+- Client: add rejectedMessage event to catch messages blocked by users with non-friends PMs disabled
+- README enhancements
+- Typings enhancements
+
 ### Version 0.9.1
 
 - PrivateMessage: add recipient property
