@@ -2,6 +2,10 @@
 
 ## Version 0.9
 
+### Version 0.9.3
+
+- Typings: include rejectedMessage event
+
 ### Version 0.9.2
 
 - Message: add content getter
