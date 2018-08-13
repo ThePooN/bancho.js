@@ -116,6 +116,13 @@ declare module "bancho.js" {
 		on(event: "PM", listener: (message: PrivateMessage) => void): this
 		
 		/**
+		 * Registers a listener for when Bancho sends us back a PM that couldn't be sent.
+		 * As far as we know, only happens when a PM is rejected because the recipient blocks messages from non-friends.
+		 * @param listener the callback with the concerned PrivateMessage
+		 */
+		on(event: "rejectedMessage", listener: (message: PrivateMessage) => void): this
+		
+		/**
 		 * Registers a listener for client state changes.
 		 * @param listener the callback with a Symbol from ConnectStates and a possible error.
 		 */
