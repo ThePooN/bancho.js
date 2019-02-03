@@ -752,11 +752,11 @@ declare module "bancho.js" {
 		/**
 		 * Custom IRC host (for proxy-ing from a firewall for example)
 		 */
-		host: string,
+		host?: string,
 		/**
 		 * Custom IRC port
 		 */
-		port: number,
+		port?: number,
 		/**
 		 * osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
 		 */
