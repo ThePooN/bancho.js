@@ -10,7 +10,7 @@
 bancho.js is designed to be the best library when it comes to interacting with Bancho in real-time. It connects over its IRC interface and enables you to do anything Bancho enables you to do, **from chatting to managing multiplayer lobbies**!
 
 It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg) and [osu! French Championship Hiver 2018](https://ofc.thepoon.fr), followed by osu!SQL in the near future, and maybe your own project!  
-Please let me know of your use of bancho.js! I'll gladly avertise your projects here :)
+Please let me know of your use of bancho.js! I'll gladly advertise your projects here :)
 
 # Useful Links
 
