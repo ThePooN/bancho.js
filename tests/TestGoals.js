@@ -29,7 +29,9 @@ const TestGoals = {
 	MultiplayerLobbyUnlockSlots: Symbol("MultiplayerLobbyUnlockSlots"),
 	MultiplayerLobbyClearHost: Symbol("MultiplayerLobbyClearHost"),
 	MultiplayerLobbyStartMatch: Symbol("MultiplayerLobbyStartMatch"),
+	MultiplayerLobbyPlayingTrue: Symbol("MultiplayerLobbyPlayingTrue"),
 	MultiplayerLobbyAbortMatch: Symbol("MultiplayerLobbyAbortMatch"),
+	MultiplayerLobbyPlayingFalse: Symbol("MultiplayerLobbyPlayingFalse"),
 	MultiplayerLobbyCloseLobby: Symbol("MultiplayerLobbyCloseLobby")
 };
 

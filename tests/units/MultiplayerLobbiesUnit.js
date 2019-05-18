@@ -40,8 +40,14 @@ class MultiplayerLobbiesUnit extends TestUnit {
 		this.fulFillGoal(TestGoals.MultiplayerLobbyClearHost);
 		await channel.lobby.startMatch();
 		this.fulFillGoal(TestGoals.MultiplayerLobbyStartMatch);
+		if(channel.lobby.playing !== true)
+			throw new Error("playing is not set to true after starting match!");
+		this.fulFillGoal(TestGoals.MultiplayerLobbyPlayingTrue);
 		await channel.lobby.abortMatch();
 		this.fulFillGoal(TestGoals.MultiplayerLobbyAbortMatch);
+		if(channel.lobby.playing !== false)
+			throw new Error("playing is not set to false after starting match!");
+		this.fulFillGoal(TestGoals.MultiplayerLobbyPlayingFalse);
 		await channel.lobby.closeLobby();
 		this.fulFillGoal(TestGoals.MultiplayerLobbyCloseLobby);
 		clearTimeout(timeout);
