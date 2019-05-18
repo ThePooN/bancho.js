@@ -2,6 +2,16 @@
 
 ## Version 0.9
 
+### Version 0.9.5
+
+- Dependency updates (security audit)
+
+### Version 0.9.4
+
+- BanchoLobby: Fix matchFinished not setting playing to false
+- README enhancements
+- Typings enhancements
+
 ### Version 0.9.3
 
 - Typings: include rejectedMessage event
