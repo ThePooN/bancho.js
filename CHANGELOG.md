@@ -2,6 +2,13 @@
 
 ## Version 0.9
 
+### Version 0.9.6
+
+- BanchoLobby: Fix !mp start timeout not working when set to 0
+- BanchoLobby: Fix race condition in updateSettings. See issue #35 for more details.
+- Docs: Fix various missing async tags
+- Update dev dependencies to fix security flaws
+
 ### Version 0.9.5
 
 - Dependency updates (security audit)
