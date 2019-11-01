@@ -866,80 +866,81 @@ class BanchoLobby extends EventEmitter {
 			return this.updateSettingsPromise;
 		
 		return this.updateSettingsPromise = new Promise((callerResolve, callerReject) => {
-			this.pushSlotsUpdateQueue(() => {
-				this.channel.sendMessage("!mp settings "+this.randomString());
-				// Beginning of the !mp settings message will be handled by handleBanchoBotMessage; ending (player infos) will be handled in the following listener.
-				let amountOfPlayers = null;
-				const slots = this._createSlotsArray();
-				const listener = (msg) => {
-					if(msg.user.ircUsername.toLowerCase() == "banchobot") {
-						if(amountOfPlayers == null) {
-							const playersRegex = Regexes.regexes.playersAmount(msg.message);
-							if(playersRegex) {
-								amountOfPlayers = playersRegex.playersAmount;
-								if(amountOfPlayers == 0) {
+			this.channel.sendMessage("!mp settings "+this.randomString());
+			// Beginning of the !mp settings message will be handled by handleBanchoBotMessage; ending (player infos) will be handled in the following listener.
+			let amountOfPlayers = null;
+			const slots = this._createSlotsArray();
+			const listener = (msg) => {
+				if(msg.user.ircUsername.toLowerCase() == "banchobot") {
+					if(amountOfPlayers == null) {
+						const playersRegex = Regexes.regexes.playersAmount(msg.message);
+						if(playersRegex) {
+							amountOfPlayers = playersRegex.playersAmount;
+							if(amountOfPlayers == 0) {
+								this.pushSlotsUpdateQueue(() => {
 									this.slots = this._createSlotsArray();
 									this.slotsUpdateCallback();
 									callerResolve();
 									this.updateSettingsPromise = null;
-									this.channel.removeListener("message", listener);
-								}
+								});
+								this.channel.removeListener("message", listener);
 							}
 						}
-						else {
-							const playerRegex = /^Slot (\d+) +(Not Ready|Ready|No Map) +https:\/\/osu\.ppy\.sh\/u\/(\d+) (.+)$/;
-							if(playerRegex.test(msg.message)) {
-								const match = playerRegex.exec(msg.message);
-								this.getPlayerById(Number(match[3])).then((player) => {
-									slots[Number(match[1])-1] = player;
-									player.state = BanchoLobbyPlayerStates[match[2]];
-									player.isHost = false;
-									player.team = null;
-									player.mods = (this.freemod) ? [] : this.mods;
-									let metadatasString = match[4].substring(player.user.username.length).trim();
-									if(metadatasString.length > 0) {
-										metadatasString = metadatasString.substr(1, metadatasString.length - 2);
-										for(let metadatasSplit of metadatasString.split("/")) {
-											metadatasSplit = metadatasSplit.trim();
-											switch(metadatasSplit) {
-												case "Host":
-													player.isHost = true;
-													break;
-												case "Team Blue":
-													player.team = BanchoLobbyTeams.Blue;
-													break;
-												case "Team Red":
-													player.team = BanchoLobbyTeams.Red;
-													break;
-												default:
-													player.mods = BanchoMods.parseLongMods(metadatasSplit);
-											}
+					}
+					else {
+						const playerRegex = /^Slot (\d+) +(Not Ready|Ready|No Map) +https:\/\/osu\.ppy\.sh\/u\/(\d+) (.+)$/;
+						if(playerRegex.test(msg.message)) {
+							const match = playerRegex.exec(msg.message);
+							this.getPlayerById(Number(match[3])).then((player) => {
+								slots[Number(match[1])-1] = player;
+								player.state = BanchoLobbyPlayerStates[match[2]];
+								player.isHost = false;
+								player.team = null;
+								player.mods = (this.freemod) ? [] : this.mods;
+								let metadatasString = match[4].substring(player.user.username.length).trim();
+								if(metadatasString.length > 0) {
+									metadatasString = metadatasString.substr(1, metadatasString.length - 2);
+									for(let metadatasSplit of metadatasString.split("/")) {
+										metadatasSplit = metadatasSplit.trim();
+										switch(metadatasSplit) {
+											case "Host":
+												player.isHost = true;
+												break;
+											case "Team Blue":
+												player.team = BanchoLobbyTeams.Blue;
+												break;
+											case "Team Red":
+												player.team = BanchoLobbyTeams.Red;
+												break;
+											default:
+												player.mods = BanchoMods.parseLongMods(metadatasSplit);
 										}
 									}
+								}
 
-									let completedPlayers = 0;
-									for(const slot of slots) {
-										if(slot != null)
-											completedPlayers++;
-									}
-									if(completedPlayers == amountOfPlayers) {
+								let completedPlayers = 0;
+								for(const slot of slots) {
+									if(slot != null)
+										completedPlayers++;
+								}
+								if(completedPlayers == amountOfPlayers) {
+									this.pushSlotsUpdateQueue(() => {
 										this.slots = slots;
 										this.slotsUpdateCallback();
 										callerResolve();
 										this.updateSettingsPromise = null;
-										this.channel.removeListener("message", listener);
-									}
-								}, (err) => {
-									this.slotsUpdateCallback();
-									callerReject(err);
-								});
-							}
+									});
+									this.channel.removeListener("message", listener);
+								}
+							}, (err) => {
+								callerReject(err);
+							});
 						}
 					}
-				};
+				}
+			};
 
-				this.channel.on("message", listener);
-			});
+			this.channel.on("message", listener);
 		});
 	}
 
@@ -1264,9 +1265,9 @@ module.exports = BanchoLobby;</pre>
 
 
 <span class="jsdoc-message">
-	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a>
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a>
 	
-		on Thu Oct 24th 2019
+		on Fri Nov 1st 2019
 	
 	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
 </span>
