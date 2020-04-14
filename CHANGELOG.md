@@ -2,6 +2,11 @@
 
 ## Version 0.9
 
+### Version 0.9.7
+
+- Fix hard crash when encountering users using reserved JS keywords
+- Upgrade dependencies
+
 ### Version 0.9.6
 
 - BanchoLobby: Fix !mp start timeout not working when set to 0
