@@ -3,7 +3,10 @@
 		"es6": true,
 		"node": true
 	},
-	"extends": "eslint:recommended",
+	"extends": [
+		"eslint:recommended",
+		"plugin:node/recommended"
+	],
 	"parserOptions": {
 		"sourceType": "module",
 		"ecmaVersion": 8
@@ -28,6 +31,9 @@
 		"semi": [
 			"error",
 			"always"
-		]
+		],
+		"no-process-exit": "off",
+		"node/no-unpublished-require": "off",
+		"node/no-missing-require": "off"
 	}
 }

@@ -10,7 +10,7 @@ cache:
 eslint:
     stage: test
     script:
-        - npm install eslint
+        - npm install eslint eslint-plugin-node
         - ./node_modules/.bin/eslint .
 
 irc:
