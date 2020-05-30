@@ -3,7 +3,7 @@
 [![NPM](https://nodei.co/npm/bancho.js.png?compact=true)](https://nodei.co/npm/bancho.js/)  
 [![pipeline status](https://git.cartooncraft.fr/ThePooN/bancho.js/badges/master/pipeline.svg)](https://git.cartooncraft.fr/ThePooN/bancho.js/commits/master)
 
-## Current release: v0.9.7
+## Current release: v0.10.0-beta.0
 
 # Introduction
 
@@ -28,6 +28,9 @@ osu! accounts by default have undisclosed rate limits. Therefore, this library u
 
 # Getting Started
 
+First, install the library: `npm i bancho.js`.  
+The optional `weak-value-map` dependency is also highly recommended, as the various caches in place do never get cleaned otherwise. It is marked as optional since it is a native dependency (they can be tough to set up in some environments). For development purposes, it is not necessary to bother with that.
+
 Let's get straight into it with a working example. This will print all your incoming PMs to the console:
 ```javascript
 const Banchojs = require("bancho.js");
@@ -49,6 +52,10 @@ This library doesn't limit itself to sending messages though! It also has **comp
 This library is very near completion. Thanks to everyone who supported and are now (directly or not) using the project!  
 There must still be some improvements to be done though. Feel free to hop on my [Discord server](https://discord.gg/ThePooN) so we can figure out issues and improve the code!  
 You can financially support this project by [subscribing](https://twitch.tv/ThePooN02/subscribe) to my Twitch channel or [donating](https://streamlabs.com/ThePooN02).
+
+# Compatibility
+
+bancho.js supports all currently supported Node.js releases. See [Node's LTS schedule](https://nodejs.org/en/about/releases/).
 
 # License
 

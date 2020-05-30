@@ -1,5 +1,14 @@
 # Pre-release
 
+## Version 0.10
+
+### Version 0.10.0-beta.0
+
+- Add `weak-value-map` support
+  - `weak-value-map` is a library that allows user and channel caches in bancho.js to be cleaned once they are no longer referenced.
+  - It is an optional peer dependency, with fallback to regular `Map` when unpresent. It is highly recommended however, especially on large instances, as without that, cache is never cleared in any way.
+- Upgrade dependencies
+
 ## Version 0.9
 
 ### Version 0.9.7
