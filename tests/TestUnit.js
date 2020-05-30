@@ -30,10 +30,9 @@ class TestUnit {
 	assertArrayEquals(expected, obj) {
 		if(expected.length != obj.length)
 			throw new Error("Invalid value: expected an array of "+expected.length+" objects, got "+obj.length+"!");
-		for(const index in expected)
-			if(expected.hasOwnProperty(index))
-				if(expected[index] != obj[index])
-					throw new Error("Invalid value at index "+index+": expected "+expected[index]+", got "+obj[index]+"!");
+		for(const entry in Object.entries(expected))
+			if(expected[entry[0]] != obj[entry[0]])
+				throw new Error("Invalid value at index "+entry[0]+": expected "+entry[1]+", got "+obj[entry[0]]+"!");
 	}
 }
 
