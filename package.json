@@ -5,9 +5,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
+    "lint": "eslint .",
     "test": "time node tests/run.js",
-    "doc": "node ./node_modules/.bin/jsdoc -c ./jsdoc.conf.json -u tutorials/ -t ./node_modules/ink-docstrap/template -R README.md -r index.js lib/",
-    "doc:dev": "node ./node_modules/.bin/jsdoc -c ./jsdoc.conf.json -u tutorials/ -t ./node_modules/ink-docstrap/template -R README.md -r -p index.js lib/"
+    "doc": "jsdoc -c ./jsdoc.conf.json -u tutorials/ -t ./node_modules/ink-docstrap/template -R README.md -r index.js lib/",
+    "doc:dev": "jsdoc -c ./jsdoc.conf.json -u tutorials/ -t ./node_modules/ink-docstrap/template -R README.md -r -p index.js lib/"
   },
   "repository": {
     "type": "git",

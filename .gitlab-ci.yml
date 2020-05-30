@@ -11,7 +11,7 @@ eslint:
     stage: test
     script:
         - npm install eslint eslint-plugin-node
-        - ./node_modules/.bin/eslint .
+        - npm run lint
 
 irc:
     stage: test
