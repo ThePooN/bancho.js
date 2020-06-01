@@ -276,7 +276,7 @@ declare module "bancho.js" {
 		name: string
 		topic: string
 		/** Members of the channel, referenced by their name */
-		channelMembers: BanchoChannelMember[]
+		channelMembers: Map<string, BanchoChannelMember>
 		/**
 		 * Sends a message to this channel
 		 */
