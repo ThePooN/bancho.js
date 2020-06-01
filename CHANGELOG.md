@@ -2,6 +2,14 @@
 
 ## Version 0.10
 
+### Version 0.10.0-beta.1
+
+- **BREAKING CHANGE: BanchoChannel#channelMembers is now a Map.**
+- Implement the IRC QUIT command.
+  - This fixes a huge memory leak, especially on high-traffic public channels (more importantly on #osu), as PARTs aren't emitted on user disconnection.
+  - Combined with `weak-value-map`, this should make bancho.js very low in RAM usage again!
+  - I have measured a debugging bancho.js idle instance on #osu with 26.7k members staying stable at 15~20MB memory heap usage over 5 hours.
+
 ### Version 0.10.0-beta.0
 
 - Add `weak-value-map` support
