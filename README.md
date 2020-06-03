@@ -51,7 +51,7 @@ This library doesn't limit itself to sending messages though! It also has **comp
 
 This library is very near completion. Thanks to everyone who supported and are now (directly or not) using the project!  
 There must still be some improvements to be done though. Feel free to hop on my [Discord server](https://discord.gg/ThePooN) so we can figure out issues and improve the code!  
-You can financially support this project by [subscribing](https://twitch.tv/ThePooN02/subscribe) to my Twitch channel or [donating](https://streamlabs.com/ThePooN02).
+You can financially support this project by [subscribing](https://twitch.tv/ThePooN/subscribe) to my Twitch channel or [donating](https://streamlabs.com/ThePooN).
 
 # Compatibility
 
