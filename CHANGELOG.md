@@ -2,6 +2,12 @@
 
 ## Version 0.10
 
+### Version 0.10.0-beta.2
+
+- Fix crash on connection close, introduced in recent betas.
+- BanchoUser: Add joinDate and totalSecondsPlayed (API data)
+- BanchoLobby: Add banPlayer method (!mp ban)
+
 ### Version 0.10.0-beta.1
 
 - **BREAKING CHANGE: BanchoChannel#channelMembers is now a Map.**
