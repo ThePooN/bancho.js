@@ -142,6 +142,7 @@ declare module "bancho.js" {
 	
 		id: number
 		username: string
+		joinDate: Date
 		count300: number
 		count100: number
 		count50: number
@@ -156,6 +157,7 @@ declare module "bancho.js" {
 		countRankS: number
 		countRankA: number
 		country: number
+		totalSecondsPlayed: number
 		ppCountryRank: number
 		events: Array<nodesu.UserEvent>
 	
@@ -434,6 +436,12 @@ declare module "bancho.js" {
 		 * @param player Referenced by their username or #<userid>
 		 */
 		kickPlayer(player: string): Promise<null>
+
+		/**
+		 * Bans a player from the lobby
+		 * @param player Referenced by their username or #<userid>
+		 */
+		banPlayer(player: string): Promise<null>
 
 		/**
 		 * Get back the host from one's hand
