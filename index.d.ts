@@ -364,9 +364,9 @@ declare module "bancho.js" {
 		/**
 		 * Set a given map in the lobby
 		 * @param map Either a beatmap ID or a Beatmap object from nodesu
-		 * @param gamemode See nodesu.Mode
+		 * @param gamemode See nodesu.ModeType
 		 */
-		setMap(map: number|nodesu.Beatmap, gamemode: nodesu.Mode): Promise<null>
+		setMap(map: number|nodesu.Beatmap, gamemode: nodesu.ModeType): Promise<null>
 
 		/**
 		 * Set given mods in the lobby
