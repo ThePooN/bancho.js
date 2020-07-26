@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-beta.3
+
+- BanchoLobby#setMap: Fix typing
+
 ### Version 0.10.0-beta.2
 
 - Fix crash on connection close, introduced in recent betas.
