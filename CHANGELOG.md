@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.2
+
+- WeakValueMap: Remove debug logging
+
 ### Version 0.10.0-rc.1
 
 - Add pure JavaScript WeakValueMap implementation
