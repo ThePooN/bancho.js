@@ -7,6 +7,8 @@
 - Add pure JavaScript WeakValueMap implementation
   - Used as a substitude when weak-value-map npm module isn't available.
   - Requires Node.js >= 14.6.0, or >= 13.0.0 with --harmony-weak-refs runtime flag.
+- Improve message events description
+- Development dependencies upgrade
 
 ### Version 0.10.0-beta.3
 
