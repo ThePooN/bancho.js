@@ -179,6 +179,11 @@ declare module "bancho.js" {
 		sendMessage(message: string): Promise<null>
 
 		/**
+		 * Sends an ACTION message to this user.
+		 */
+		sendAction(message: string): Promise<null>
+
+		/**
 		 * Fires an IRC WHOIS request to the server about this user. Only works on online users.
 	 	 * Throws if the user can't be found or is offline.
 		 */
@@ -283,6 +288,10 @@ declare module "bancho.js" {
 		 * Sends a message to this channel
 		 */
 		sendMessage(message: string): Promise<null>
+		/**
+		 * Sends an ACTION message to this channel
+		 */
+		sendAction(message: string): Promise<null>
 		join(): Promise<null>
 		leave(): Promise<null>
 
@@ -637,6 +646,10 @@ declare module "bancho.js" {
 		message: string
 		self: boolean
 		readonly content: string
+		/**
+		 * Tries to parse this message as an ACTION (/me message).
+		 */
+		getAction(): string | undefined;
 	}
 
 	/**
