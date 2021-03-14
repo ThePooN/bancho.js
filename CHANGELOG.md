@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.3
+
+- Add ACTION (/me messages) support
+
 ### Version 0.10.0-rc.2
 
 - WeakValueMap: Remove debug logging
