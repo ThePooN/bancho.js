@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.4
+
+- Update typings following addition of action messages
+
 ### Version 0.10.0-rc.3
 
 - Add ACTION (/me messages) support
