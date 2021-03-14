@@ -13,8 +13,8 @@ class MultiplayerLobbiesUnit extends TestUnit {
 	async run() {
 		const roomName = Math.random().toString(36).substring(8);
 		const timeout = setTimeout(() => {
-			throw new Error("Multiplayer tests haven't completed after 25 seconds!");
-		}, 25000);
+			throw new Error("Multiplayer tests haven't completed after 30 seconds!");
+		}, 30000);
 
 		const channel = await this.client.createLobby(roomName);
 		if(!channel.lobby)
