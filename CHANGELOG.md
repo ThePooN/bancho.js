@@ -2,6 +2,15 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.5
+
+- **BREAKING CHANGE: The `limiterPublic` BanchoClient option is no longer supported.**
+- **DEPRECATED: Rate-limiting BanchoClient options `limiterPrivate` and `limiterTimespan` are now deprecated in favor of newer options.**
+- New BanchoClient option: `rateLimit` can be used to pass a `RateLimiter` object from the `limiter` NPM package (or similar implementation). Default is instancied with the right options for regular user accounts.
+- New BanchoClient option: setting `botAccount` to `true` applies the right options to the default `RateLimiter` instance for bot accounts.
+- Add a message queue and proper rate-limiting
+- Actualize README to better reflect current context
+
 ### Version 0.10.0-rc.4
 
 - Update typings following addition of action messages
