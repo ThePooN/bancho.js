@@ -9,8 +9,7 @@
 
 bancho.js is designed to be the best library when it comes to interacting with Bancho in real-time. It connects over its IRC interface and enables you to do anything Bancho enables you to do, **from chatting to managing multiplayer lobbies**!
 
-It is designed to be reliable and easy to use. It has already been successfully used in several projects, most notably [OHC.gg](https://ohc.gg) and [osu! French Championship Hiver 2018](https://ofc.thepoon.fr), followed by osu!SQL in the near future, and maybe your own project!  
-Please let me know of your use of bancho.js! I'll gladly advertise your projects here :)
+It is designed to be reliable and easy to use, as demonstrated by the [many projects relying on it](https://github.com/ThePooN/bancho.js/network/dependents)!
 
 # Useful Links
 
@@ -22,14 +21,16 @@ Please let me know of your use of bancho.js! I'll gladly advertise your projects
 
 # Disclaimer
 
-Running an IRC bot on your osu! account for development purposes is fine, however once it enters production, it is advised to [contact the osu! staff](mailto:contact@ppy.sh) to detail the purpose of your bot and get authorization. Keep in mind you aren't allowed to create a dedicated osu! account to your bot neither. **Any attempt to do so without authorization from the staff will be considered multi-accounting, which is against the osu! Terms of Use.**  
-Also, if the osu! staff gave you their agreement, you may be eligible to higher (and known!) rate limits dedicated to chat bots. See [the client options documentation](https://bancho.js.org/global.html#BanchoClientOptions__anchor) for details on how to use them with the library.  
-osu! accounts by default have undisclosed rate limits. Therefore, this library uses by default limits that are somewhat tested on user accounts but there's no guarantee provided. The test suite should always run fine though.
+Before running a bot on your osu! account, please read the [Bot account wiki page](https://osu.ppy.sh/wiki/en/Bot_account).
+It details conditions under which you can run a bot on your account and eventually getting a dedicated account for it.
+
+**Please do NOT create an account dedicated to your bot without allowance. This will be considered multi-accounting, which is against the osu! Terms of Use and may lead to sanctions on your account.**
+
+The library uses sane rate limits for normal user accounts by default.
 
 # Getting Started
 
-First, install the library: `npm i bancho.js`.  
-The optional `weak-value-map` dependency is also highly recommended, as the various caches in place do never get cleaned otherwise. It is marked as optional since it is a native dependency (they can be tough to set up in some environments). For development purposes, it is not necessary to bother with that.
+First, install the library: `npm i bancho.js`.
 
 Let's get straight into it with a working example. This will print all your incoming PMs to the console:
 ```javascript
@@ -46,6 +47,15 @@ Ghouru: notice me senpai
 ```
 All you need to do to run this example is install bancho.js into your project (`npm i bancho.js`), paste this code into a file and replace my credentials with yours, from https://osu.ppy.sh/p/irc.  
 This library doesn't limit itself to sending messages though! It also has **complete multiplayer support** and the ability of firing API requests from BanchoUser objects, and much more! **Learn more with the [provided examples](https://github.com/ThePooN/bancho.js/tree/master/examples) and [documentation](https://bancho.js.org)!**
+
+# Caching
+
+A BanchoClient uses unique BanchoUser instances across its lifespan. The cache never gets cleared and objects never destroyed.
+
+Starting with bancho.js v0.10, we support garbage collection of these instances out-of-the-box using WeakRef, introduced in Node.js >= v14.6.0.
+
+bancho.js also supports [weak-value-map](https://www.npmjs.com/package/weak-value-map) if present, providing garbage collection of BanchoUser objects in Node.js >= v10.0.0.
+From my own testing, this solution offers better memory usage than Node.js's WeakRef. However, I don't think this can be considered as stable as Node.js's WeakRefs, so I wouldn't recommend using this solution unless necessary.
 
 # Contributing
 
