@@ -33,8 +33,9 @@ declare module "bancho.js" {
 		/**
 		 * Creates a multiplayer lobby and return its channel.
 		 * @param name Lobby name
+		 * @param privateLobby Mark as private
 		 */
-		createLobby(name: string): Promise<BanchoMultiplayerChannel>
+		createLobby(name: string, private?: boolean): Promise<BanchoMultiplayerChannel>
 	
 		/**
 		 * Connects to Bancho, rejects an Error if connection fails
