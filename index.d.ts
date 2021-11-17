@@ -392,6 +392,11 @@ declare module "bancho.js" {
 		setMods(mods: Array<BanchoMod>|string, freemod?: boolean): Promise<null>
 
 		/**
+		 * Sets the lobby's name
+		 */
+		setName(name: string): Promise<null>
+
+		/**
 		 * Sets the lobby's password
 		 */
 		setPassword(password: string): Promise<null>
