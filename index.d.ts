@@ -286,6 +286,8 @@ declare module "bancho.js" {
 		channelMembers: Map<string, BanchoChannelMember>
 		/**
 		 * Sends a message to this channel
+		 * 
+		 * Elevated Bancho users are advised to heavily sanitize their inputs.
 		 */
 		sendMessage(message: string): Promise<null>
 		/**
@@ -322,6 +324,11 @@ declare module "bancho.js" {
 		lobby: BanchoLobby
 	}
 
+	/**
+	 * Represents a Bancho multiplayer lobby.
+	 * 
+ 	 * Highly recommended to await updateSettings before manipulating (else some properties will be null).
+	 */
 	class BanchoLobby {
 		channel: BanchoMultiplayerChannel
 		/**
@@ -382,7 +389,7 @@ declare module "bancho.js" {
 		 * Set given mods in the lobby
 		 * @param mods Either an array of BanchoMods or a mods string joined by spaces
 		 */
-		setMods(mods: Array<BanchoMod|String>, freemod: boolean): Promise<null>
+		setMods(mods: Array<BanchoMod>|string, freemod?: boolean): Promise<null>
 
 		/**
 		 * Sets the lobby's password
@@ -421,7 +428,7 @@ declare module "bancho.js" {
 		 * @param teamMode See BanchoLobbyTeamModes
 		 * @param winCondition See BanchoLobbyWinConditions
 		 */
-		setSettings(teamMode: number, winCondition: number, size: number): Promise<null>
+		setSettings(teamMode?: number, winCondition?: number, size?: number): Promise<null>
 		
 		/**
 		 * Moves a player from one slot to another
@@ -567,7 +574,7 @@ declare module "bancho.js" {
 			team: string
 		}) => void): this
 		on(event: "playerMoved", listener: (obj: {
-			player; BanchoLobbyPlayer
+			player: BanchoLobbyPlayer
 			slot: number
 		}) => void): this
 		on(event: "playerLeft", listener: (player: BanchoLobbyPlayer) => void): this
