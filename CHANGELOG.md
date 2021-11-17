@@ -2,6 +2,18 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.6
+
+- **BREAKING CHANGE: Mods are no longer initialized in BanchoLobby ctor.** They are now initialized in `updateSettings`.
+- **Fix crash when leaving multiplayer lobbies** (thanks @KhooHaoYit!)
+- **Fix crash when receiving player slots events before updating settings** (thanks @kiwec!)
+- BanchoClient: Allow creation of private lobbies
+- BanchoLobby: Add setName
+- BanchoLobby: Add `gamemode` property. Fairly unreliable, as the only way to know it is when a referee sets it via !mp map, but it's better than nothing.
+- BanchoLobby: Remove identical update checks for beatmaps and mods
+- BanchoLobby: Fix broken conditionals in `setSize` and `setSettings`
+- Miscellaneous doc/typings updates and fixes
+
 ### Version 0.10.0-rc.5
 
 - **BREAKING CHANGE: The `limiterPublic` BanchoClient option is no longer supported.**
