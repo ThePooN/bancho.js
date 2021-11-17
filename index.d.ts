@@ -344,6 +344,7 @@ declare module "bancho.js" {
 		 * Current size of the lobby
 		 */
 		size: number
+		gamemode: nodesu.Mode[keyof nodesu.Mode]
 		/**
 		 * Beatmap fetched from the API (late/not as reliable, use beatmapId when possible)
 		 * 
@@ -373,9 +374,9 @@ declare module "bancho.js" {
 		/**
 		 * Set a given map in the lobby
 		 * @param map Either a beatmap ID or a Beatmap object from nodesu
-		 * @param gamemode See nodesu.ModeType
+		 * @param gamemode See nodesu.Mode. Defaults to current mode (osu! if undetected).
 		 */
-		setMap(map: number|nodesu.Beatmap, gamemode: nodesu.ModeType): Promise<null>
+		setMap(map: number|nodesu.Beatmap, gamemode?: typeof nodesu.Mode[keyof typeof nodesu.Mode]): Promise<null>
 
 		/**
 		 * Set given mods in the lobby
@@ -537,6 +538,7 @@ declare module "bancho.js" {
 		 * Fired when the lobby's freemod property is updated
 		 */
 		on(event: "freemod", listener: (freemod: boolean) => void): this
+		on(event: "gamemode", listener: (gamemode: typeof nodesu.Mode[keyof typeof nodesu.Mode]) => void): this
 		on(event: "host", listener: (player: BanchoLobbyPlayer) => void): this
 		on(event: "hostCleared", listener: () => void): this
 		on(event: "invalidBeatmapId", listener: () => void): this
