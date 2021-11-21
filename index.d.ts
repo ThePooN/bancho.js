@@ -1,5 +1,6 @@
 declare module "bancho.js" {
 	import { EventEmitter } from "events";
+	import { RateLimiter } from "limiter";
 	import * as nodesu from "nodesu";
 
 	export class BanchoClient extends EventEmitter {
@@ -773,10 +774,7 @@ declare module "bancho.js" {
 		parseLongMods(longMods: string|string[]): BanchoMod[]
 	}
 
-	/**
-	 * Options for a BanchoClient.
-	 */
-	type BanchoClientOptions = {
+	interface BanchoClientBaseOptions {
 		/**
 		 * Username of the user to connect to Bancho
 		 */
@@ -796,20 +794,58 @@ declare module "bancho.js" {
 		/**
 		 * osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
 		 */
-		apiKey?: string,
+		apiKey?: string
+	}
+
+	interface BanchoClientOptionsWithoutRateLimiter extends BanchoClientBaseOptions {
+		rateLimiter?: never
+		botAccount?: never
+		limiterTimespan?: never
+		limiterPrivate?: never
+	}
+
+	interface BanchoClientOptionsWithRateLimiter extends BanchoClientBaseOptions {
+		/**
+		 * Instance of RateLimiter from the `limiter` npm module for outgoing Bancho messages. Default is safe for normal users in private messages (PM and #multiplayer channels), bots are not supposed to send public messages. Can be disabled by setting to `null`.
+		 */
+		rateLimiter: RateLimiter
+
+		botAccount?: never
+		limiterTimespan?: never
+		limiterPrivate?: never
+	}
+
+	interface BanchoClientOptionsBotAccount extends BanchoClientBaseOptions {
+		/**
+		 * Apply bot account rate-limits to the default RateLimiter instance if true (see https://osu.ppy.sh/wiki/en/Bot_account).
+		 */
+		botAccount: boolean
+
+		rateLimiter?: never
+		limiterTimespan?: never
+		limiterPrivate?: never
+	}
+
+	interface BanchoClientOptionsDeprecated extends BanchoClientBaseOptions {
 		/**
 		 * Span of milliseconds in you may not exceed the following limits. Default *should* be safe for normal users, recommended value for chat bot accounts is 60000.
+		 * @deprecated
 		 */
-		limiterTimespan?: number,
+		limiterTimespan: number,
 		/**
 		 * Amount of private messages (PMs & messages in multiplayer channels) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 270 (300 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
+		 * @deprecated
 		 */
-		limiterPrivate?: number,
-		/**
-		 * Amount of public messages (messages that aren't private) you allow the bot to send in the last timespan. Default *should* be safe for normal users, recommended value for chat bot accounts is 54 (60 * 0.9, 10% margin to protect from accuracy issues, because of bancho/network).
-		 */
-		limiterPublic?: number
+		limiterPrivate: number
+
+		rateLimiter?: never
+		botAccount?: never
 	}
+
+	/**
+	 * Options for a BanchoClient.
+	 */
+	type BanchoClientOptions = BanchoClientOptionsWithoutRateLimiter | BanchoClientOptionsWithRateLimiter | BanchoClientOptionsBotAccount | BanchoClientOptionsDeprecated;
 
 	type BanchoLobbyPlayerStatesTypes = {
 		Ready: Symbol,
