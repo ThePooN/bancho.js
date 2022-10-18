@@ -331,7 +331,7 @@ declare module "bancho.js" {
 	 * 
  	 * Highly recommended to await updateSettings before manipulating (else some properties will be null).
 	 */
-	class BanchoLobby {
+	class BanchoLobby extends EventEmitter {
 		channel: BanchoMultiplayerChannel
 		/**
 		 * Multiplayer lobby ID (used in multiplayer history links)
