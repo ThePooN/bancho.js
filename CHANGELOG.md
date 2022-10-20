@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.8
+
+- BanchoLobby: If playerLeft is emitted, emit allPlayersReady on callback of updateSettings if all players still present are ready
+
 ### Version 0.10.0-rc.7
 
 - Typings update (fix `BanchoUser`, `BanchoChannel` and `BanchoLobby` not extending `EventEmitter` and new rate-limiting options)
