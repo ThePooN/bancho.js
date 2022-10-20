@@ -132,7 +132,7 @@ declare module "bancho.js" {
 		
 	}
 
-	class BanchoUser {
+	class BanchoUser extends EventEmitter {
 		/**
 		 * Creates an instance of BanchoUser.
 		 * @param banchojs Bancho.js client this user was instancied by
@@ -276,7 +276,7 @@ declare module "bancho.js" {
 	/**
 	 * Represents a discussion channel (not including PMs)
 	 */
-	class BanchoChannel {
+	class BanchoChannel extends EventEmitter {
 		/**
 		 * @param name Channel name as it is referred by on IRC (including #)
 		 */
