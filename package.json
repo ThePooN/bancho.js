@@ -35,8 +35,8 @@
     "weak-value-map": "^1.0.1"
   },
   "dependencies": {
-    "limiter": "^2.1.0",
-    "nodesu": "^0.7.2"
+    "nodesu": "^0.7.2",
+    "rate-limiter-flexible": "^2.3.12"
   },
   "peerDependencies": {
     "weak-value-map": "^1.0.1"
