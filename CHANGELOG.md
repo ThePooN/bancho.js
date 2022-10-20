@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.9
+
+- Updated all dependencies, fixing security issues (in dev dependencies)
+
 ### Version 0.10.0-rc.8
 
 - BanchoLobby: If playerLeft is emitted, emit allPlayersReady on callback of updateSettings if all players still present are ready
