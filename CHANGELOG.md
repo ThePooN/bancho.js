@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.11
+
+- Fix stats with players who have non-decimal global accuracy
+
 ### Version 0.10.0-rc.10
 
 - Switch to an actually FIFO rate-limiting library  
