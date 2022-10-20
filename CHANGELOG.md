@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.7
+
+- Typings update (fix `BanchoUser`, `BanchoChannel` and `BanchoLobby` not extending `EventEmitter` and new rate-limiting options)
+
 ### Version 0.10.0-rc.6
 
 - **BREAKING CHANGE: Mods are no longer initialized in BanchoLobby ctor.** They are now initialized in `updateSettings`.
