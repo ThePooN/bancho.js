@@ -2,6 +2,12 @@
 
 ## Version 0.10
 
+### Version 0.10.0-rc.10
+
+- Switch to an actually FIFO rate-limiting library  
+  The new implementation is actually correct now...
+- Fine-tune rate limits again for user and bot accounts
+
 ### Version 0.10.0-rc.9
 
 - Updated all dependencies, fixing security issues (in dev dependencies)
