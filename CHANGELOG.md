@@ -2,6 +2,41 @@
 
 ## Version 0.10
 
+### Version 0.10.0
+
+#### Highlights
+
+- **BREAKING CHANGES**
+  - BanchoChannel#channelMembers is now a Map instead of a plain object.
+  - Following rate-limiting refactoring (see highlights below), the `limiterPublic` BanchoClient option is no longer supported.  
+    Realistically this should never have been implemented, as bots are not supposed to ever send messages publicly (understand public channels like #osu, or every channel that are not PMs and multiplayer lobbies).
+  - The mods array is now initialized to `null` in `BanchoLobby`'s constructor instead of an empty array.
+
+- **BanchoUser instances are now garbage-collected**  
+  If you joined public channels like #osu, you will eventually get hundreds of thousands users registered, which inevitably caused some out-of-memory issues.  
+  We fixed them by garbage-collecting these instances when they are no longer referenced anywhere, by using [`WeakRef`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakRef).  
+  Support was also added using [`weak-value-map`](https://github.com/amapili/weak-value-map) as a peer dependency, which looks to be more memory-efficient but it is considered experimental. Probably only useful if you're running Node.js >= 10 < 14.6.0.
+
+- **Implement the IRC QUIT command**  
+  Bancho doesn't emit `PART` when users are disconnecting without leaving channels first. This fixes users that were never marked as having left channels they were part of when disconnecting.
+
+- **Rate-limiting has been refactored**  
+  We're now using a much simpler implementation based on a FIFO queue with rate-limiting.  
+  Default rate limits for both user and bot accounts have been fine-tuned.
+
+- **New `BanchoLobby` features:**
+  - New `banPlayer` method (using `!mp ban`)
+  - New `setName` method (using `!mp name`)
+  - New `gamemode` property (updated when referees use `!mp map` with gamemode id, or using `setMap` of course)
+  - When a player leaves the lobby (`playerLeft` event), the subsequent `updateSettings` call will emit `allPlayersReady` if all remaining players are ready.
+    This works around a lack of reporting from Bancho when every player is ready, except the one who has just left, though it is not automatic and you do have to call `updateSettings` yourself.
+
+- **Add support for ACTION events (/me messages)**
+  See https://git.cartooncraft.fr/ThePooN/bancho.js/-/commit/e3636e427d4d00ce79b89b31b751d3e733622b75
+
+- **Misc. bug fixes and minor improvements (eg. typings)**  
+  See the changelog for dev versions below.
+
 ### Version 0.10.0-rc.11
 
 - Fix stats with players who have non-decimal global accuracy
