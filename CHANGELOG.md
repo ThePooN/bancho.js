@@ -2,6 +2,10 @@
 
 ## Version 0.10
 
+### Version 0.10.1
+
+- **BanchoLobby: Fix beatmap never being refreshed from API**
+
 ### Version 0.10.0
 
 #### Highlights
