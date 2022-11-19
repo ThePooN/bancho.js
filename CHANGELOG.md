@@ -1,5 +1,17 @@
 # Pre-release
 
+## Version 0.11
+
+### Version 0.11.0
+
+- **Add ability to set default gamemode for fetching users from API**  
+  In order to optimize API calls in your application, you can rely on bancho.js' existing API data.  
+  The new `gamemode` parameter in the bancho.js config object allows you to specify which gamemode data to receive when fetching an user to save more API calls in certain scenarios.
+
+- **BanchoLobby: When updating from an FFA to a team-based mode, reset teams**  
+  Whenn enabling teams, all players in the lobby are assigned a default team. They're assigned predictably based on their slots.  
+  bancho.js now applies the same algorithm when changing team mode.
+
 ## Version 0.10
 
 ### Version 0.10.1
