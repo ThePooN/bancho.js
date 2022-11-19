@@ -794,7 +794,11 @@ declare module "bancho.js" {
 		/**
 		 * osu! API key for API requests (see https://osu.ppy.sh/p/api). WARNING: Multiplayer lobbies won't work without an API key!
 		 */
-		apiKey?: string
+		apiKey?: string,
+		/**
+		 * Gamemode id to fetch users with. Defaults to null
+		 */
+		gamemode?: number
 	}
 
 	interface BanchoClientOptionsWithoutRateLimiter extends BanchoClientBaseOptions {
