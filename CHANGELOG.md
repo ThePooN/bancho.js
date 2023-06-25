@@ -2,6 +2,10 @@
 
 ## Version 0.11
 
+### Version 0.11.1
+
+- Fix typings compilation on recent TypeScript versions
+
 ### Version 0.11.0
 
 - **Add ability to set default gamemode for fetching users from API**  
