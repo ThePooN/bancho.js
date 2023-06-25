@@ -353,7 +353,7 @@ declare module "bancho.js" {
 		 * Current size of the lobby
 		 */
 		size: number
-		gamemode: nodesu.Mode[keyof nodesu.Mode]
+		gamemode: nodesu.ModeType
 		/**
 		 * Beatmap fetched from the API (late/not as reliable, use beatmapId when possible)
 		 * 
