@@ -2,6 +2,15 @@
 
 ## Version 0.11
 
+### Version 0.11.2
+
+- BanchoLobby: Fix mods listener never unset in `updateSettings`  
+  Caused some "memory leak" warning (`MaxListenersExceededWarning`) to be fired (without any impact, per nodejs doc).  
+  Rest assured, you'd have to execute a LOT of `updateSettings` call in the same lobby to notice any increase in resources usage...
+
+- BanchoLobby: Fix `!mp settings` never firing again on user lookup error  
+  Never encountered this, also the id should be in cache from the `playerJoined` event anyway, but there is always a possibility...
+
 ### Version 0.11.1
 
 - Fix typings compilation on recent TypeScript versions
