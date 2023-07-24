@@ -21,6 +21,17 @@ class Banchojs {
 		this.BanchoLobbyTeams = require("./lib/Multiplayer/Enums/BanchoLobbyTeams");
 		this.BanchoLobbyWinConditions = require("./lib/Multiplayer/Enums/BanchoLobbyWinConditions");
 		this.BanchoMods = require("./lib/Multiplayer/Enums/BanchoMods");
+		this.BanchoUser = require("./lib/BanchoUser");
+		this.BanchoWhoisReturn = require("./lib/IrcCommands/whois/BanchoWhoisReturn");
+		this.BanchoBotStatsReturn = require("./lib/StatsCommand/BanchoBotStatsReturn");
+		this.BanchoChannel = require("./lib/BanchoChannel");
+		this.BanchoMultiplayerChannel = require("./lib/BanchoMultiplayerChannel");
+		this.BanchoLobby = require("./lib/Multiplayer/BanchoLobby");
+		this.BanchoLobbyPlayer = require("./lib/Multiplayer/BanchoLobbyPlayer");
+		this.BanchoLobbyPlayerScore = require("./lib/Multiplayer/BanchoLobbyPlayerScore");
+		this.BanchoMod = require("./lib/Multiplayer/BanchoMod");
+		this.BanchoChannelMemberMode = require("./lib/BanchoChannelMemberMode");
+		this.BanchoChannelMember = require("./lib/BanchoChannelMember");
 	}
 
 	/**

@@ -132,7 +132,7 @@ declare module "bancho.js" {
 		
 	}
 
-	class BanchoUser extends EventEmitter {
+	export class BanchoUser extends EventEmitter {
 		/**
 		 * Creates an instance of BanchoUser.
 		 * @param banchojs Bancho.js client this user was instancied by
@@ -216,7 +216,7 @@ declare module "bancho.js" {
 	/**
 	 * Class describing what is returned after a WHOIS query on an online user
 	 */
-	class BanchoWhoisReturn {
+	export class BanchoWhoisReturn {
 		/**
 		 * Username of the queried user
 		 */
@@ -234,7 +234,7 @@ declare module "bancho.js" {
 	/**
 	 * Contains properties returned by the BanchoBot !stats command that can't be set in BanchoUser.
 	 */
-	class BanchoBotStatsReturn {
+	export class BanchoBotStatsReturn {
 		user: BanchoUser
 		/**
 		 * Truncated value of levels (eg. 102)
@@ -276,7 +276,7 @@ declare module "bancho.js" {
 	/**
 	 * Represents a discussion channel (not including PMs)
 	 */
-	class BanchoChannel extends EventEmitter {
+	export class BanchoChannel extends EventEmitter {
 		/**
 		 * @param name Channel name as it is referred by on IRC (including #)
 		 */
@@ -318,7 +318,7 @@ declare module "bancho.js" {
 		on(event: "PART", listener: (member: BanchoChannelMember) => void): this
 	}
 
-	class BanchoMultiplayerChannel extends BanchoChannel {
+	export class BanchoMultiplayerChannel extends BanchoChannel {
 		/**
 		 * @param name Channel name as it is referred by on IRC (including #)
 		 */
@@ -331,7 +331,7 @@ declare module "bancho.js" {
 	 * 
  	 * Highly recommended to await updateSettings before manipulating (else some properties will be null).
 	 */
-	class BanchoLobby extends EventEmitter {
+	export class BanchoLobby extends EventEmitter {
 		channel: BanchoMultiplayerChannel
 		/**
 		 * Multiplayer lobby ID (used in multiplayer history links)
@@ -601,7 +601,7 @@ declare module "bancho.js" {
 		on(event: "userNotFoundUsername", listener: (username: string) => void): this
 	}
 
-	class BanchoLobbyPlayer {
+	export class BanchoLobbyPlayer {
 		lobby: BanchoLobby
 		user: BanchoUser
 		/**
@@ -617,13 +617,13 @@ declare module "bancho.js" {
 		score: BanchoLobbyPlayerScore
 	}
 
-	class BanchoLobbyPlayerScore {
+	export class BanchoLobbyPlayerScore {
 		score: number
 		pass: boolean
 		player: BanchoLobbyPlayer
 	}
 
-	class BanchoMod {
+	export class BanchoMod {
 		enumValue: number
 		shortMod: string
 		longMod: string
@@ -633,7 +633,7 @@ declare module "bancho.js" {
 	 * A Bancho channel user mode, or "IRC modes".
 	 * Used by Bancho to mark someone in a channel as an IRC user or a moderator.
 	 */
-	class BanchoChannelMemberMode {
+	export class BanchoChannelMemberMode {
 		/**
 		 * @param ircLetter Letter used in the MODE command to represent this mode
 		 * @param name Name to describe the mode
@@ -642,7 +642,7 @@ declare module "bancho.js" {
 	}
 
 	/** A Bancho channel member */
-	class BanchoChannelMember {
+	export class BanchoChannelMember {
 		/**
 		 * @param client 
 		 * @param channel 
@@ -685,7 +685,7 @@ declare module "bancho.js" {
 	/**
 	 * Static class with a property for each mods and methods to manipulate them
 	 */
-	class BanchoModsTypes {
+	type BanchoModsTypes = {
 		None: BanchoMod
 		NoFail: BanchoMod
 		Easy: BanchoMod
