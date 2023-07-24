@@ -2,6 +2,10 @@
 
 ## Version 0.11
 
+### Version 0.11.3
+
+- Add missing exports from typings
+
 ### Version 0.11.2
 
 - BanchoLobby: Fix mods listener never unset in `updateSettings`  
