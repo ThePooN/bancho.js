@@ -2,6 +2,10 @@
 
 ## Version 0.11
 
+### Version 0.11.4
+
+- Add argument types to utility functions
+
 ### Version 0.11.3
 
 - Add missing exports from typings
