@@ -904,23 +904,23 @@ declare module "bancho.js" {
 	}
 
 	/** Compares the provided object and return true if the object is an instance of BanchoMod. */
-	export function isBanchoMod(mod): boolean
+	export function isBanchoMod(mod: BanchoMod): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoUser. */
-	export function isBanchoUser(user): boolean
+	export function isBanchoUser(user: BanchoUser): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoChannel. */
-	export function isBanchoChannel(channel): boolean
+	export function isBanchoChannel(channel: BanchoChannel): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoMultiplayerChannel. */
-	export function isBanchoMultiplayerChannel(channel): boolean
+	export function isBanchoMultiplayerChannel(channel: BanchoMultiplayerChannel): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoLobby. */
-	export function isBanchoLobby(lobby): boolean
+	export function isBanchoLobby(lobby: BanchoLobby): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoChannelMember. */
-	export function isBanchoChannelMember(member): boolean
+	export function isBanchoChannelMember(member: BanchoChannelMember): boolean
 	/** Compares the provided object and return true if the object is an instance of BanchoMessage. */
-	export function isBanchoMessage(message): boolean
+	export function isBanchoMessage(message: BanchoMessage): boolean
 	/** Compares the provided object and return true if the object is an instance of ChannelMessage. */
-	export function isChannelMessage(message): boolean
+	export function isChannelMessage(message: ChannelMessage): boolean
 	/** Compares the provided object and return true if the object is an instance of PrivateMessage. */
-	export function isPrivateMessage(message): boolean
+	export function isPrivateMessage(message: PrivateMessage): boolean
 
 	/**
 	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.
