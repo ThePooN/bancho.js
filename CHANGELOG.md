@@ -2,6 +2,10 @@
 
 ## Version 0.11
 
+### Version 0.11.5
+
+- Apply new personal account rate limits
+
 ### Version 0.11.4
 
 - Add argument types to utility functions
