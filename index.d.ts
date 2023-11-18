@@ -599,6 +599,8 @@ declare module "bancho.js" {
 		on(event: "winCondition", listener: (winCondition: number) => void): this
 		on(event: "userNotFound", listener: () => void): this
 		on(event: "userNotFoundUsername", listener: (username: string) => void): this
+		on(event: "timerEnded", listener: () => void): this
+		on(event: "timerAborted", listener: () => void): this
 	}
 
 	export class BanchoLobbyPlayer {
