@@ -602,6 +602,9 @@ declare module "bancho.js" {
 		on(event: "timerEnded", listener: () => void): this
 		on(event: "timerAborted", listener: () => void): this
 		on(event: "timerTick", listener: (seconds: number) => void): this
+		on(event: "startTimerStarted", listener: (seconds: number) => void): this
+		on(event: "startTimerAborted", listener: () => void): this
+		on(event: "startTimerTick", listener: (seconds: number) => void): this
 	}
 
 	export class BanchoLobbyPlayer {
