@@ -2,6 +2,13 @@
 
 ## Version 0.11
 
+### Version 0.11.6
+
+- **BanchoLobby: Add timer events**  
+  Added the following events for `!mp timer`: `timerTick`, `timerAborted`, `timerEnded`  
+  Added the following events for `!mp start`: `startTimerStarted`, `startTimerTick`, `startTimerAborted`  
+  They are emitted with a `seconds` parameter where applicable.
+
 ### Version 0.11.5
 
 - Apply new personal account rate limits
