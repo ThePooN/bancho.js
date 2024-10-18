@@ -5,17 +5,17 @@ declare module "bancho.js" {
 
 	export class BanchoClient extends EventEmitter {
 		constructor(options: BanchoClientOptions)
-	
+
 		/**
 		 * Populated with a Nodesu client, if api key is passed to the constructor
 		 */
 		osuApi: nodesu.Client
-	
+
 		/**
 		 * Get a BanchoUser instance for the specified user
 		 */
 		getUser(username: string): BanchoUser
-	
+
 		/**
 		 * Get a BanchoUser representing ourself
 		 */
@@ -25,7 +25,7 @@ declare module "bancho.js" {
 		 * Get a BanchoUser instance for the specified user id
 		 */
 		getUserById(userid: number): Promise<BanchoUser>
-	
+
 		/**
 		 * Get a BanchoChannel instance for the specified name
 		 */
@@ -37,99 +37,99 @@ declare module "bancho.js" {
 		 * @param privateLobby Mark as private
 		 */
 		createLobby(name: string, private?: boolean): Promise<BanchoMultiplayerChannel>
-	
+
 		/**
 		 * Connects to Bancho, rejects an Error if connection fails
 		 */
 		connect(): Promise<null>
-		
+
 		/**
 		 * Disconnects from Bancho
 		 */
 		disconnect(): void
-		
+
 		/**
 		 * Returns the current connection state.
 		 */
 		getConnectState(): Symbol
-		
+
 		/**
 		 * Returns true if the connectState is Connected, false otherwise.
 		 */
 		isConnected(): boolean
-		
+
 		/**
 		 * Returns true if the connectState is Disconnected, otherwise false.
 		 */
 		isDisconnected(): boolean
-		
+
 		/**
 		 * Registers a listener for channel messages.
 		 * @param listener the callback
 		 */
 		on(event: "CM", listener: (message: ChannelMessage) => void): this
-		
+
 		/**
 		 * Registers a listener for the successful connection events.
 		 * @param listener the callback
 		 */
 		on(event: "connected", listener: () => void): this
-		
+
 		/**
 		 * Registers a listener for the disconnection events.
 		 * @param listener the callback
 		 */
 		on(event: "disconnected", listener: (error: Error) => void): this
-		
+
 		/**
 		 * Registers a listener for errors.
 		 * @param listener the callback
 		 */
 		on(event: "error", listener: (error: Error) => void): this
-		
+
 		/**
 		 * Registers a listener for when a user joins a channel.
 		 * @param listener the callback
 		 */
 		on(event: "JOIN", listener: (member: BanchoChannelMember) => void): this
-		
+
 		/**
 		 * Registers a listener for when a user leaves a channel.
 		 * @param listener the callback
 		 */
 		on(event: "PART", listener: (member: BanchoChannelMember) => void): this
-		
+
 		/**
 		 * Registers a listener for when the client fails to enter a non-existant channel.
 		 * @param listener the callback with the concerned BanchoChannel
 		 */
 		on(event: "nochannel", listener: (channel: BanchoChannel) => void): this
-		
+
 		/**
 		 * Registers a listener for when the client tries to execute something for an offline user.
 		 * @param listener the callback with the concerned BanchoUser
 		 */
 		on(event: "nouser", listener: (user: BanchoUser) => void): this
-		
+
 		/**
 		 * Registers a listener for private messages.
 		 * @param listener the callback
 		 */
 		on(event: "PM", listener: (message: PrivateMessage) => void): this
-		
+
 		/**
 		 * Registers a listener for when Bancho sends us back a PM that couldn't be sent.
 		 * As far as we know, only happens when a PM is rejected because the recipient blocks messages from non-friends.
 		 * @param listener the callback with the concerned PrivateMessage
 		 */
 		on(event: "rejectedMessage", listener: (message: PrivateMessage) => void): this
-		
+
 		/**
 		 * Registers a listener for client state changes.
 		 * @param listener the callback with a Symbol from ConnectStates and a possible error.
 		 */
 		on(event: "state", listener: (state: Symbol, error?: Error) => void): this
-		
+
 	}
 
 	export class BanchoUser extends EventEmitter {
@@ -138,10 +138,10 @@ declare module "bancho.js" {
 		 * @param banchojs Bancho.js client this user was instancied by
 		 */
 		constructor(banchojs: BanchoClient, ircUsername: string)
-	
+
 		banchojs: BanchoClient
 		ircUsername: string
-	
+
 		id: number
 		username: string
 		joinDate: Date
@@ -162,19 +162,19 @@ declare module "bancho.js" {
 		totalSecondsPlayed: number
 		ppCountryRank: number
 		events: Array<nodesu.UserEvent>
-	
+
 		/**
 		 * Fetch the user from the osu! API if possible. Populates all the "optional" properties of BanchoUser.
-		 * 
+		 *
 		 * @throws {Error} osu! API/no API key error
 		 */
 		fetchFromAPI(): Promise<nodesu.User>
-		
+
 		/**
 		 * Returns true if the user is the client
 		 */
 		isClient(): boolean
-	
+
 		/**
 		 * Sends a PM to this user.
 		 */
@@ -261,7 +261,7 @@ declare module "bancho.js" {
 		constructor(banchojs: BanchoClient, recipient: BanchoUser|BanchoChannel, message: string)
 		/**
 		 * Sends the prepared message to the recipient
-		 * 
+		 *
 		 * @throws {Error} If recipient isn't a valid type
 		 */
 		send(): Promise<null>
@@ -288,7 +288,7 @@ declare module "bancho.js" {
 		channelMembers: Map<string, BanchoChannelMember>
 		/**
 		 * Sends a message to this channel
-		 * 
+		 *
 		 * Elevated Bancho users are advised to heavily sanitize their inputs.
 		 */
 		sendMessage(message: string): Promise<null>
@@ -304,13 +304,13 @@ declare module "bancho.js" {
 		 * @param listener the callback with the message
 		 */
 		on(event: "message", listener: (message: BanchoMessage) => void): this
-		
+
 		/**
 		 * Registers a listener for when a user joins this channel.
 		 * @param listener the callback
 		 */
 		on(event: "JOIN", listener: (member: BanchoChannelMember) => void): this
-		
+
 		/**
 		 * Registers a listener for when a user leaves this channel.
 		 * @param listener the callback
@@ -328,7 +328,7 @@ declare module "bancho.js" {
 
 	/**
 	 * Represents a Bancho multiplayer lobby.
-	 * 
+	 *
  	 * Highly recommended to await updateSettings before manipulating (else some properties will be null).
 	 */
 	export class BanchoLobby extends EventEmitter {
@@ -348,7 +348,7 @@ declare module "bancho.js" {
 		/**
 		 * Array of BanchoLobbyPlayer determining each users' slot, from 0 to 15
 		 */
-		slots: Array<BanchoLobbyPlayer>
+		slots: Array<BanchoLobbyPlayer | null>
 		/**
 		 * Current size of the lobby
 		 */
@@ -356,7 +356,7 @@ declare module "bancho.js" {
 		gamemode: nodesu.ModeType
 		/**
 		 * Beatmap fetched from the API (late/not as reliable, use beatmapId when possible)
-		 * 
+		 *
 		 */
 		beatmap: nodesu.Beatmap
 		beatmapId: number
@@ -436,7 +436,7 @@ declare module "bancho.js" {
 		 * @param winCondition See BanchoLobbyWinConditions
 		 */
 		setSettings(teamMode?: number, winCondition?: number, size?: number): Promise<null>
-		
+
 		/**
 		 * Moves a player from one slot to another
 		 * @param slot starting from 0
@@ -650,8 +650,8 @@ declare module "bancho.js" {
 	/** A Bancho channel member */
 	export class BanchoChannelMember {
 		/**
-		 * @param client 
-		 * @param channel 
+		 * @param client
+		 * @param channel
 		 * @param userString Username with optional @ or + prefix (that will automatically determine the role)
 		 */
 		constructor(client: BanchoClient, channel: BanchoChannel, userString: string)
@@ -753,7 +753,7 @@ declare module "bancho.js" {
 		/**
 		 * Parse mods in their bit flags form and returns them in an array of BanchoMods.
 		 * @param bits Mods combination in bit flags form
-		 * @param returnNone Returns [BanchoMods.None] if bits is equal to 0 
+		 * @param returnNone Returns [BanchoMods.None] if bits is equal to 0
 		 */
 		parseBitFlags(bits: number, returnNone?: boolean): BanchoMod[]
 		/**
@@ -888,23 +888,23 @@ declare module "bancho.js" {
 	 * Contains the different connect states: Disconnected, Connecting, Reconnecting, Connected.
 	 */
 	type ConnectStateTypes = {
-		/** 
-		 * When we're purposely disconnected from Bancho or after an auth fail 
+		/**
+		 * When we're purposely disconnected from Bancho or after an auth fail
 		 */
 		Disconnected: Symbol,
-	
-		/** 
-		 * When we've opened the socket before any reconnection attempts and waiting for the Welcome packet 
+
+		/**
+		 * When we've opened the socket before any reconnection attempts and waiting for the Welcome packet
 		 */
 		Connecting: Symbol,
-	
-		/** 
-		 * When we've gotten disconnected, and are currently waiting before trying to reconnect 
+
+		/**
+		 * When we've gotten disconnected, and are currently waiting before trying to reconnect
 		 */
 		Reconnecting: Symbol,
-	
-		/** 
-		 * When we're online! \o/ 
+
+		/**
+		 * When we're online! \o/
 		 */
 		Connected: Symbol
 	}
