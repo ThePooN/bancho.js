@@ -19,6 +19,8 @@ const TestGoals = {
 	MultiplayerScoresSorting: Symbol("MultiplayerScoresSorting"),
 
 	MultiplayerLobbyExists: Symbol("MultiplayerLobbyExists"),
+	MultiplayerLobbyUpdateSettings: Symbol("MultiplayerLobbyUpdateSettings"),
+	MultiplayerLobbyNamed: Symbol("MultiplayerLobbyNamed"),
 	MultiplayerLobbySetMap: Symbol("MultiplayerLobbySetMap"),
 	MultiplayerLobbySetModsDTFree: Symbol("MultiplayerLobbySetModsDTFree"),
 	MultiplayerLobbySetModsHDHR: Symbol("MultiplayerLobbySetModsHDHR"),

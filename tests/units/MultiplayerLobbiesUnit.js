@@ -20,6 +20,11 @@ class MultiplayerLobbiesUnit extends TestUnit {
 		if(!channel.lobby)
 			throw new Error("lobby doesn't exist! this is a regular channel, not a multiplayer one!");
 		this.fulFillGoal(TestGoals.MultiplayerLobbyExists);
+		await channel.lobby.updateSettings();
+		this.fulFillGoal(TestGoals.MultiplayerLobbyUpdateSettings);
+		if(channel.lobby.name !== roomName)
+			throw new Error("lobby name doesn't match!");
+		this.fulFillGoal(TestGoals.MultiplayerLobbyNamed);
 		await channel.lobby.setMap(75);
 		this.fulFillGoal(TestGoals.MultiplayerLobbySetMap);
 		await channel.lobby.setMods([BanchoMods.enum.DoubleTime], true);
