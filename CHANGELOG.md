@@ -1,5 +1,17 @@
 # Pre-release
 
+## Version 0.12
+
+### Version 0.12.0
+
+- **Support creating lobbies with filtered names by queuing lobby creation**  
+  Created lobbies are no longer checked against their names for the `createLobby` call to succeed. This helps in cases where the requested lobby name has filtered words.  
+  As a consequence, lobby creation can no longer be done in parallel. They are now transparently queued. The promise returned by `createLobby` still resolves when the lobby is created, so this should be fully transparent to the user.
+- **Fix infinite loop when message fails to send**
+- BanchoChannel: Fix join and leave methods hanging forever if channel is already joined/left
+- BanchoChannel: Fix JOIN and PART events being emitted before they're fully processed
+- Fix slots types not being nullable
+
 ## Version 0.11
 
 ### Version 0.11.6
