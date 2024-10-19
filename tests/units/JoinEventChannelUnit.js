@@ -10,36 +10,32 @@ class JoinEventChannelUnit extends TestUnit {
 	run() {
 		return new Promise((resolve, reject) => {
 			const channel = this.client.getChannel("#french");
-			let returned = false;
 			this.client.on("JOIN", (obj) => {
 				if(obj.user.isClient() && obj.channel == channel) {
 					this.fulFillGoal(TestGoals.JoinEvent);
-					channel.leave(channel);
 
 					this.client.on("PART", (obj) => {
 						if(obj.user.isClient() && obj.channel == channel) {
 							this.client.removeAllListeners("JOIN");
 							this.client.removeAllListeners("nochannel");
+							this.client.removeAllListeners("PART");
 							this.fulFillGoal(TestGoals.PartEvent);
-							returned = true;
 							resolve();
 						}
 					});
+					channel.leave(channel);
 				}
 			});
 			this.client.on("nochannel", (errorChannel) => {
 				if(errorChannel == channel) {
 					this.client.removeAllListeners("JOIN");
 					this.client.removeAllListeners("nochannel");
-					returned = true;
+					this.client.removeAllListeners("PART");
 					reject(new Error("No such channel: "+errorChannel.name));
 				}
 			});
 			channel.join();
-			setTimeout(() => {
-				if(!returned)
-					reject(new Error("Didn't join after timeout!"));
-			}, 10000);
+			setTimeout(() => reject(new Error("Didn't join and leave after timeout!")), 10000);
 		});
 	}
 }
