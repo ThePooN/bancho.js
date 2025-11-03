@@ -2,6 +2,10 @@
 
 ## Version 0.12
 
+### Version 0.12.1
+
+- Only unready affected player on team change
+
 ### Version 0.12.0
 
 - **Support creating lobbies with filtered names by queuing lobby creation**  
