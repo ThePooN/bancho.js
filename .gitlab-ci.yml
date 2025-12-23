@@ -15,6 +15,7 @@ eslint:
 
 irc:
     stage: test
+    resource_group: irc
     script:
         - npm config set script-shell "/bin/bash"
         - npm i
@@ -23,6 +24,7 @@ irc:
 
 irc-with-weak-value-map:
     stage: test
+    resource_group: irc
     script:
         - npm config set script-shell "/bin/bash"
         - npm i
