@@ -2,6 +2,10 @@
 
 ## Version 0.12
 
+### Version 0.12.3
+
+- Catch undefined location response
+
 ### Version 0.12.2
 
 - Update BanchoMods
