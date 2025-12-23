@@ -2,6 +2,11 @@
 
 ## Version 0.12
 
+### Version 0.12.2
+
+- Update BanchoMods
+  See https://git.cartooncraft.fr/ThePooN/bancho.js/-/commit/799862a6ef404e4068ea35cb8a2a6f319178871c
+
 ### Version 0.12.1
 
 - Only unready affected player on team change
