@@ -2,6 +2,10 @@
 
 ## Version 0.12
 
+### Version 0.12.4
+
+- Fix missing mods from players with under 6 digit user ID
+
 ### Version 0.12.3
 
 - Catch undefined location response
